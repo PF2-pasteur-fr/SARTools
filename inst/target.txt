@@ -1,0 +1,1 @@
+label	files	groupWT1	WT1.htseq.out	WTWT2	WT2.htseq.out	WTKO1	KO1.htseq.out	KOKO2	KO2.htseq.out	KO

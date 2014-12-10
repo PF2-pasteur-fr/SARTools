@@ -1,0 +1,14 @@
+citEntry(entry = "article",
+         title = "SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data",
+         author = personList( as.person("Hugo Varet"),
+                              as.person("Jean-Yves Coppée"),
+                              as.person("Marie-Agnès Dillies")),
+         year = 2014,
+         journal = "Bioinformatics",
+         doi = "(submitted)",
+         url = "",
+         textVersion = 
+         paste("Hugo Varet, Jean-Yves Coppée and Marie-Agnès Dillies (2014):", 
+               "SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data.",
+                "Bioinformatics (submitted)" ))
+

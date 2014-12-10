@@ -1,0 +1,286 @@
+# <center> Statistical report of project `r projectName`: </center>
+# <center> pairwise comparison(s) of conditions </center>
+# <center> with edgeR </center>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Author: `r author`
+
+Date: `r Sys.Date()`
+
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2014 (submitted) when using this tool for any analysis published.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## Table of contents
+
+1. Introduction
+2. Description of raw data
+3. Filtering low counts
+4. Variability within the experiment: data exploration
+5. Normalization
+6. Differential analysis
+7. R session information and parameters
+8. Bibliography
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 1 Introduction
+
+The analyses reported in this document are part of the `r projectName` project. The aim is to find features that are differentially expressed between `r paste(paste(levels(target[,varInt])[-nlevels(target[,varInt])],collapse=", "),levels(target[,varInt])[nlevels(target[,varInt])],sep=" and ")`. The statistical analysis process includes data normalization, graphical exploration of raw and normalized data, test for differential expression for each feature between the conditions, raw p-value adjustment and export of lists of features having a significant differential expression between the conditions. `r ifelse(!is.null(batch),paste0("In this analysis, the ",batch, " effect will be taken into account in the statistical models."),"")`
+
+The analysis is performed using the R software [R Core Team, 2014], Bioconductor [Gentleman, 2004] packages including edgeR [Robinson, 2010] and the SARTools package developed at PF2 - Institut Pasteur. Normalization and differential analysis are carried out according to the edgeR model and package. This report comes with additional tab-delimited text files that contain lists of differentially expressed features.
+
+For more details about the edgeR methodology, please refer to its related publications [Robinson, 2007, 2008, 2010 and McCarthy, 2012].
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 2 Description of raw data
+
+The count data files and associated biological conditions are listed in the following table.
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(xtable(target,caption="Table 1: Data files and associated biological conditions."), type="html", include.rownames=FALSE, html.table.attributes = "align='center'")
+```
+
+After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(xtable(head(counts),caption="Table 2: Partial view of the count data table."), type="html", html.table.attributes = "align='center'")
+```
+
+Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+fun_summary=function(x){
+  out=c(quantile(x,c(0,0.25,0.5),type=1),mean(x),quantile(x,c(0.75,1),type=1))
+  names(out)=c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
+  return(round(out,0))
+}
+print(xtable(apply(counts,2,fun_summary),caption="Table 3: Summary of the raw counts.",digits=0), type="html", html.table.attributes = "align='center'")
+nbNull <- nrow(counts) - nrow(removeNull(counts))
+percentNull <- nbNull/nrow(counts)
+```
+
+Figure 1 shows the total number of mapped reads for each sample. Reads that map on multiple locations on the transcriptome are counted more than once, as far as they are mapped on less than 50 different loci. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
+- different rRNA contamination levels between samples (even between biological replicates);
+- slight differences between library concentrations, since they may be difficult to measure with high precision.
+
+<figure>
+<center>
+    <img src="figures/barplotTotal.png" alt="Barplot total counts" />
+	<figcaption> Figure 1: Number of mapped reads per sample. Colors refer to the biological condition of the sample. </figcaption>
+</center>
+</figure>
+
+Figure 2 shows the proportion of features with no read count in each sample. We expect this proportion to be similar within conditions. Features with null read counts in the `r ncol(counts)` samples will not be taken into account for the analysis with edgeR. Here, `r nbNull` features (`r round(100*percentNull,2)`%) are in this situation (dashed line).
+
+<figure>
+<center>
+    <img src="figures/barplotNull.png" alt="Barplot null counts" />
+	<figcaption> Figure 2: Proportion of features with null read counts in each sample. </figcaption>
+</center>
+</figure>
+
+Figure 3 shows the distribution of read counts for each sample. For sake of readability, $\text{log}_2(\text{counts}+1)$ are used instead of raw counts. Again we expect replicates to have similar distributions. In addition, this figure shows if read counts are preferably low, medium or high. This depends on the organisms as well as the biological conditions under consideration.
+
+<figure>
+<center>
+    <img src="figures/densplot.png" alt="Estimated densities of raw counts" />
+	<figcaption> Figure 3: Density distribution of read counts. </figcaption>
+</center>
+</figure>
+
+It may happen that one or a few features capture a high proportion of reads (up to 20% or more). This phenomenon should not influence the normalization process. The edgeR normalization has proved to be robust to this situation [Dillies, 2012]. Anyway, we expect these high count features to be the same across replicates. They are not necessarily the same across conditions. Figure 4 and table 4 illustrate the possible presence of such high count features in the data set.
+
+<figure>
+<center>
+    <img src="figures/majSeq.png" alt="Most represented sequences" />
+	<figcaption> Figure 4: Percentage of reads associated with the sequence having the highest count (provided in each box on the graph) for each sample. </figcaption>
+</center>
+</figure>
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(xtable(majSequences,caption="Table 4: Percentage of reads associated with the sequences having the highest counts."), type="html", html.table.attributes = "align='center'")
+```
+
+We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different ($\text{log}_2(\text{counts}+1)$ are used instead of raw count values). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [Schulze, 2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
+- 0 when samples are identical (no variability at all: this may happen in the case of a sample duplication);
+- 1 for technical replicates (technical variability follows a Poisson distribution);
+- greater than 1 for biological replicates and samples from different biological conditions (biological variability is higher than technical one, data are over-dispersed with respect to Poisson). The higher the SERE value, the lower the similarity. It is expected to be lower between biological replicates than between samples of different biological conditions. Hence, the SERE statistic can be used to detect inversions between samples.
+
+<figure>
+<center>
+    <img src="figures/pairwiseScatter.png" alt="Pairwise scatter plot" />
+	<figcaption> Figure 5: Pairwise comparison of samples. </figcaption>
+</center>
+</figure>
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 3 Filtering low counts
+
+edgeR suggests to filter features with null or low counts because they do not supply much information. For this project, `r nrow(counts) - nrow(out.edgeR$dge$counts)` features (`r round(100*(nrow(counts)-nrow(out.edgeR$dge$counts))/nrow(counts),2)`%) have been removed from the analysis because they did not satisfy the following condition: having at least `r cpmCutoff` counts-per-million in at least `r min(table(target[,varInt]))` samples.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 4 Variability within the experiment: data exploration
+
+The main variability within the experiment is expected to come from biological differences between the samples. This can be checked in two ways. The first one is to perform a hierarchical clustering of the whole sample set. This is performed after a transformation of the count data as moderated log-counts-per-million. Figure 6 shows the dendrogram obtained from CPM data. An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
+
+<figure>
+<center>
+    <img src="figures/cluster.png" alt="Clustering" />
+	<figcaption> Figure 6: Sample clustering based on normalized data. </figcaption>
+</center>
+</figure>
+
+Another way of visualizing the experiment variability is to look at the first two dimensions of a multidimensional scaling plot, as shown on figure 7. On this figure, the first dimension is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
+
+<figure>
+<center>
+    <img src="figures/MDS.png" alt="Multidimensional scaling plot" />
+	<figcaption> Figure 7: Multidimensional scaling plot of the samples. </figcaption>
+</center>
+</figure>
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+if (!is.null(batch)){
+  cat("For the statistical analysis, we need to take into account the effect of the ",batch," parameter. Statistical models and tests will thus be adjusted on it.\n")
+}
+```
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 5 Normalization
+
+Normalization aims at correcting systematic technical biases in the data, in order to make read counts comparable across samples. The normalization proposed by edgeR is called Trimmed Mean of M-values (TMM) and relies on the hypothesis that most features are not differentially expressed. 
+
+It computes a factor for each sample. These normalization factors apply to the total number of counts and cannot be used to normalize read counts in a direct manner. Indeed, normalization factors are used to normalize total counts. These in turn are used to normalize read counts according to a total count normalization: if $N_j$ is the total number of reads of the sample $j$ and $f_j$ its normalization factor, $N'_j=f_j \times N_j$ is the normalized total number of reads. Then, let $s_j=N'_j/\bar{N'}$ with $\bar{N'}$ the mean of the $N'_j$ s. Finally, the normalized counts of the sample $j$ are defined as $x'_{ij}=x_{ij}/s_j$ where $i$ is the gene index.
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(xtable(t(matrix(out.edgeR$dge$samples$norm.factors, dimnames=list(target$label,"TMM"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
+```
+
+Boxplots are often used to assess the quality of the normalization process, as they show how distributions are globally affected during this process. We expect normalization to stabilize distributions across samples. Figure 8 shows boxplots of raw (left) and normalized (right) data respectively.
+
+<figure>
+<center>
+    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" />
+	<figcaption> Figure 8: Boxplots of raw (left) and normalized (right) read counts. </figcaption>
+</center>
+</figure>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 6 Differential analysis
+
+### 6.1 Modelization
+
+edgeR aims at fitting one linear model per feature. For this project, the design used is `r paste(as.character(paste("~", ifelse(!is.null(batch), paste(batch,"+"), ""), varInt)),collapse=" ")` and the goal is to estimate the models' coefficients which can be interpreted as $\log_2(\texttt{FC})$. These coefficients will then be tested to get p-values and adjusted p-values.
+
+### 6.2 Dispersions estimation
+
+The edgeR model assumes that the count data follow a negative binomial distribution which is a robust alternative to the Poisson law when data are over-dispersed (the variance is higher than the mean). The first step of the statistical procedure is to estimate the dispersion of the data.
+
+<figure>
+<center>
+    <img src="figures/BCV.png" alt="Dispersions estimations" />
+	<figcaption> Figure 9: Dispersion estimates. </figcaption>
+</center>
+</figure>
+
+Figure 9 shows the result of the dispersion estimation step. The x- and y-axes represent the mean count value and the estimated dispersion respectively. Black dots represent empirical dispersion estimates for each feature (from the observed count values). The blue curve shows the relationship between the means of the counts and the dispersions modeled with splines. The red segment represents the common dispersion.
+
+### 6.3 Statistical test for differential expression
+
+Once the dispersion estimation and the model fitting have been done, edgeR can perform the statistical testing. Figure 10 shows the distributions of raw p-values computed by the statistical test for the comparison(s) done. This distribution is expected to be a mixture of a uniform distribution on $[0,1]$ and a peak around 0 corresponding to the differentially expressed features.
+
+<figure>
+<center>
+    <img src="figures/rawpHist.png" alt="Histogram(s) of raw p-values" />
+	<figcaption> Figure 10: Distribution(s) of raw p-values. </figcaption>
+</center>
+</figure>
+
+### 6.4 Final results
+
+A p-value adjustment is performed to take into account multiple testing and control the false positive rate to a chosen level $\alpha$. For this analysis, a `r pAdjustMethod` p-value adjustment was performed [Benjamini, 1995 and 2001] and the level of controlled false positive rate was set to `r alpha`.
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(xtable(summaryResults$nDiffTotal,caption="Table 6: Number of up-, down- and total number of differentially expressed features for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
+```
+
+Figure 11 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature.
+
+<figure>
+<center>
+    <img src="figures/MAPlot.png" alt="MA-plot(s)" />
+	<figcaption> Figure 11: MA-plot(s) of each comparison. Red dots represent significantly differentially expressed features. </figcaption>
+</center>
+</figure>
+
+Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
+- TestVsRef.complete.txt contains results for all the features;
+- TestVsRef.up.txt contains results for up-regulated features. Features are ordered from the most significant adjusted p-value to the less significant one;
+- TestVsRef.down.txt contains results for down-regulated features. Features are ordered from the most significant adjusted p-value to the less significant one.
+
+These files contain the following columns:
+- Id: unique feature identifier;
+- sampleName: raw counts per sample;
+- norm.sampleName: rounded normalized counts per sample;
+- baseMean: base mean over all samples;
+- `r paste(paste(levels(target[,varInt])[-nlevels(target[,varInt])],collapse=", "),levels(target[,varInt])[nlevels(target[,varInt])],sep=" and ")`: means (rounded) of normalized counts of the biological conditions;
+- FoldChange: fold change of expression, calculated as $2^{\log_2(\text{FC})}$;
+- log2FoldChange: $\log_2(\text{FC})$ as estimated by the GLM model. It reflects the differential expression between Test and Ref and can be interpreted as $\log_2(\frac{\text{Test}}{\text{Ref}})$. If this value is:
+  + around 0: the feature expression is similar in both conditions;
+  + positive: the feature is up-regulated ($\text{Test} > \text{Ref}$);
+  + negative: the feature is down-regulated ($\text{Test} < \text{Ref}$);
+- pvalue: raw p-value from the statistical test;
+- padj: adjusted p-value on which the cut-off $\alpha$ is applied;
+- tagwise.dispersion: dispersion parameter estimated from feature counts (i.e. black dots on figure 9);
+- trended.dispersion: dispersion parameter estimated with splines (i.e. blue curve on figure 9).
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 7 R session information and parameters
+
+The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
+
+```{r , cache=TRUE, echo=FALSE, results="asis"}
+print(sessionInfo())
+```
+
+Parameter values used for this analysis are:
+
+- workDir: `r workDir`
+- projectName: `r projectName`
+- author: `r author`
+- targetFile: `r targetFile`
+- rawDir: `r rawDir`
+- featuresToRemove: `r ifelse(is.null(featuresToRemove),"NULL",paste(featuresToRemove,collapse=", "))`
+- varInt: `r varInt`
+- condRef: `r condRef`
+- batch: `r ifelse(is.null(batch),"NULL",batch)`
+- alpha: `r alpha`
+- pAdjustMethod: `r pAdjustMethod`
+- cpmCutoff: `r cpmCutoff`
+- gene.selection: `r gene.selection`
+- colors: `r colors`
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 8 Bibliography
+
+- R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
+- Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
+- Robinson and Smyth, Moderated statistical tests for assessing differences in tag abundance, _Bioinformatics_, 2007
+- Robinson and Smyth, Small-sample estimation of negative binomial dispersion, with applications to SAGE data, _Biostatistics_, 2008
+- Robinson, McCarthy and Smyth, edgeR: a Bioconductor package for differential expression analysis of digital gene expression data, _Bioinformatics_, 2010
+- Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
+- Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
+- McCarthy, Chen and Smyth, Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation, _Nucleic Acids Research_, 2012
+- Wu, Wang and Wu, A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data, _Biostatistics_, 2013
+- Benjamini and Hochberg, Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing, _Journal of the Royal Statistical Society_, 1995
+- Benjamini and Yekutieli, The control of the false discovery rate in multiple testing under dependency, _The Annals of Statistics_, 2001
