@@ -13,7 +13,7 @@ In addition to the SARTools package itself, the workflow requires the installati
 To install the SARTools package from GitHub, open a R session and:
 - install DESeq2, edgeR, genefilter if not installed yet (see the dedicated webpages for Bioconductor packages)
 - load the devtools R package: `library(devtools)` (after `install.packages("devtools")` if not installed yet)
-- run `install_github("hvaret/SARTools")`
+- run `install_github("PF2-pasteur-fr/SARTools")`
 
 How to use SARTools?
 --------------------
