@@ -313,7 +313,7 @@ Parameter values used for this analysis are:
 - R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
 - Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
 - Anders and Huber, Differential expression analysis for sequence count data, _Genome Biology_, 2010
-- Love, Huber and Anders, Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2, _bioRxiv_, 2014
+- Love, Huber and Anders, Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2, _Genome Biology_, 2014
 - Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
 - Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
 - Cook, Detection of Influential Observation in Linear Regression, _Technometrics_, 1977
