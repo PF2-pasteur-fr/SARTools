@@ -36,5 +36,8 @@ summarizeResults.edgeR <- function(out.edgeR, group, counts, alpha=0.05,
   # MA-plots
   MAPlot(complete=complete, alpha=alpha)
   
+  # Volcano plots
+  volcanoPlot(complete=complete, alpha=alpha)
+  
   return(list(complete=complete, nDiffTotal=nDiffTotal))
 }

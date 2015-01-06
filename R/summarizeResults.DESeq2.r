@@ -52,6 +52,9 @@ summarizeResults.DESeq2 <- function(out.DESeq2, group, independentFiltering=TRUE
   
   # MA-plots
   MAPlot(complete=complete, alpha=alpha)
-  
+ 
+  # Volcano plots
+  volcanoPlot(complete=complete, alpha=alpha)
+ 
   return(list(complete=complete, tabIndepFiltering=tabIndepFiltering, nDiffTotal=nDiffTotal))
 }

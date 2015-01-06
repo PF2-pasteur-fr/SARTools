@@ -221,6 +221,15 @@ Figure 11 represents the MA-plot of the data for the comparisons done, where dif
 </center>
 </figure>
 
+Figure 12 shows the volcano plots for the comparisons performed and differentially expressed features are still highlighted in red. A volcano plot represents the log of the adjusted P value as a function of the log ratio of differential expression.
+
+<figure>
+<center>
+    <img src="figures/volcanoPlot.png" alt="Volcano plot(s)" />
+	<figcaption> Figure 12: Volcano plot(s) of each comparison. Red dots represent significantly differentially expressed features. </figcaption>
+</center>
+</figure>
+
 Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
 - TestVsRef.complete.txt contains results for all the features;
 - TestVsRef.up.txt contains results for up-regulated features. Features are ordered from the most significant adjusted p-value to the less significant one;
