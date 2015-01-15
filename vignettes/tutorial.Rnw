@@ -126,7 +126,7 @@ All the parameters that can be modified by the user are at the beginning of the 
 	\item \Rcode{condRef}: reference biological condition used to compute fold-changes (no default, must be one of the levels of \Rcode{varInt});
 	\item \Rcode{batch}: adjustment variable to use as a batch effect, must be a column of the target file (\Rcode{NULL} if no batch effect needs to be taken into account);
 	\item \Rcode{fitType}: (if use of \deseq) type of model for the mean-dispersion relationship (\Rcode{"parametric"} by default, or \Rcode{"local"});
-	\item \Rcode{cooksCutoff}: (if use of \deseq) \Rcode{NULL} to let \deseq~choosing the threshold for the outlier detection, \Rcode{Inf} to turn off the outlier detection or a numeric of length one to give a specific value \cite{Cook1977Detection};
+	\item \Rcode{cooksCutoff}: (if use of \deseq) \Rcode{NULL} to let \deseq~choosing the threshold for the outlier detection, \Rcode{Inf} to turn it off, or a numeric of length one to give a specific value \cite{Cook1977Detection};
 	\item \Rcode{independentFiltering}: (if use of \deseq) \Rcode{TRUE} (default) of \Rcode{FALSE} to execute or not the independent filtering \cite{bourgon2010};
 	\item \Rcode{alpha}: significance threshold applied to the adjusted p-values to select the differentially expressed features (default is \Rcode{0.05});
 	\item \Rcode{pAdjustMethod}: p-value adjustment method for multiple testing \cite{bh1995,yekutieli} (\Rcode{"BH"} by default, \Rcode{"BY"} or any value of \Rcode{p.adjust.methods});
@@ -172,7 +172,8 @@ While running the script, PNG files are generated in the \texttt{figures} direct
 	\item \file{dispersionsPlot.png}: graph of the estimations of the dispersions and diagnostic of log-linearity of the dispersions (if use of \deseq);
 	\item \file{BCV.png}: graph of the estimations of the tagwise, trended and common dispersions (if use of \edger);
 	\item \file{rawpHist.png}: histogram of the raw p-values for each comparison;
-	\item \file{MAplot.png}: MA-plot for each comparison (log ratio of the means vs intensity).
+	\item \file{MAplot.png}: MA-plot for each comparison (log ratio of the means vs intensity);
+	\item \file{vulcanoPlot.png}: vulcano plot for each comparison ($-\log_{10}\text{(adjusted P value)}$ vs log ratio of the means).
 \end{itemize}
 
 Some tab-delimited files are exported in the \texttt{tables} directory. They store information on the features as $\log_2\text{(FC)}$ or p-values and can be read easily in a spreadsheet:

@@ -11,14 +11,15 @@ How to install SARTools?
 In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online, see the dedicated webpages). This current version of SARTools has been developed under R 3.1.1 and with DESeq2 1.6.1, edgeR 3.8.2, genefilter 1.48.1 and knitr 1.7. As a DESeq2 or edgeR update might make the workflow unusable due to modifications on the statistical models, care is recommended when updating these packages.
 
 To install the SARTools package from GitHub, open a R session and:
-- install DESeq2, edgeR, genefilter if not installed yet (see the dedicated webpages for Bioconductor packages)
-- load the devtools R package: `library(devtools)` (after `install.packages("devtools")` if not installed yet)
-- run `install_github("PF2-pasteur-fr/SARTools")`
+- install DESeq2, edgeR, genefilter and BiocStyle with `source("http://bioconductor.org/biocLite.R")` and `biocLite(c("DESeq2", "edgeR", "genefilter", "BiocStyle"))` (if not installed yet)
+- install devtools with `install.packages("devtools")` (if not installed yet)
+- load the devtools R package with `library(devtools)`
+- run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
 
 How to use SARTools?
 --------------------
 
-A PDF vignette (tutorial.pdf) is available within the package and provides extensive information on the use of SARTools. To open it, run `vignette("tutorial",package="SARTools")`
+A PDF vignette (tutorial.pdf) is available within the package and provides extensive information on the use of SARTools. The user can download it from GitHub or open it with `vignette("tutorial", package="SARTools")`.
 
 About SARTools
 --------------

@@ -17,7 +17,7 @@ MAPlot <- function(complete, alpha=0.05){
         complete.name <- complete.name[complete.name$baseMean>0,]
         complete.name$padj <- ifelse(is.na(complete.name$padj),1,complete.name$padj)
         log2FC <- complete.name$log2FoldChange
-        ylim = 1.1 * c(-1,1) * quantile(abs(log2FC[is.finite(log2FC)]), probs=0.99)
+        ylim <- 1.1 * c(-1,1) * quantile(abs(log2FC[is.finite(log2FC)]), probs=0.99)
         plot(complete.name$baseMean, pmax(ylim[1], pmin(ylim[2], log2FC)),
 	         log = "x", cex=0.45, las = 1, ylim = ylim,
              col = ifelse(complete.name[,"padj"] < alpha, "red", "black"),

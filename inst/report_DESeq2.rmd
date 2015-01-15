@@ -250,6 +250,15 @@ Figure 13 represents the MA-plot of the data for the comparisons done, where dif
 </center>
 </figure>
 
+Figure 14 shows the volcano plots for the comparisons performed and differentially expressed features are still highlighted in red. A volcano plot represents the log of the adjusted P value as a function of the log ratio of differential expression.
+
+<figure>
+<center>
+    <img src="figures/volcanoPlot.png" alt="Volcano plot(s)" />
+	<figcaption> Figure 14: Volcano plot(s) of each comparison. Red dots represent significantly differentially expressed features. </figcaption>
+</center>
+</figure>
+
 Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
 - TestVsRef.complete.txt contains results for all the features;
 - TestVsRef.up.txt contains results for significantly up-regulated features. Features are ordered from the most significant adjusted p-value to the less significant one;
@@ -313,7 +322,7 @@ Parameter values used for this analysis are:
 - R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
 - Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
 - Anders and Huber, Differential expression analysis for sequence count data, _Genome Biology_, 2010
-- Love, Huber and Anders, Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2, _bioRxiv_, 2014
+- Love, Huber and Anders, Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2, _Genome Biology_, 2014
 - Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
 - Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
 - Cook, Detection of Influential Observation in Linear Regression, _Technometrics_, 1977
