@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
-### December 10th, 2014
-### designed to be executed with SARTools 1.0.1
+### February 04th, 2015
+### designed to be executed with SARTools 1.0.3
 ################################################################################
 
 ################################################################################
@@ -26,7 +26,7 @@ condRef <- "WT"                                      # reference biological cond
 batch <- NULL                                        # blocking factor: NULL (default) or "batch" for example
 
 fitType <- "parametric"                              # mean-variance relationship: "parametric" (default) or "local"
-cooksCutoff <- NULL                                  # outliers detection threshold (NULL to let DESeq2 choosing it)
+cooksCutoff <- TRUE                                  # TRUE/FALSE to perform the outliers detection (default is TRUE)
 independentFiltering <- TRUE                         # TRUE/FALSE to perform independent filtering (default is TRUE)
 alpha <- 0.05                                        # threshold of statistical significance
 pAdjustMethod <- "BH"                                # p-value adjustment method: "BH" (default) or "BY"

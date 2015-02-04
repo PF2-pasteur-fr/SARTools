@@ -5,7 +5,7 @@
 \title{Wrapper to run DESeq2}
 \usage{
 run.DESeq2(counts, target, varInt, batch = NULL, locfunc = "median",
-  fitType = "parametric", pAdjustMethod = "BH", cooksCutoff = NULL,
+  fitType = "parametric", pAdjustMethod = "BH", cooksCutoff = TRUE,
   independentFiltering = TRUE, alpha = 0.05, ...)
 }
 \arguments{
@@ -23,7 +23,7 @@ run.DESeq2(counts, target, varInt, batch = NULL, locfunc = "median",
 
 \item{pAdjustMethod}{p-value adjustment method: \code{"BH"} (default) or \code{"BY"} for instance}
 
-\item{cooksCutoff}{outliers detection threshold (\code{NULL} to let DESeq2 choosing it)}
+\item{cooksCutoff}{outliers detection threshold (TRUE to let DESeq2 choosing it or FALSE to disable the outliers detection)}
 
 \item{independentFiltering}{\code{TRUE} or \code{FALSE} to perform the independent filtering or not}
 

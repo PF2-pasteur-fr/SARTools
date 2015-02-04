@@ -27,7 +27,7 @@ checkParameters.DESeq2(projectName, author, targetFile, rawDir,
 
 \item{fitType}{mean-variance relationship: "parametric" (default) or "local"}
 
-\item{cooksCutoff}{outliers detection threshold (NULL to let DESeq2 choosing it)}
+\item{cooksCutoff}{outliers detection (TRUE or FALSE)}
 
 \item{independentFiltering}{TRUE/FALSE to perform independent filtering}
 
