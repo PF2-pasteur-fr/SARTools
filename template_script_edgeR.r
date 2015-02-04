@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### December 10th, 2014
-### designed to be executed with SARTools 1.0.1
+### February 04th, 2015
+### designed to be executed with SARTools 1.0.3
 ################################################################################
 
 ################################################################################

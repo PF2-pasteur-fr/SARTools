@@ -13,7 +13,7 @@
 #' @param condRef reference biological condition
 #' @param batch blocking factor in the design
 #' @param fitType mean-variance relationship: "parametric" (default) or "local"
-#' @param cooksCutoff outliers detection threshold (NULL to let DESeq2 choosing it)
+#' @param cooksCutoff outliers detection (TRUE or FALSE)
 #' @param independentFiltering TRUE/FALSE to perform independent filtering
 #' @param alpha threshold of statistical significance
 #' @param pAdjustMethod p-value adjustment method: "BH" (default) or "BY" for example
@@ -64,8 +64,8 @@ checkParameters.DESeq2 <- function(projectName,author,targetFile,rawDir,
     print("fitType must be equal to 'parametric' or 'local'")
 	problem <- TRUE
   }
-  if (!is.null(cooksCutoff) && I(!is.numeric(cooksCutoff) |  length(cooksCutoff)!=1 || cooksCutoff<=0)){
-    print("cooksCutoff must be NULL or a numeric vector of length 1 with a positive value")
+  if (!is.logical(cooksCutoff) | length(cooksCutoff)!=1){
+    print("cooksCutoff must be a boolean vector of length 1")
 	problem <- TRUE
   }
   if (!is.logical(independentFiltering) | length(independentFiltering)!=1){
