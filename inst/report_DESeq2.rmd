@@ -194,7 +194,7 @@ DESeq2 aims at fitting one linear model per feature. For this project, the desig
 
 ### 5.2 Outlier detection
 
-Model outliers are features for which at least one sample seems unrelated to the experimental or study design. For every feature and for every sample, the Cook's distance [Cook, 1977] reflects how the sample matches the model. A large value of the Cook's distance indicates an outlier count and p-values are not computed for the corresponding feature. `r ifelse(!is.null(cooksCutoff) && is.infinite(cooksCutoff),"For this project, the detection of model outliers have been turned off by setting the cut-off to the infinite.","")`
+Model outliers are features for which at least one sample seems unrelated to the experimental or study design. For every feature and for every sample, the Cook's distance [Cook, 1977] reflects how the sample matches the model. A large value of the Cook's distance indicates an outlier count and p-values are not computed for the corresponding feature. `r ifelse(!cooksCutoff,"For this project, the detection of model outliers have been turned off by setting the cut-off to the infinite.","")`
 
 ### 5.3 Dispersions estimation
 
@@ -229,7 +229,7 @@ if (independentFiltering){
   cat("Table 6 reports the thresholds used for each comparison and the number of features discarded by the independent filtering. Adjusted p-values of discarded features are then set to NA.\n")
   print(xtable(summaryResults$tabIndepFiltering,caption="Table 6: Number of features discarded by the independent filtering for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
 } else{
-  cat("For this project, no independent filtering has been performed.\\\\")
+  cat("For this project, no independent filtering has been performed.")
 }
 ```
 
@@ -307,7 +307,7 @@ Parameter values used for this analysis are:
 - condRef: `r condRef`
 - batch: `r ifelse(is.null(batch),"NULL",batch)`
 - fitType: `r fitType`
-- cooksCutoff: `r ifelse(is.null(cooksCutoff),"NULL",cooksCutoff)`
+- cooksCutoff: `r cooksCutoff`
 - independentFiltering: `r independentFiltering`
 - alpha: `r alpha`
 - pAdjustMethod: `r pAdjustMethod`
