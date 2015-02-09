@@ -34,6 +34,7 @@ loadCountData <- function(target, rawDir="raw", header=FALSE, skip=0,
   rawCounts[is.na(rawCounts)] <- 0
   counts <- as.matrix(rawCounts[,-1])
   rownames(counts) <- rawCounts[,1]
+  counts <- counts[order(rownames(counts)),]
   
   cat("\nFeatures removed:\n")
   for (f in featuresToRemove){
