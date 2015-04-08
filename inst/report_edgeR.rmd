@@ -46,7 +46,7 @@ print(xtable(target,caption="Table 1: Data files and associated biological condi
 After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(xtable(head(counts),caption="Table 2: Partial view of the count data table."), type="html", html.table.attributes = "align='center'")
+print(xtable(head(counts),caption="Table 2: Partial view of the count data table.",digits=0), type="html", html.table.attributes = "align='center'")
 ```
 
 Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
