@@ -49,7 +49,7 @@ checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFi
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
                        condRef=condRef,batch=batch,fitType=fitType,cooksCutoff=cooksCutoff,
                        independentFiltering=independentFiltering,alpha=alpha,pAdjustMethod=pAdjustMethod,
-					   typeTrans=typeTrans,locfunc=locfunc,colors=colors)
+                       typeTrans=typeTrans,locfunc=locfunc,colors=colors)
 
 # loading target file
 target <- loadTargetFile(targetFile=targetFile, varInt=varInt, condRef=condRef, batch=batch)

@@ -56,6 +56,9 @@ BiocStyle::latex()
 
 \begin{document}
 \maketitle
+\begin{center}
+\Rpackage{SARTools} version: \Sexpr{packageVersion("SARTools")}.
+\end{center}
 \tableofcontents
 
 \section{Introduction}
@@ -75,7 +78,7 @@ The only file the user has to deal with for an analysis is either \file{template
 
 \subsection{Data files}
 
-The statistical analysis assumes that reads have already been mapped and that counts per feature (gene or transcript) are available. If counting has been done with \texttt{HTSeq-count} \cite{htseq,anders2014}, output files are ready to be loaded in \R{} with the dedicated \Rpackage{SARTools} function. If not, the user must supply one count file per sample with two tab delimited columns without header:
+The statistical analysis assumes that reads have already been mapped and that counts per feature (gene or transcript) are available. If counting has been done with \texttt{HTSeq-count} \cite{anders2014}, output files are ready to be loaded in \R{} with the dedicated \Rpackage{SARTools} function. If not, the user must supply one count file per sample with two tab delimited columns without header:
 \begin{itemize}
 	\item the unique IDs of the features in the first column;
 	\item the raw counts associated with these features in the second column (null or positive integers).
@@ -298,6 +301,18 @@ Below are the \R{} codes of the workflow. The user can copy and paste them in a 
 \lstinputlisting[caption=]{\Sexpr{system.file("template_script_edgeR.r",package="SARTools")}}
 
 \clearpage
-\bibliography{library}
 
+\begin{thebibliography}{}
+\bibitem[1]{anders2010} Anders S, Huber W. \textbf{Differential expression analysis for sequence count data}. \textit{Genome Biology}. 2010; doi:10.1186/gb-2010-11-10-r106.
+\bibitem[2]{love2014} Love M, Huber W, Anders S. \textbf{Moderated estimation of fold change and dispersion for {RNA-S}eq data with {DES}eq2}. \textit{Genome Biology}. 2014; doi:10.1186/s13059-014-0550-8.
+\bibitem[3]{robinson2009} Robinson M, McCarthy DJ, Smyth GK. \textbf{edge{R}: a Bioconductor package for differential expression analysis of digital gene expression data}. \textit{Bioinformatics}. 2009; doi:10.1093/bioinformatics/btp616.
+\bibitem[4]{anders2014} Anders S, Pyl TP, Huber W. \textbf{HTSeq - A Python framework to work with high-throughput sequencing data}. \textit{Bioinformatics}. 2014; doi:10.1093/bioinformatics/btu638.
+\bibitem[5]{limma} Ritchie ME, Phipson B, Wu D, et al. \textbf{limma powers differential expression analyses for RNA-sequencing and microarray studies}. \textit{Nucleic Acids Research}. 2015; doi:10.1093/nar/gkv007.
+\bibitem[6]{Cook1977Detection} Cook RD. \textbf{Detection of Influential Observation in Linear Regression}. \textit{Technometrics}. 1977; DOI:10.1080/00401706.2000.10485981.
+\bibitem[7]{bourgon2010} Bourgon R, Gentleman R and Huber W. \textbf{Independent filtering increases detection power for high-throughput experiments}. \textit{PNAS}. 2010; doi:10.1073/pnas.0914005107.
+\bibitem[8]{bh1995} Benjamini Y and Hochberg Y. \textbf{Controlling the false discovery rate: a practical and powerful approach to multiple testing}. \textit{Journal of the Royal Statistical Society B}. 1995; doi:10.2307/2346101 .
+\bibitem[9]{yekutieli} Benjamini Y and Yekutieli D. \textbf{The control of the false discovery rate in multiple testing under dependency}. \textit{Annals of Statistics}. 2001.
+\bibitem[10]{sere} Schulze SK, Kanwar R, G\"olzenleuchter M, et al. \textbf{{SERE}: Single-parameter quality control and sample comparison for {RNA-S}eq}. \textit{BMC Genomics}. 2012; doi:10.1186/1471-2164-13-524.
+\end{thebibliography}
+	
 \end{document}
