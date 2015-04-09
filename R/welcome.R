@@ -3,7 +3,7 @@
 # ==========================================================================
 .onAttach = function(libname, pkgname) {
   msg <- c("----------------------------------------------",
-          "Welcome to SARTools.",
+          paste0("Welcome to SARTools version ", packageVersion("SARTools"),"."),
 		  "R template scripts are available at the end of the vignette and on GitHub.")
   # checking DESeq2 version
   if (packageVersion("DESeq2") < "1.6.0" | packageVersion("DESeq2") >= "1.7.0"){
