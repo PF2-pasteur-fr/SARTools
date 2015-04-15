@@ -24,7 +24,7 @@ The next section details the tools and files required to perform an analysis and
 
 ### 2.1 R tools
 
-In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online). This current version of SARTools has been developed under R 3.1.2 and with DESeq2 1.6.3, edgeR 3.8.5, genefilter 1.48.1 and knitr 1.7. As a DESeq2 or edgeR update might make the workflow unusable due to modifications on the statistical models, care is recommended when updating these packages. 
+In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online). SARTools needs R version 3.1.0 or higher, DESeq2 1.6.0 or higher and edgeR 3.8.5 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
 
 The only file the user has to deal with for an analysis is either `template_script_DESeq2.r` or `template_script_edgeR.r` (supplied within the package). They contain all the code needed for the statistical analysis, and to generate figures, tables and the HTML report.
 
