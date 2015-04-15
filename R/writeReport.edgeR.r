@@ -20,13 +20,15 @@
 #' @param pAdjustMethod p-value adjustment method: \code{"BH"} (default) or \code{"BY"}
 #' @param colors vector of colors of each biological condition on the plots
 #' @param gene.selection selection of the features in \code{MDSPlot()} (\code{"pairwise"} by default)
+#' @param normalizationMethod normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}
 #' @details This function generates the HTML report for a statistical analysis with edgeR. It uses the tables and graphs created during the workflow as well as the parameters defined at the beginning of the script.
 #' @author Hugo Varet
 
 writeReport.edgeR <- function(target,counts,out.edgeR,summaryResults,majSequences,
                               workDir,projectName,author,targetFile,rawDir,
 			  	              featuresToRemove,varInt,condRef,batch,
-			  	              alpha,pAdjustMethod,colors,gene.selection){
+			  	              alpha,pAdjustMethod,colors,gene.selection,
+							  normalizationMethod){
   knit2html(input=system.file("report_edgeR.rmd", package="SARTools"),
             output=paste0(projectName, "_report.html"),
 			quiet=TRUE, title="Statistical report")

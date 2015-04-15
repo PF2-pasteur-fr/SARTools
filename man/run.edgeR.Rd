@@ -5,7 +5,7 @@
 \title{Wrapper to run edgeR}
 \usage{
 run.edgeR(counts, target, varInt, condRef, batch = NULL, cpmCutoff = 1,
-  pAdjustMethod = "BH", ...)
+  normalizationMethod = "TMM", pAdjustMethod = "BH", ...)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}
@@ -19,6 +19,8 @@ run.edgeR(counts, target, varInt, condRef, batch = NULL, cpmCutoff = 1,
 \item{batch}{batch effect to take into account (\code{NULL} by default)}
 
 \item{cpmCutoff}{counts-per-million cut-off to filter low counts}
+
+\item{normalizationMethod}{normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}}
 
 \item{pAdjustMethod}{p-value adjustment method: \code{"BH"} (default) or \code{"BY"}}
 

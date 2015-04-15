@@ -44,8 +44,8 @@ checkParameters.DESeq2 <- function(projectName,author,targetFile,rawDir,
     print("rawDir must be a character vector of length 1 specifying an accessible directory")
 	problem <- TRUE
   }
-  if (!is.character(featuresToRemove)){
-    print("featuresToRemove must be a character vector")
+  if (!is.null(featuresToRemove) && !is.character(featuresToRemove)){
+    print("featuresToRemove must be a character vector or equal to NULL")
 	problem <- TRUE
   }
   if (!is.character(varInt) | length(varInt)!=1){

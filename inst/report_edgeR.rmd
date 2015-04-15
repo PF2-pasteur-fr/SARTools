@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2014 (submitted) when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2015 (submitted) when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -276,20 +276,21 @@ Parameter values used for this analysis are:
 - pAdjustMethod: `r pAdjustMethod`
 - cpmCutoff: `r cpmCutoff`
 - gene.selection: `r gene.selection`
+- normalizationMethod: `r normalizationMethod`
 - colors: `r colors`
 
 --------------------------------------------------------------------------------------------------------------------------
 
 ## 8 Bibliography
 
-- R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
-- Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
-- Robinson and Smyth, Moderated statistical tests for assessing differences in tag abundance, _Bioinformatics_, 2007
-- Robinson and Smyth, Small-sample estimation of negative binomial dispersion, with applications to SAGE data, _Biostatistics_, 2008
-- Robinson, McCarthy and Smyth, edgeR: a Bioconductor package for differential expression analysis of digital gene expression data, _Bioinformatics_, 2010
-- Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
-- Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
-- McCarthy, Chen and Smyth, Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation, _Nucleic Acids Research_, 2012
-- Wu, Wang and Wu, A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data, _Biostatistics_, 2013
-- Benjamini and Hochberg, Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing, _Journal of the Royal Statistical Society_, 1995
-- Benjamini and Yekutieli, The control of the false discovery rate in multiple testing under dependency, _The Annals of Statistics_, 2001
+- R Core Team, **R: A Language and Environment for Statistical Computing**, _R Foundation for Statistical Computing_, 2014
+- Gentleman, Carey, Bates et al, **Bioconductor: Open software development for computational biology and bioinformatics**, _Genome Biology_, 2004
+- Robinson and Smyth, **Moderated statistical tests for assessing differences in tag abundance**, _Bioinformatics_, 2007
+- Robinson and Smyth, **Small-sample estimation of negative binomial dispersion, with applications to SAGE data**, _Biostatistics_, 2008
+- Robinson, McCarthy and Smyth, **edgeR: a Bioconductor package for differential expression analysis of digital gene expression data**, _Bioinformatics_, 2010
+- Dillies, Rau, Aubert et al, **A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis**, _Briefings in Bioinformatics_, 2012
+- Schulze, Kanwar, Golzenleuchter et al, **SERE: Single-parameter quality control and sample comparison for RNA-Seq**, _BMC Genomics_, 2012
+- McCarthy, Chen and Smyth, **Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation**, _Nucleic Acids Research_, 2012
+- Wu, Wang and Wu, **A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data**, _Biostatistics_, 2013
+- Benjamini and Hochberg, **Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing**, _Journal of the Royal Statistical Society_, 1995
+- Benjamini and Yekutieli, **The control of the false discovery rate in multiple testing under dependency**, _The Annals of Statistics_, 2001

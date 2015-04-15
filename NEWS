@@ -1,6 +1,8 @@
 CHANGES IN VERSION 1.0.5
 ------------------------
 	o Improved the installation guidelines from GitHub
+	o Vignette now in Markdown for a better integration in GitHub
+	o Added the normalizationMethod parameter to the edgeR pipeline to allow a RLE or upperquartile normalization
 
 CHANGES IN VERSION 1.0.4
 ------------------------

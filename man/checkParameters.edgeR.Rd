@@ -6,7 +6,7 @@
 \usage{
 checkParameters.edgeR(projectName, author, targetFile, rawDir, featuresToRemove,
   varInt, condRef, batch, alpha, pAdjustMethod, cpmCutoff, gene.selection,
-  colors)
+  normalizationMethod, colors)
 }
 \arguments{
 \item{projectName}{name of the project}
@@ -27,11 +27,13 @@ checkParameters.edgeR(projectName, author, targetFile, rawDir, featuresToRemove,
 
 \item{alpha}{threshold of statistical significance}
 
-\item{pAdjustMethod}{p-value adjustment method: "BH" (default) or "BY" for example}
+\item{pAdjustMethod}{p-value adjustment method: \code{"BH"} (default) or \code{"BY"} for example}
 
 \item{cpmCutoff}{counts-per-million cut-off to filter low counts}
 
 \item{gene.selection}{selection of the features in MDSPlot}
+
+\item{normalizationMethod}{normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}}
 
 \item{colors}{vector of colors of each biological condition on the plots}
 }

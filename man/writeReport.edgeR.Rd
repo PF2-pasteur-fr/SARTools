@@ -6,7 +6,8 @@
 \usage{
 writeReport.edgeR(target, counts, out.edgeR, summaryResults, majSequences,
   workDir, projectName, author, targetFile, rawDir, featuresToRemove, varInt,
-  condRef, batch, alpha, pAdjustMethod, colors, gene.selection)
+  condRef, batch, alpha, pAdjustMethod, colors, gene.selection,
+  normalizationMethod)
 }
 \arguments{
 \item{target}{target \code{data.frame} of the project returned by \code{loadTargetFile()}}
@@ -44,6 +45,8 @@ writeReport.edgeR(target, counts, out.edgeR, summaryResults, majSequences,
 \item{colors}{vector of colors of each biological condition on the plots}
 
 \item{gene.selection}{selection of the features in \code{MDSPlot()} (\code{"pairwise"} by default)}
+
+\item{normalizationMethod}{normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}}
 }
 \description{
 Write HTML report from graphs and tables created during the analysis with edgeR

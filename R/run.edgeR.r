@@ -8,12 +8,14 @@
 #' @param condRef reference biological condition
 #' @param batch batch effect to take into account (\code{NULL} by default)
 #' @param cpmCutoff counts-per-million cut-off to filter low counts
+#' @param normalizationMethod normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}
 #' @param pAdjustMethod p-value adjustment method: \code{"BH"} (default) or \code{"BY"}
 #' @param ... optional arguments to be passed to \code{glmFit()}
 #' @return A list containing the \code{dge} object and the \code{results} object
 #' @author Hugo Varet
 
-run.edgeR <- function(counts, target, varInt, condRef, batch=NULL, cpmCutoff=1, pAdjustMethod="BH", ...){
+run.edgeR <- function(counts, target, varInt, condRef, batch=NULL, cpmCutoff=1, 
+                      normalizationMethod="TMM", pAdjustMethod="BH", ...){
   
   # filtering: select features which contain at least 
   # minReplicates (smallest number of replicates) with
@@ -31,7 +33,7 @@ run.edgeR <- function(counts, target, varInt, condRef, batch=NULL, cpmCutoff=1, 
   cat(paste(as.character(design),collapse=" "),"\n")					  
   
   # normalization
-  dge <- calcNormFactors(dge)
+  dge <- calcNormFactors(dge, method=normalizationMethod)
   cat("\nNormalization factors:\n")
   print(dge$samples$norm.factors)
 

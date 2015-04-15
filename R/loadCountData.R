@@ -37,7 +37,7 @@ loadCountData <- function(target, rawDir="raw", header=FALSE, skip=0,
   counts <- counts[order(rownames(counts)),]
   
   cat("\nFeatures removed:\n")
-  for (f in featuresToRemove){
+  for (f in setdiff(featuresToRemove,"")){
     match <- grep(f, rownames(counts))
     if (length(match)>0){
 	  cat(rownames(counts)[match],sep="\n")
