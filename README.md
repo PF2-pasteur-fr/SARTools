@@ -15,7 +15,7 @@ To install the SARTools package from GitHub, open a R session and:
 - install devtools with `install.packages("devtools")` (if not installed yet)
 - for Windows users only, install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) or check that it is already installed (needed to build the package)
 - load the devtools R package with `library(devtools)`
-- run either `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)` to build the HTML of the vignette during the installation.
+- run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
 
 How to use SARTools?
 --------------------

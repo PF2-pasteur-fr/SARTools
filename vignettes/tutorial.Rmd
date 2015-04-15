@@ -1,5 +1,5 @@
 <!--
-%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEngine{knitr::knitr}
 \usepackage[utf8]{inputenc}
 %\VignetteIndexEntry{tutorial}
 -->
@@ -74,7 +74,7 @@ All the parameters that can be modified by the user are at the beginning of the 
  - `cooksCutoff`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the detection of the outliers [6];
  - `independentFiltering`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the independent filtering [7];
  - `alpha`: significance threshold applied to the adjusted p-values to select the differentially expressed features (default is `0.05`);
- - `pAdjustMethod`: p-value adjustment method for multiple testing [8,9] (`"BH"` by default, `"BY"` or any value of `p.adjust.methods`);
+ - `pAdjustMethod`: p-value adjustment method for multiple testing (`"BH"` by default, `"BY"` or any value of `p.adjust.methods`) [8,9];
  - `typeTrans`: (if use of DESeq2) method of transformation of the counts for the clustering and the PCA (default is `"VST"` for Variance Stabilizing Transformation, or `"rlog"` for Regularized Log Transformation);
  - `locfunc`: (if use of DESeq2) function used for the estimation of the size factors (default is `"median"`, or `"shorth"` from the genefilter` package);
  - `cpmCutoff`: (if use of edgeR) counts-per-million cut-off to filter low counts (default is 1, set to 0 to disable filtering);
