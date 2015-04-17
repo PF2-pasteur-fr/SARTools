@@ -212,7 +212,7 @@ A p-value adjustment is performed to take into account multiple testing and cont
 print(xtable(summaryResults$nDiffTotal,caption="Table 6: Number of up-, down- and total number of differentially expressed features for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
 ```
 
-Figure 11 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature.
+Figure 11 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high $\log_2(\text{FC})$ to be displayed on the plot.
 
 <figure>
 <center>

@@ -18,7 +18,7 @@ diagSizeFactorsPlots <- function(dds){
     xmin <- min(counts.trans[is.finite(counts.trans)],na.rm=TRUE)
     xmax <- max(counts.trans[is.finite(counts.trans)],na.rm=TRUE)
     for (j in 1:ncol(dds)){
-  	  hist(log2(counts(dds)[,j]/geomeans), nclass=100, xlab="counts/geometric mean", las=1, xlim=c(xmin,xmax),
+  	  hist(log2(counts(dds)[,j]/geomeans), nclass=100, xlab=expression(log[2] ~ (counts/geometric~mean)), las=1, xlim=c(xmin,xmax),
            main=paste0("Size factors diagnostic - Sample ",samples[j]),col="skyblue")
       abline(v = log2(sizeFactors(dds)[j]), col="red", lwd=1.5)
     }
