@@ -13,8 +13,9 @@
 #' @param condRef reference biological condition
 #' @param batch blocking factor in the design
 #' @param alpha threshold of statistical significance
-#' @param pAdjustMethod p-value adjustment method: "BH" (default) or "BY" for example
+#' @param pAdjustMethod p-value adjustment method: \code{"BH"} (default) or \code{"BY"} for example
 #' @param cpmCutoff counts-per-million cut-off to filter low counts
+#' @param normalizationMethod normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}
 #' @param gene.selection selection of the features in MDSPlot
 #' @param colors vector of colors of each biological condition on the plots
 #' @return A boolean indicating if there is a problem in the parameters
@@ -22,7 +23,8 @@
 
 checkParameters.edgeR <- function(projectName,author,targetFile,rawDir,
                                   featuresToRemove,varInt,condRef,batch,alpha,
-								  pAdjustMethod,cpmCutoff,gene.selection,colors){
+								  pAdjustMethod,cpmCutoff,gene.selection,
+								  normalizationMethod,colors){
   problem <- FALSE
   if (!is.character(projectName) | length(projectName)!=1){
     print("projectName must be a character vector of length 1")
@@ -40,8 +42,8 @@ checkParameters.edgeR <- function(projectName,author,targetFile,rawDir,
     print("rawDir must be a character vector of length 1 specifying an accessible directory")
 	problem <- TRUE
   }  
-  if (!is.character(featuresToRemove)){
-    print("featuresToRemove must be a character vector")
+  if (!is.null(featuresToRemove) && !is.character(featuresToRemove)){
+    print("featuresToRemove must be a character vector or equal to NULL")
 	problem <- TRUE
   }
   if (!is.character(varInt) | length(varInt)!=1){
@@ -66,6 +68,10 @@ checkParameters.edgeR <- function(projectName,author,targetFile,rawDir,
   }
   if (!is.numeric(cpmCutoff) | length(cpmCutoff)!=1 || cpmCutoff<=0){
     print("cpmCutoff must be a numeric vector of length 1 with a value equal to or greater than 0")
+	problem <- TRUE
+  }
+  if (!is.character(normalizationMethod) | length(normalizationMethod)!=1 || !I(normalizationMethod %in% c("TMM","RLE","upperquartile"))){
+    print("gene.selection must be equal to 'TMM', 'RLE' or 'upperquartile'")
 	problem <- TRUE
   }
   if (!is.character(gene.selection) | length(gene.selection)!=1 || !I(gene.selection %in% c("pairwise","common"))){

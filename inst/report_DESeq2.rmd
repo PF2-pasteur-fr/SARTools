@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2014 (submitted) when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2015 (submitted) when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ print(xtable(target,caption="Table 1: Data files and associated biological condi
 After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(xtable(head(counts),caption="Table 2: Partial view of the count data table."), type="html", html.table.attributes = "align='center'")
+print(xtable(head(counts),caption="Table 2: Partial view of the count data table.",digits=0), type="html", html.table.attributes = "align='center'")
 ```
 
 Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
@@ -157,7 +157,7 @@ Normalization aims at correcting systematic technical biases in the data, in ord
 print(xtable(t(matrix(out.DESeq2$sf, dimnames=list(target$label,"Size factor"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
 ```
 
-The histograms (figure 8) can help to validate the choice of the normalization parameter ("median" or "shorth"). Under the hypothesis that most features are not differentially expressed, each size factor is expected to be close to the mode of the distribution of the counts divided by their geometric means across samples.
+The histograms (figure 8) can help to validate the choice of the normalization parameter ("median" or "shorth"). Under the hypothesis that most features are not differentially expressed, each size factor represented by a red line is expected to be close to the mode of the distribution of the counts divided by their geometric means across samples.
 
 <figure>
 <center>
@@ -241,7 +241,7 @@ A p-value adjustment is performed to take into account multiple testing and cont
 print(xtable(summaryResults$nDiffTotal,caption=paste0(ifelse(independentFiltering,"Table 7: ","Table 6: "),"Number of up-, down- and total number of differentially expressed features for each comparison.")),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
 ```
 
-Figure 13 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature.
+Figure 13 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high $\log_2(\text{FC})$ to be displayed on the plot.
 
 <figure>
 <center>
@@ -319,15 +319,15 @@ Parameter values used for this analysis are:
 
 ## 7 Bibliography
 
-- R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
-- Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
-- Anders and Huber, Differential expression analysis for sequence count data, _Genome Biology_, 2010
-- Love, Huber and Anders, Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2, _Genome Biology_, 2014
-- Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
-- Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
-- Cook, Detection of Influential Observation in Linear Regression, _Technometrics_, 1977
-- Cox and Reid, Parameter orthogonality and approximate conditional inference, _Journal of the Royal Statistical Society_, 1987
-- McCarthy, Chen and Smyth, Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation, _Nucleic Acids Research_, 2012
-- Wu, Wang and Wu, A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data, _Biostatistics_, 2013
-- Benjamini and Hochberg, Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing, _Journal of the Royal Statistical Society_, 1995
-- Benjamini and Yekutieli, The control of the false discovery rate in multiple testing under dependency, _The Annals of Statistics_, 2001
+- R Core Team, **R: A Language and Environment for Statistical Computing**, _R Foundation for Statistical Computing_, 2014
+- Gentleman, Carey, Bates et al, **Bioconductor: Open software development for computational biology and bioinformatics**, _Genome Biology_, 2004
+- Anders and Huber, **Differential expression analysis for sequence count data**, _Genome Biology_, 2010
+- Love, Huber and Anders, **Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2**, _Genome Biology_, 2014
+- Dillies, Rau, Aubert et al, **A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis**, _Briefings in Bioinformatics_, 2012
+- Schulze, Kanwar, Golzenleuchter et al, **SERE: Single-parameter quality control and sample comparison for RNA-Seq**, _BMC Genomics_, 2012
+- Cook, **Detection of Influential Observation in Linear Regression**, _Technometrics_, 1977
+- Cox and Reid, **Parameter orthogonality and approximate conditional inference**, _Journal of the Royal Statistical Society_, 1987
+- McCarthy, Chen and Smyth, **Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation**, _Nucleic Acids Research_, 2012
+- Wu, Wang and Wu, **A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data**, _Biostatistics_, 2013
+- Benjamini and Hochberg, **Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing**, _Journal of the Royal Statistical Society_, 1995
+- Benjamini and Yekutieli, **The control of the false discovery rate in multiple testing under dependency**, _The Annals of Statistics_, 2001

@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
-### February 04th, 2015
-### designed to be executed with SARTools 1.0.4
+### April 20th, 2015
+### designed to be executed with SARTools 1.1.0
 ################################################################################
 
 ################################################################################
@@ -42,14 +42,13 @@ colors <- c("dodgerblue","firebrick1",               # vector of colors of each 
 ################################################################################
 setwd(workDir)
 library(SARTools)
-if (locfunc=="shorth") library(genefilter)
 
 # checking parameters
 checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFile,
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
                        condRef=condRef,batch=batch,fitType=fitType,cooksCutoff=cooksCutoff,
                        independentFiltering=independentFiltering,alpha=alpha,pAdjustMethod=pAdjustMethod,
-					   typeTrans=typeTrans,locfunc=locfunc,colors=colors)
+                       typeTrans=typeTrans,locfunc=locfunc,colors=colors)
 
 # loading target file
 target <- loadTargetFile(targetFile=targetFile, varInt=varInt, condRef=condRef, batch=batch)

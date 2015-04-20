@@ -21,6 +21,7 @@ exportResults.edgeR <- function(out.edgeR, group, counts, alpha=0.05){
   f <- tmm * N/mean(tmm * N)
   normCounts <- round(scale(dge$counts, center=FALSE, scale=f))
   base <- data.frame(Id=rownames(counts), counts)
+  names(base) <- c("Id", colnames(counts))
   norm.bm <- data.frame(Id=rownames(normCounts),normCounts)
   names(norm.bm) <- c("Id", paste0("norm.",colnames(normCounts)))
   norm.bm$baseMean <- round(apply(scale(dge$counts, center=FALSE, scale=f),1,mean),2)
@@ -45,7 +46,7 @@ exportResults.edgeR <- function(out.edgeR, group, counts, alpha=0.05){
     complete[[name]] <- complete.name
 	
     # sélection des up et down
-	up.name <- complete.name[which(complete.name$padj <= alpha  & complete.name$log2FoldChange>=0),]
+	up.name <- complete.name[which(complete.name$padj <= alpha & complete.name$log2FoldChange>=0),]
 	up.name <- up.name[order(up.name$padj),]
 	down.name <- complete.name[which(complete.name$padj <= alpha & complete.name$log2FoldChange<=0),]
 	down.name <- down.name[order(down.name$padj),]		

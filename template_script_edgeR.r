@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### February 04th, 2015
-### designed to be executed with SARTools 1.0.4
+### April 20th, 2015
+### designed to be executed with SARTools 1.1.0
 ################################################################################
 
 ################################################################################
@@ -30,6 +30,7 @@ pAdjustMethod <- "BH"                                # p-value adjustment method
 
 cpmCutoff <- 1                                       # counts-per-million cut-off to filter low counts
 gene.selection <- "pairwise"                         # selection of the features in MDSPlot
+normalizationMethod <- "TMM"                         # normalization method: "TMM" (default), "RLE" (DESeq) or "upperquartile"
 
 colors <- c("dodgerblue","firebrick1",               # vector of colors of each biological condition on the plots
             "MediumVioletRed","SpringGreen")
@@ -44,7 +45,8 @@ library(SARTools)
 checkParameters.edgeR(projectName=projectName,author=author,targetFile=targetFile,
                       rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
                       condRef=condRef,batch=batch,alpha=alpha,pAdjustMethod=pAdjustMethod,
-                      cpmCutoff=cpmCutoff,gene.selection=gene.selection,colors=colors)
+                      cpmCutoff=cpmCutoff,gene.selection=gene.selection,
+                      normalizationMethod=normalizationMethod,colors=colors)
 
 # loading target file
 target <- loadTargetFile(targetFile=targetFile, varInt=varInt, condRef=condRef, batch=batch)
@@ -57,7 +59,8 @@ majSequences <- descriptionPlots(counts=counts, group=target[,varInt], col=color
 
 # edgeR analysis
 out.edgeR <- run.edgeR(counts=counts, target=target, varInt=varInt, condRef=condRef,
-                       batch=batch, cpmCutoff=cpmCutoff, pAdjustMethod=pAdjustMethod)
+                       batch=batch, cpmCutoff=cpmCutoff, normalizationMethod=normalizationMethod,
+                       pAdjustMethod=pAdjustMethod)
 
 # MDS + clustering
 exploreCounts(object=out.edgeR$dge, group=target[,varInt], gene.selection=gene.selection, col=colors)
@@ -73,4 +76,4 @@ writeReport.edgeR(target=target, counts=counts, out.edgeR=out.edgeR, summaryResu
                   majSequences=majSequences, workDir=workDir, projectName=projectName, author=author,
                   targetFile=targetFile, rawDir=rawDir, featuresToRemove=featuresToRemove, varInt=varInt,
                   condRef=condRef, batch=batch, alpha=alpha, pAdjustMethod=pAdjustMethod, colors=colors,
-                  gene.selection=gene.selection)
+                  gene.selection=gene.selection, normalizationMethod=normalizationMethod)

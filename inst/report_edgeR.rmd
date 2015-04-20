@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2014 (submitted) when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2015 (submitted) when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ print(xtable(target,caption="Table 1: Data files and associated biological condi
 After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(xtable(head(counts),caption="Table 2: Partial view of the count data table."), type="html", html.table.attributes = "align='center'")
+print(xtable(head(counts),caption="Table 2: Partial view of the count data table.",digits=0), type="html", html.table.attributes = "align='center'")
 ```
 
 Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
@@ -155,9 +155,9 @@ if (!is.null(batch)){
 
 ## 5 Normalization
 
-Normalization aims at correcting systematic technical biases in the data, in order to make read counts comparable across samples. The normalization proposed by edgeR is called Trimmed Mean of M-values (TMM) and relies on the hypothesis that most features are not differentially expressed. 
+Normalization aims at correcting systematic technical biases in the data, in order to make read counts comparable across samples. The normalization proposed by edgeR is called Trimmed Mean of M-values (TMM) but it is also possible to use the RLE (DESeq) or upperquartile normalizations. It relies on the hypothesis that most features are not differentially expressed.
 
-It computes a factor for each sample. These normalization factors apply to the total number of counts and cannot be used to normalize read counts in a direct manner. Indeed, normalization factors are used to normalize total counts. These in turn are used to normalize read counts according to a total count normalization: if $N_j$ is the total number of reads of the sample $j$ and $f_j$ its normalization factor, $N'_j=f_j \times N_j$ is the normalized total number of reads. Then, let $s_j=N'_j/\bar{N'}$ with $\bar{N'}$ the mean of the $N'_j$ s. Finally, the normalized counts of the sample $j$ are defined as $x'_{ij}=x_{ij}/s_j$ where $i$ is the gene index.
+edgeR computes a factor for each sample. These normalization factors apply to the total number of counts and cannot be used to normalize read counts in a direct manner. Indeed, normalization factors are used to normalize total counts. These in turn are used to normalize read counts according to a total count normalization: if $N_j$ is the total number of reads of the sample $j$ and $f_j$ its normalization factor, $N'_j=f_j \times N_j$ is the normalized total number of reads. Then, let $s_j=N'_j/\bar{N'}$ with $\bar{N'}$ the mean of the $N'_j$ s. Finally, the normalized counts of the sample $j$ are defined as $x'_{ij}=x_{ij}/s_j$ where $i$ is the gene index.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
 print(xtable(t(matrix(out.edgeR$dge$samples$norm.factors, dimnames=list(target$label,"TMM"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
@@ -212,7 +212,7 @@ A p-value adjustment is performed to take into account multiple testing and cont
 print(xtable(summaryResults$nDiffTotal,caption="Table 6: Number of up-, down- and total number of differentially expressed features for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
 ```
 
-Figure 11 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature.
+Figure 11 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high $\log_2(\text{FC})$ to be displayed on the plot.
 
 <figure>
 <center>
@@ -276,20 +276,21 @@ Parameter values used for this analysis are:
 - pAdjustMethod: `r pAdjustMethod`
 - cpmCutoff: `r cpmCutoff`
 - gene.selection: `r gene.selection`
+- normalizationMethod: `r normalizationMethod`
 - colors: `r colors`
 
 --------------------------------------------------------------------------------------------------------------------------
 
 ## 8 Bibliography
 
-- R Core Team, R: A Language and Environment for Statistical Computing, _R Foundation for Statistical Computing_, 2014
-- Gentleman, Carey, Bates et al, Bioconductor: Open software development for computational biology and bioinformatics, _Genome Biology_, 2004
-- Robinson and Smyth, Moderated statistical tests for assessing differences in tag abundance, _Bioinformatics_, 2007
-- Robinson and Smyth, Small-sample estimation of negative binomial dispersion, with applications to SAGE data, _Biostatistics_, 2008
-- Robinson, McCarthy and Smyth, edgeR: a Bioconductor package for differential expression analysis of digital gene expression data, _Bioinformatics_, 2010
-- Dillies, Rau, Aubert et al, A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis, _Briefings in Bioinformatics_, 2012
-- Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, _BMC Genomics_, 2012
-- McCarthy, Chen and Smyth, Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation, _Nucleic Acids Research_, 2012
-- Wu, Wang and Wu, A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data, _Biostatistics_, 2013
-- Benjamini and Hochberg, Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing, _Journal of the Royal Statistical Society_, 1995
-- Benjamini and Yekutieli, The control of the false discovery rate in multiple testing under dependency, _The Annals of Statistics_, 2001
+- R Core Team, **R: A Language and Environment for Statistical Computing**, _R Foundation for Statistical Computing_, 2014
+- Gentleman, Carey, Bates et al, **Bioconductor: Open software development for computational biology and bioinformatics**, _Genome Biology_, 2004
+- Robinson and Smyth, **Moderated statistical tests for assessing differences in tag abundance**, _Bioinformatics_, 2007
+- Robinson and Smyth, **Small-sample estimation of negative binomial dispersion, with applications to SAGE data**, _Biostatistics_, 2008
+- Robinson, McCarthy and Smyth, **edgeR: a Bioconductor package for differential expression analysis of digital gene expression data**, _Bioinformatics_, 2010
+- Dillies, Rau, Aubert et al, **A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis**, _Briefings in Bioinformatics_, 2012
+- Schulze, Kanwar, Golzenleuchter et al, **SERE: Single-parameter quality control and sample comparison for RNA-Seq**, _BMC Genomics_, 2012
+- McCarthy, Chen and Smyth, **Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation**, _Nucleic Acids Research_, 2012
+- Wu, Wang and Wu, **A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data**, _Biostatistics_, 2013
+- Benjamini and Hochberg, **Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing**, _Journal of the Royal Statistical Society_, 1995
+- Benjamini and Yekutieli, **The control of the false discovery rate in multiple testing under dependency**, _The Annals of Statistics_, 2001
