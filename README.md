@@ -17,6 +17,8 @@ To install the SARTools package from GitHub, open a R session and:
 - load the devtools R package with `library(devtools)`
 - run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
 
+Please read the NEWS file to see the latest improvements!
+
 How to use SARTools?
 --------------------
 

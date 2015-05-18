@@ -292,7 +292,13 @@ These files contain the following columns:
 The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(sessionInfo())
+si <- as.character(toLatex(sessionInfo()))
+si <- si[-c(1,length(si))]
+si <- gsub("(\\\\verb)|(\\|)", "", si)
+si <- gsub("~", " ", si)
+si <- paste(si, collapse=" ")
+si <- unlist(strsplit(si, "\\\\item"))
+cat(paste(si, collapse="\n -"), "\n")
 ```
 
 Parameter values used for this analysis are:
