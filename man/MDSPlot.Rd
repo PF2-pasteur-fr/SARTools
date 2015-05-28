@@ -4,8 +4,9 @@
 \alias{MDSPlot}
 \title{MDS plot (for edgeR objects)}
 \usage{
-MDSPlot(dge, group, n = 500, gene.selection = c("pairwise", "common"),
-  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"))
+MDSPlot(dge, group, n = min(500, nrow(dge$counts)),
+  gene.selection = c("pairwise", "common"), col = c("lightblue", "orange",
+  "MediumVioletRed", "SpringGreen"))
 }
 \arguments{
 \item{dge}{a \code{DGEList} object}

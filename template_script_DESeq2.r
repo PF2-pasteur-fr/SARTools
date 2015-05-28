@@ -19,7 +19,7 @@ targetFile <- "target.txt"                           # path to the design/target
 rawDir <- "raw"                                      # path to the directory containing raw counts files
 featuresToRemove <- c("alignment_not_unique",        # names of the features to be removed
                       "ambiguous", "no_feature",     # (specific HTSeq-count information and rRNA for example)
-                      "not_aligned", "too_low_aQual")
+                      "not_aligned", "too_low_aQual")# NULL if no feature to remove
 
 varInt <- "group"                                    # factor of interest
 condRef <- "WT"                                      # reference biological condition

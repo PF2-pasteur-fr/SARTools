@@ -9,7 +9,7 @@
 #' @return A file named PCA.png in the figures directory with a pairwise plot of the three first principal components
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-PCAPlot <- function(counts.trans, group, n=500, col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
+PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
   # PCA on the 500 most variables features
   rv = apply(counts.trans, 1, var, na.rm=TRUE)
   select = order(rv, decreasing = TRUE)[1:n]

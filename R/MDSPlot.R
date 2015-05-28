@@ -10,7 +10,7 @@
 #' @return A file named MDS.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MDSPlot <- function(dge, group, n=500, gene.selection=c("pairwise", "common"),
+MDSPlot <- function(dge, group, n=min(500,nrow(dge$counts)), gene.selection=c("pairwise", "common"),
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
   png(filename="figures/MDS.png", width=400, height=400)
     coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1])
