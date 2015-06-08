@@ -57,6 +57,8 @@ Warning: if the counts and the target files are not supplied in the required for
 
 ## 3 Running the analysis
 
+In order to perform an analysis, the user first has to download one of the two R script templates from the root of the package on GitHub.
+
 ### 3.1 Setting the parameters
 
 All the parameters that can be modified by the user are at the beginning of the R template files:

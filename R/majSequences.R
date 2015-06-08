@@ -19,7 +19,7 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
   sum <- matrix(sum,nrow(counts),ncol(counts),byrow=TRUE)
   p <- round(100*counts/sum,digits=3)
 
-  png(filename="figures/majSeq.png",width=400,height=400)
+  png(filename="figures/majSeq.png",width=min(800,400+200*ncol(counts)/10),height=400)
     maj <- apply(p, 2, max)
     seqname <- rownames(p)[apply(p, 2, which.max)]
     x <- barplot(maj, col=col[as.integer(group)], main="Proportion of reads from most expressed sequence",
