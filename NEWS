@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.1.1
 ------------------------
 	o Improved the sessionInfo() printing in the HTML reports
+	o Improved the README and the vignette
 
 CHANGES IN VERSION 1.1.0
 ------------------------
