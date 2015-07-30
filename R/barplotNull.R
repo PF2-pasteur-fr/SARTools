@@ -16,7 +16,7 @@ barplotNull <- function(counts, group, col=c("lightblue","orange","MediumVioletR
             col = col[as.integer(group)],
 		    ylab = "Proportion of null counts",
 		    main = "Proportion of null counts per sample", 
-	  	    ylim = c(0,1.2*ifelse(max(percentage)==0,1),max(percentage)))
+	  	    ylim = c(0,1.2*ifelse(max(percentage)==0,1,max(percentage))))
     abline(h = percentage.allNull, lty = 2, lwd = 2)
     legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
   dev.off()

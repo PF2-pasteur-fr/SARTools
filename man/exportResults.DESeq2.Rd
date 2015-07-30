@@ -4,15 +4,12 @@
 \alias{exportResults.DESeq2}
 \title{Export results for DESeq2 analyses}
 \usage{
-exportResults.DESeq2(out.DESeq2, group, cooksCutoff = NULL, alpha = 0.05)
+exportResults.DESeq2(out.DESeq2, group, alpha = 0.05)
 }
 \arguments{
 \item{out.DESeq2}{the result of \code{run.DESeq2()}}
 
 \item{group}{factor vector of the condition from which each sample belongs}
-
-\item{cooksCutoff}{Cook's distance threshold for detecting outliers (\code{Inf}
-to disable the detection, \code{NULL} to keep DESeq2 threshold)}
 
 \item{alpha}{threshold to apply to adjusted p-values}
 }

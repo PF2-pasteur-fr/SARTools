@@ -282,8 +282,7 @@ These files contain the following columns:
 - dispMAP: dispersion parameter estimated from the Maximum _A Posteriori_ model;
 - dispersion: final dispersion parameter used to perform the test (i.e. blue dots and circles on figure 11);
 - betaConv: convergence of the coefficients of the model (TRUE or FALSE);
-- maxCooks: maximum Cook's distance of the feature;
-- outlier: indicates if the feature has been detected as a count outlier (it does not make sense if an infinite threshold is given for the Cook's distance).
+- maxCooks: maximum Cook's distance of the feature.
 
 --------------------------------------------------------------------------------------------------------------------------
 

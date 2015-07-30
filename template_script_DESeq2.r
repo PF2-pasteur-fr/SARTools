@@ -69,8 +69,7 @@ exploreCounts(object=out.DESeq2$dds, group=target[,varInt], typeTrans=typeTrans,
 
 # summary of the analysis (boxplots, dispersions, diag size factors, export table, nDiffTotal, histograms, MA plot)
 summaryResults <- summarizeResults.DESeq2(out.DESeq2, group=target[,varInt], col=colors,
-                                          independentFiltering=independentFiltering, 
-                                          cooksCutoff=cooksCutoff, alpha=alpha)
+                                          independentFiltering=independentFiltering, alpha=alpha)
 
 # save image of the R session
 save.image(file=paste0(projectName, ".RData"))
