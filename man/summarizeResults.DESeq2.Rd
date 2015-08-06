@@ -5,8 +5,8 @@
 \title{Summarize DESeq2 analysis}
 \usage{
 summarizeResults.DESeq2(out.DESeq2, group, independentFiltering = TRUE,
-  alpha = 0.05, col = c("lightblue", "orange", "MediumVioletRed",
-  "SpringGreen"))
+  cooksCutoff = TRUE, alpha = 0.05, col = c("lightblue", "orange",
+  "MediumVioletRed", "SpringGreen"))
 }
 \arguments{
 \item{out.DESeq2}{the result of \code{run.DESeq2()}}
@@ -14,6 +14,8 @@ summarizeResults.DESeq2(out.DESeq2, group, independentFiltering = TRUE,
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{independentFiltering}{\code{TRUE} or \code{FALSE} to perform the independent filtering or not}
+
+\item{cooksCutoff}{outliers detection threshold (TRUE to let DESeq2 choosing it or FALSE to disable the outliers detection)}
 
 \item{alpha}{significance threshold to apply to the adjusted p-values}
 
