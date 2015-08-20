@@ -2,6 +2,7 @@ CHANGES IN VERSION 1.1.1
 ------------------------
 	o Improved the sessionInfo() printing in the HTML reports
 	o Improved the README and the vignette
+	o Fixed a bug when selecting the most variant features in PCAPlot()
 
 CHANGES IN VERSION 1.1.0
 ------------------------

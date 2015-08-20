@@ -12,8 +12,7 @@
 PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
   # PCA on the 500 most variables features
   rv = apply(counts.trans, 1, var, na.rm=TRUE)
-  select = order(rv, decreasing = TRUE)[1:n]
-  pca = prcomp(t(counts.trans[select, ]))
+  pca = prcomp(t(counts.trans[order(rv, decreasing = TRUE), ][1:n,]))
   prp <- pca$sdev^2 * 100 / sum(pca$sdev^2)
   prp <- round(prp[1:3],2)
 
