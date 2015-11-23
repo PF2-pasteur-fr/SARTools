@@ -6,7 +6,7 @@
 \usage{
 MDSPlot(dge, group, n = min(500, nrow(dge$counts)),
   gene.selection = c("pairwise", "common"), col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"))
+  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{dge}{a \code{DGEList} object}
@@ -18,6 +18,8 @@ MDSPlot(dge, group, n = min(500, nrow(dge$counts)),
 \item{gene.selection}{\code{"pairwise"} to choose the top features separately for each pairwise comparison between the samples or \code{"common"} to select the same features for all comparisons. Only used when \code{method="logFC"}}
 
 \item{col}{colors to use (one per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named MDS.png in the figures directory

@@ -5,10 +5,11 @@
 #' @param object a \code{DESeqDataSet} object from DESeq2 or a \code{DGEList} object from edgeR
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the boxplots (one per biological condition)
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named countsBoxplots.png in the figures directory containing boxplots of the raw and normalized counts
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVioletRed","SpringGreen")){
+countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
   if (class(object)=="DESeqDataSet"){
     counts <- counts(object)
     counts <- removeNull(counts)
@@ -24,7 +25,7 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
     norm.counts <- removeNull(norm.counts)    
   }
 
-  png(filename="figures/countsBoxplots.png",width=2*min(500,400+200*ncol(norm.counts)/10),height=400)
+  if (outfile) png(filename="figures/countsBoxplots.png",width=2*min(500,400+200*ncol(norm.counts)/10),height=400)
     par(mfrow=c(1,2))
 	# raw counts
     boxplot(log2(counts+1), col = col[as.integer(group)], las = 2,
@@ -34,5 +35,5 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
     boxplot(log2(norm.counts+1), col = col[as.integer(group)], las = 2,
 	        main = "Normalized counts distribution", ylab = expression(log[2] ~ (norm ~ count + 1)))
     legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
-  dev.off()
+  if (outfile) dev.off()
 }

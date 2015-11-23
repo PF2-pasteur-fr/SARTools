@@ -5,11 +5,12 @@
 #' @param counts \code{matrix} of counts
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the curves (one per biological condition)
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named densplot.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
-  png(filename="figures/densplot.png",width=400,height=400)
+densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+  if (outfile) png(filename="figures/densplot.png",width=400,height=400)
     counts <- removeNull(counts)
     plot(density(log2(counts[,1]+1)), las = 1, lwd = 2,
          main = "Density of counts distribution",
@@ -20,5 +21,5 @@ densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletR
       lines(density(log2(counts[,i]+1)),col=col[as.integer(group)[i]],lwd=2)
     }
   legend("topright", levels(group), lty=1, col=col[1:nlevels(group)], lwd=2, bty="n")
-  dev.off()
+  if (outfile) dev.off()
 }

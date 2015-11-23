@@ -4,10 +4,12 @@
 \alias{BCVPlot}
 \title{BCV plot (for edgeR dispersions)}
 \usage{
-BCVPlot(dge)
+BCVPlot(dge, outfile = TRUE)
 }
 \arguments{
 \item{dge}{a \code{DGEList} object}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named BCV.png in the figures directory with a BCV plot produced by the \code{plotBCV()} function of the edgeR package

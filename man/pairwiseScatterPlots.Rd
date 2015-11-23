@@ -4,12 +4,14 @@
 \alias{pairwiseScatterPlots}
 \title{Scatter plots for pairwise comparaisons of log counts}
 \usage{
-pairwiseScatterPlots(counts, group)
+pairwiseScatterPlots(counts, group, outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of raw counts}
 
 \item{group}{factor vector of the condition from which each sample belongs}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named pairwiseScatter.png in the figures directory containing a pairwise scatter plot with the SERE statistics in the lower panel

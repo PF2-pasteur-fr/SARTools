@@ -6,10 +6,13 @@
 #' @param group factor vector of the condition from which each sample belongs
 #' @param n number of features to keep among the most variant
 #' @param col colors to use (one per biological condition)
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named PCA.png in the figures directory with a pairwise plot of the three first principal components
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
+PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), 
+                    col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
+                    outfile=TRUE){
   # PCA on the 500 most variables features
   rv = apply(counts.trans, 1, var, na.rm=TRUE)
   pca = prcomp(t(counts.trans[order(rv, decreasing = TRUE), ][1:n,]))
@@ -17,7 +20,7 @@ PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), col=c("l
   prp <- round(prp[1:3],2)
 
   # create figure
-  png(filename="figures/PCA.png",width=400*2,height=400)
+  if (outfile) png(filename="figures/PCA.png",width=400*2,height=400)
     par(mfrow=c(1,2))
 	# axes 1 et 2
 	abs=range(pca$x[,1]); abs=abs(abs[2]-abs[1])/25;
@@ -42,7 +45,7 @@ PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), col=c("l
     abline(h=0,v=0,lty=2,col="lightgray")
     text(pca$x[,1] - ifelse(pca$x[,1]>0,abs,-abs), pca$x[,3] - ifelse(pca$x[,3]>0,ord,-ord),
          colnames(counts.trans), col=col[as.integer(group)])
-  dev.off()
+  if (outfile) dev.off()
 
   return(invisible(pca$x))
 }

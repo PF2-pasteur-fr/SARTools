@@ -66,7 +66,7 @@ checkParameters.edgeR <- function(projectName,author,targetFile,rawDir,
     print(paste("pAdjustMethod must be a value in", paste(p.adjust.methods, collapse=", ")))
 	problem <- TRUE
   }
-  if (!is.numeric(cpmCutoff) | length(cpmCutoff)!=1 || cpmCutoff<=0){
+  if (!is.numeric(cpmCutoff) | length(cpmCutoff)!=1 || cpmCutoff<0){
     print("cpmCutoff must be a numeric vector of length 1 with a value equal to or greater than 0")
 	problem <- TRUE
   }

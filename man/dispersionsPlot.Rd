@@ -4,10 +4,12 @@
 \alias{dispersionsPlot}
 \title{Plots about DESeq2 dispersions}
 \usage{
-dispersionsPlot(dds)
+dispersionsPlot(dds, outfile = TRUE)
 }
 \arguments{
 \item{dds}{a \code{DESeqDataSet} object}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named dispersionsPlot.png in the figures directory containing the plot of the mean-dispersion relationship and a diagnostic of log normality of the dispersions

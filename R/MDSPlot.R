@@ -7,12 +7,13 @@
 #' @param n number of features to keep among the most variant
 #' @param gene.selection \code{"pairwise"} to choose the top features separately for each pairwise comparison between the samples or \code{"common"} to select the same features for all comparisons. Only used when \code{method="logFC"}
 #' @param col colors to use (one per biological condition)
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named MDS.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 MDSPlot <- function(dge, group, n=min(500,nrow(dge$counts)), gene.selection=c("pairwise", "common"),
-                    col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
-  png(filename="figures/MDS.png", width=400, height=400)
+                    col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+  if (outfile) png(filename="figures/MDS.png", width=400, height=400)
     coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1])
     abs=range(coord$x); abs=abs(abs[2]-abs[1])/25;
     ord=range(coord$y); ord=abs(ord[2]-ord[1])/25;
@@ -21,5 +22,5 @@ MDSPlot <- function(dge, group, n=min(500,nrow(dge$counts)), gene.selection=c("p
     abline(h=0,v=0,lty=2,col="lightgray")
     text(coord$x - ifelse(coord$x>0,abs,-abs), coord$y - ifelse(coord$y>0,ord,-ord),
          colnames(dge$counts), col=col[as.integer(group)])
-  dev.off()      
+  if (outfile) dev.off()      
 }

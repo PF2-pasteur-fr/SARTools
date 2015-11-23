@@ -5,7 +5,8 @@
 \title{PCA of samples (if use of DESeq2)}
 \usage{
 PCAPlot(counts.trans, group, n = min(500, nrow(counts.trans)),
-  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"))
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE)
 }
 \arguments{
 \item{counts.trans}{a matrix a transformed counts (VST- or rlog-counts)}
@@ -15,6 +16,8 @@ PCAPlot(counts.trans, group, n = min(500, nrow(counts.trans)),
 \item{n}{number of features to keep among the most variant}
 
 \item{col}{colors to use (one per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named PCA.png in the figures directory with a pairwise plot of the three first principal components

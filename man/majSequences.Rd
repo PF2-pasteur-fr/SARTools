@@ -5,7 +5,7 @@
 \title{Most expressed sequences per sample}
 \usage{
 majSequences(counts, n = 3, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"))
+  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}
@@ -15,6 +15,8 @@ majSequences(counts, n = 3, group, col = c("lightblue", "orange",
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{col}{colors of the bars (one per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A \code{matrix} with the percentage of reads of the three most expressed sequences and a file named majSeq.png in the figures directory

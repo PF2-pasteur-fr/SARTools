@@ -6,10 +6,11 @@
 #' @param n number of most expressed sequences to return
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the bars (one per biological condition)
+#' @param outfile TRUE to export the figure in a png file
 #' @return A \code{matrix} with the percentage of reads of the three most expressed sequences and a file named majSeq.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
+majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
 
   seqnames <- apply(counts, 2, function(x){x <- sort(x, decreasing=TRUE); names(x)[1:n]})
   seqnames <- unique(unlist(as.character(seqnames)))
@@ -19,14 +20,14 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
   sum <- matrix(sum,nrow(counts),ncol(counts),byrow=TRUE)
   p <- round(100*counts/sum,digits=3)
 
-  png(filename="figures/majSeq.png",width=min(800,400+200*ncol(counts)/10),height=400)
+  if (outfile) png(filename="figures/majSeq.png",width=min(800,400+200*ncol(counts)/10),height=400)
     maj <- apply(p, 2, max)
     seqname <- rownames(p)[apply(p, 2, which.max)]
     x <- barplot(maj, col=col[as.integer(group)], main="Proportion of reads from most expressed sequence",
 	             ylim=c(0, max(maj)*1.2), las=2, ylab="Proportion of reads")
     legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
     for (i in 1:length(seqname)) text(x[i], maj[i]/2, seqname[i], cex=0.8, srt=90, adj=0)
-  dev.off()
+  if (outfile) dev.off()
   
   return(invisible(p))
 }

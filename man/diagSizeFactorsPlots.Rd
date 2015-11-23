@@ -4,10 +4,12 @@
 \alias{diagSizeFactorsPlots}
 \title{Assess the estimations of the size factors}
 \usage{
-diagSizeFactorsPlots(dds)
+diagSizeFactorsPlots(dds, outfile = TRUE)
 }
 \arguments{
 \item{dds}{a \code{DESeqDataSet} object}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 Two files in the figures directory: diagSizeFactorsHist.png containing one histogram per sample and diagSizeFactorsTC.png for a plot of the size factors vs the total number of reads

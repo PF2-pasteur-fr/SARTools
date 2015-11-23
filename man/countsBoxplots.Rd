@@ -5,7 +5,7 @@
 \title{Box-plots of (normalized) counts distribution per sample}
 \usage{
 countsBoxplots(object, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"))
+  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{object}{a \code{DESeqDataSet} object from DESeq2 or a \code{DGEList} object from edgeR}
@@ -13,6 +13,8 @@ countsBoxplots(object, group, col = c("lightblue", "orange",
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{col}{colors of the boxplots (one per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named countsBoxplots.png in the figures directory containing boxplots of the raw and normalized counts

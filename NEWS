@@ -2,7 +2,9 @@ CHANGES IN VERSION 1.1.1
 ------------------------
 	o Improved the sessionInfo() printing in the HTML reports
 	o Improved the README and the vignette
+	o Figure size now depends on the number of samples (in some cases)
 	o Fixed a bug when selecting the most variant features in PCAPlot()
+	o Fixed a bug when setting cpmCutoff to 0 using the edgeR script
 
 CHANGES IN VERSION 1.1.0
 ------------------------

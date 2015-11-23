@@ -5,7 +5,7 @@
 \title{Percentage of null counts per sample}
 \usage{
 barplotNull(counts, group, col = c("lightblue", "orange", "MediumVioletRed",
-  "SpringGreen"))
+  "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}
@@ -13,6 +13,8 @@ barplotNull(counts, group, col = c("lightblue", "orange", "MediumVioletRed",
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{col}{colors of the bars (one color per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named barplotNull.png in the figures directory

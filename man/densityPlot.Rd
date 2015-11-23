@@ -5,7 +5,7 @@
 \title{Density plot of all samples}
 \usage{
 densityPlot(counts, group, col = c("lightblue", "orange", "MediumVioletRed",
-  "SpringGreen"))
+  "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}
@@ -13,6 +13,8 @@ densityPlot(counts, group, col = c("lightblue", "orange", "MediumVioletRed",
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{col}{colors of the curves (one per biological condition)}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named densplot.png in the figures directory

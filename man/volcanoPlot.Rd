@@ -4,12 +4,14 @@
 \alias{volcanoPlot}
 \title{Volcano plots}
 \usage{
-volcanoPlot(complete, alpha = 0.05)
+volcanoPlot(complete, alpha = 0.05, outfile = TRUE)
 }
 \arguments{
 \item{complete}{A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})}
 
 \item{alpha}{cut-off to apply on each adjusted p-value}
+
+\item{outfile}{TRUE to export the figure in a png file}
 }
 \value{
 A file named volcanoPlot.png in the figures directory containing one volcano plot per comparison
