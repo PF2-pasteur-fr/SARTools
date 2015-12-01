@@ -1,10 +1,11 @@
-CHANGES IN VERSION 1.1.1
+CHANGES IN VERSION 1.2.0
 ------------------------
 	o Improved the sessionInfo() printing in the HTML reports
 	o Improved the README and the vignette
 	o Figure size now depends on the number of samples (in some cases)
 	o Fixed a bug when selecting the most variant features in PCAPlot()
 	o Fixed a bug when setting cpmCutoff to 0 using the edgeR script
+	o Vignette name is now "SARTools" instead of "tutorial"
 
 CHANGES IN VERSION 1.1.0
 ------------------------

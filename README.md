@@ -23,7 +23,7 @@ Please read the NEWS file to see the latest improvements!
 How to use SARTools?
 --------------------
 
-A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("tutorial", package="SARTools")` if it has been generated during the installation of the package.
+A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package.
 
 About SARTools
 --------------
