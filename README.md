@@ -8,7 +8,7 @@ SARTools is distributed with two R script templates (`template_script_DESeq2.r` 
 How to install SARTools?
 ------------------------
 
-In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online, see the dedicated webpages). SARTools needs R version 3.1.0 or higher, DESeq2 1.6.0 or higher and edgeR 3.8.5 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
+In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online, see the dedicated webpages). SARTools needs R version 3.2.2 or higher, DESeq2 1.10.0 or higher and edgeR 3.12.0 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
 
 To install the SARTools package from GitHub, open a R session and:
 - install DESeq2, edgeR and genefilter with `source("http://bioconductor.org/biocLite.R")` and `biocLite(c("DESeq2", "edgeR", "genefilter"))` (if not installed yet)

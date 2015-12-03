@@ -202,7 +202,7 @@ targetFile <- system.file("target.txt", package="SARTools")
 rawDir <- system.file("raw", package="SARTools")
 ```
 
-The user can try the R scripts `template_script_DESeq2.r` and `template_script_edgeR.r` with the parameters above (all the others remaining unchanged).
+The user can try the R scripts `template_script_DESeq2.r` and `template_script_edgeR.r` specifying a working directory (`workDir`) and with the parameters above (all the others remaining unchanged).
 
 ## Bibliography
 

@@ -2,10 +2,10 @@ Package: SARTools
 Type: Package
 Title: Statistical Analysis of RNA-Seq Tools
 Version: 1.2.0
-Date: 2015-12-01
+Date: 2015-12-03
 Author: Marie-Agnes Dillies and Hugo Varet
 Maintainer: Hugo Varet <hugo.varet@pasteur.fr>
-Depends: R (>= 3.1.0), DESeq2 (>= 1.6.0), edgeR (>= 3.8.0), xtable
+Depends: R (>= 3.2.2), DESeq2 (>= 1.10.0), edgeR (>= 3.12.0), xtable
 Imports: knitr, GenomicRanges, S4Vectors, limma, genefilter (>= 1.44.0)
 VignetteBuilder: knitr
 Encoding: latin1

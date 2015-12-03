@@ -6,6 +6,8 @@ CHANGES IN VERSION 1.2.0
 	o Fixed a bug when selecting the most variant features in PCAPlot()
 	o Fixed a bug when setting cpmCutoff to 0 using the edgeR script
 	o Vignette name is now "SARTools" instead of "tutorial"
+	o Mofidied the way of getting the independent filtering threshold (bug due to new DESeq2 version)
+	o New versions of R (3.2.2), DESeq2 (1.10.0) and edgeR (3.12.0) required
 
 CHANGES IN VERSION 1.1.0
 ------------------------
