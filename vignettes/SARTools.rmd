@@ -26,7 +26,7 @@ The next section details the tools and files required to perform an analysis and
 
 In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online). SARTools needs R version 3.1.0 or higher, DESeq2 1.6.0 or higher and edgeR 3.8.5 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
 
-The only file the user has to deal with for an analysis is either `template_script_DESeq2.r` or `template_script_edgeR.r` (supplied within the package). They contain all the code needed for the statistical analysis, and to generate figures, tables and the HTML report.
+The only file the user has to deal with for an analysis is either `template_script_DESeq2.r` or `template_script_edgeR.r` (downloadable on GitHub). They contain all the code needed for the statistical analysis, and to generate figures, tables and the HTML report.
 
 ### 2.2 Data files
 
@@ -46,16 +46,18 @@ The user has to supply another tab delimited file which describes the experiment
 
 The table below shows an example of a target file:
 
-| label | files                        | group |
-|:------|:-----------------------------|:------|
-| s1c1  | count_file_sample1_cond1.txt | cond1 |
-| s2c1  | count_file_sample2_cond1.txt | cond1 |
-| s1c2  | count_file_sample1_cond2.txt | cond2 |
-| s2c2  | count_file_sample2_cond2.txt | cond2 |
+| label | files                        | group | day |
+|:------|:-----------------------------|:------|:----|
+| s1c1  | count_file_sample1_cond1.txt | cond1 | d1  |
+| s2c1  | count_file_sample2_cond1.txt | cond1 | d2  |
+| s1c2  | count_file_sample1_cond2.txt | cond2 | d1  |
+| s2c2  | count_file_sample2_cond2.txt | cond2 | d2  |
 
 Warning: if the counts and the target files are not supplied in the required formats, the workflow will probably crash and will not be able to run the analysis.
 
 ## 3 Running the analysis
+
+In order to perform an analysis, the user first has to download one of the two R script templates from the root of the package on GitHub.
 
 ### 3.1 Setting the parameters
 
@@ -69,7 +71,7 @@ All the parameters that can be modified by the user are at the beginning of the 
  - `featuresToRemove`: character vector containing the IDs of the features to remove before running the analysis (default are `"alignment_not_unique"`, `"ambiguous"`, `"no_feature"`, `"not_aligned"`, `"too_low_aQual"` to remove HTSeq-count specific rows);
  - `varInt`: variable of interest, i.e. biological condition, in the target file (`"group"` by default);
  - `condRef`: reference biological condition used to compute fold-changes (no default, must be one of the levels of `varInt`);
- - `batch`: adjustment variable to use as a batch effect, must be a column of the target file (`NULL` if no batch effect needs to be taken into account);
+ - `batch`: adjustment variable to use as a batch effect, must be a column of the target file (`"day"` for example, or `NULL` if no batch effect needs to be taken into account);
  - `fitType`: (if use of DESeq2) type of model for the mean-dispersion relationship (`"parametric"` by default, or `"local"`);
  - `cooksCutoff`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the detection of the outliers [6];
  - `independentFiltering`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the independent filtering [7];
@@ -200,7 +202,7 @@ targetFile <- system.file("target.txt", package="SARTools")
 rawDir <- system.file("raw", package="SARTools")
 ```
 
-The user can try the R scripts `template_script_DESeq2.r` and `template_script_edgeR.r` with the parameters above (all the others remaining unchanged).
+The user can try the R scripts `template_script_DESeq2.r` and `template_script_edgeR.r` specifying a working directory (`workDir`) and with the parameters above (all the others remaining unchanged).
 
 ## Bibliography
 

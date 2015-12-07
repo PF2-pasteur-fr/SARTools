@@ -20,6 +20,7 @@ loadCountData <- function(target, rawDir="raw", header=FALSE, skip=0,
   rawCounts <- read.table(paste(rawDir,files[1],sep="/"), sep="\t", quote="\"", header=header, skip=skip)
   rawCounts <- rawCounts[,1:2]
   colnames(rawCounts) <- c("Id", labels[1])
+  if (any(duplicated(rawCounts$Id))) stop("Duplicated feature names in ", files[1])
   cat("Loading files:\n")
   cat(files[1],": ",length(rawCounts[,labels[1]])," rows and ",sum(rawCounts[,labels[1]]==0)," null count(s)\n",sep="")
 
@@ -27,7 +28,8 @@ loadCountData <- function(target, rawDir="raw", header=FALSE, skip=0,
   	tmp <- read.table(paste(rawDir,files[i],sep="/"), sep="\t", header=header, skip=skip)
     tmp <- tmp[,1:2]
   	colnames(tmp) <- c("Id", labels[i])
-  	rawCounts <- merge(rawCounts, tmp, by="Id", all=TRUE)
+  	if (any(duplicated(tmp$Id))) stop("Duplicated feature names in ", files[i])
+	rawCounts <- merge(rawCounts, tmp, by="Id", all=TRUE)
     cat(files[i],": ",length(tmp[,labels[i]])," rows and ",sum(tmp[,labels[i]]==0)," null count(s)\n",sep="")
   }
   

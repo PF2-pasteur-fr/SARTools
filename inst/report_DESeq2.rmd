@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2015 (submitted) when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, bioRxiv, 2015, doi: http://dx.doi.org/10.1101/021741 when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -282,8 +282,7 @@ These files contain the following columns:
 - dispMAP: dispersion parameter estimated from the Maximum _A Posteriori_ model;
 - dispersion: final dispersion parameter used to perform the test (i.e. blue dots and circles on figure 11);
 - betaConv: convergence of the coefficients of the model (TRUE or FALSE);
-- maxCooks: maximum Cook's distance of the feature;
-- outlier: indicates if the feature has been detected as a count outlier (it does not make sense if an infinite threshold is given for the Cook's distance).
+- maxCooks: maximum Cook's distance of the feature.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -292,7 +291,13 @@ These files contain the following columns:
 The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(sessionInfo())
+si <- as.character(toLatex(sessionInfo()))
+si <- si[-c(1,length(si))]
+si <- gsub("(\\\\verb)|(\\|)", "", si)
+si <- gsub("~", " ", si)
+si <- paste(si, collapse=" ")
+si <- unlist(strsplit(si, "\\\\item"))
+cat(paste(si, collapse="\n -"), "\n")
 ```
 
 Parameter values used for this analysis are:

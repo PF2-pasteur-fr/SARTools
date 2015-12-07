@@ -4,13 +4,14 @@
 #'
 #' @param complete A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})
 #' @param alpha cut-off to apply on each adjusted p-value
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named volcanoPlot.png in the figures directory containing one volcano plot per comparison
 #' @author Hugo Varet
 
-volcanoPlot <- function(complete, alpha=0.05){
+volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE){
   nrow <- ceiling(sqrt(length(complete)))
   ncol <- ceiling(length(complete)/nrow)
-  png(filename="figures/volcanoPlot.png", width=400*max(ncol,nrow), height=400*min(ncol,nrow))
+  if (outfile) png(filename="figures/volcanoPlot.png", width=400*max(ncol,nrow), height=400*min(ncol,nrow))
     par(mfrow=sort(c(nrow,ncol)))
     for (name in names(complete)){
       complete.name <- complete[[name]]
@@ -23,5 +24,5 @@ volcanoPlot <- function(complete, alpha=0.05){
 		   main=paste0("Volcano plot - ",gsub("_"," ",name)))
 	  abline(h=-log10(alpha), lty=2, col="lightgray")
     }
-  dev.off()
+  if (outfile) dev.off()
 }

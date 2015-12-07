@@ -9,7 +9,7 @@
 tabIndepFiltering <- function(results){
   out <- matrix(NA,ncol=3,nrow=length(names(results)),dimnames=list(names(results),c("Test vs Ref","Threshold","# discarded")))
   for (name in names(results)){
-	  threshold <- attr(results[[name]],"filterThreshold")
+	  threshold <- metadata(results[[name]])$filterThreshold
 	  out[name,2] <- round(threshold,2)
     use <- results[[name]]$baseMean > threshold
 	  out[name,3] <- ifelse(is.na(table(use)["FALSE"]),0,table(use)["FALSE"])

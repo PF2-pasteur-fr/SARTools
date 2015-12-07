@@ -4,13 +4,11 @@
 #'
 #' @param out.DESeq2 the result of \code{run.DESeq2()}
 #' @param group factor vector of the condition from which each sample belongs
-#' @param cooksCutoff Cook's distance threshold for detecting outliers (\code{Inf}
-#' to disable the detection, \code{NULL} to keep DESeq2 threshold)
 #' @param alpha threshold to apply to adjusted p-values
 #' @return A list of \code{data.frame} containing counts, pvalues, FDR, log2FC...
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-exportResults.DESeq2 <- function(out.DESeq2, group, cooksCutoff=NULL, alpha=0.05){
+exportResults.DESeq2 <- function(out.DESeq2, group, alpha=0.05){
   
   dds <- out.DESeq2$dds
   results <- out.DESeq2$results
@@ -41,12 +39,6 @@ exportResults.DESeq2 <- function(out.DESeq2, group, cooksCutoff=NULL, alpha=0.05
                             dispFit=round(mcols(dds)$dispFit,4),dispMAP=round(mcols(dds)$dispMAP,4),
                             dispersion=round(mcols(dds)$dispersion,4),betaConv=mcols(dds)$betaConv,
                             maxCooks=round(mcols(dds)$maxCooks,4))
-    if (is.null(cooksCutoff)){
-      m <- nrow(attr(dds,"modelMatrix"))
-      p <- ncol(attr(dds,"modelMatrix"))
-      cooksCutoff <- qf(.99, p, m - p)
-    }
-    mcols.add$outlier <- ifelse(mcols(dds)$maxCooks > cooksCutoff,"Yes","No")
     complete.name <- merge(complete.name, mcols.add, by="Id", all=TRUE)
     complete[[name]] <- complete.name
 	

@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, 2015 (submitted) when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, bioRxiv, 2015, doi: http://dx.doi.org/10.1101/021741 when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -160,7 +160,7 @@ Normalization aims at correcting systematic technical biases in the data, in ord
 edgeR computes a factor for each sample. These normalization factors apply to the total number of counts and cannot be used to normalize read counts in a direct manner. Indeed, normalization factors are used to normalize total counts. These in turn are used to normalize read counts according to a total count normalization: if $N_j$ is the total number of reads of the sample $j$ and $f_j$ its normalization factor, $N'_j=f_j \times N_j$ is the normalized total number of reads. Then, let $s_j=N'_j/\bar{N'}$ with $\bar{N'}$ the mean of the $N'_j$ s. Finally, the normalized counts of the sample $j$ are defined as $x'_{ij}=x_{ij}/s_j$ where $i$ is the gene index.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(xtable(t(matrix(out.edgeR$dge$samples$norm.factors, dimnames=list(target$label,"TMM"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
+print(xtable(t(matrix(out.edgeR$dge$samples$norm.factors, dimnames=list(target$label,paste0(normalizationMethod," normalization factors")))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
 ```
 
 Boxplots are often used to assess the quality of the normalization process, as they show how distributions are globally affected during this process. We expect normalization to stabilize distributions across samples. Figure 8 shows boxplots of raw (left) and normalized (right) data respectively.
@@ -258,7 +258,13 @@ These files contain the following columns:
 The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
 
 ```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(sessionInfo())
+si <- as.character(toLatex(sessionInfo()))
+si <- si[-c(1,length(si))]
+si <- gsub("(\\\\verb)|(\\|)", "", si)
+si <- gsub("~", " ", si)
+si <- paste(si, collapse=" ")
+si <- unlist(strsplit(si, "\\\\item"))
+cat(paste(si, collapse="\n -"), "\n")
 ```
 
 Parameter values used for this analysis are:

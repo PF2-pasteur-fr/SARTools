@@ -4,13 +4,14 @@
 #'
 #' @param complete A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})
 #' @param alpha cut-off to apply on each adjusted p-value
+#' @param outfile TRUE to export the figure in a png file
 #' @return A file named MAPlot.png in the figures directory containing one MA-plot per comparison
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MAPlot <- function(complete, alpha=0.05){
+MAPlot <- function(complete, alpha=0.05, outfile=TRUE){
   nrow <- ceiling(sqrt(length(complete)))
   ncol <- ceiling(length(complete)/nrow)
-  png(filename="figures/MAPlot.png", width=400*max(ncol,nrow), height=400*min(ncol,nrow))
+  if (outfile) png(filename="figures/MAPlot.png", width=400*max(ncol,nrow), height=400*min(ncol,nrow))
     par(mfrow=sort(c(nrow,ncol)))
       for (name in names(complete)){
         complete.name <- complete[[name]]
@@ -27,7 +28,7 @@ MAPlot <- function(complete, alpha=0.05){
   		     main = paste0("MA-plot - ",gsub("_"," ",name)))
         abline(h=0, lwd=1, col="lightgray")
       }
-  dev.off()
+  if (outfile) dev.off()
 }
 
 

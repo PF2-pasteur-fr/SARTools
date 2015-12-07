@@ -18,7 +18,7 @@
 
 run.DESeq2 <- function(counts, target, varInt, batch=NULL,
                        locfunc="median", fitType="parametric", pAdjustMethod="BH",
-					   cooksCutoff=TRUE, independentFiltering=TRUE, alpha=0.05, ...){
+		       cooksCutoff=TRUE, independentFiltering=TRUE, alpha=0.05, ...){
   # building dds object
   dds <- DESeqDataSetFromMatrix(countData=counts, colData=target, 
                                 design=formula(paste("~", ifelse(!is.null(batch), paste(batch,"+"), ""), varInt)))
