@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
-### April 20th, 2015
-### designed to be executed with SARTools 1.2.0
+### May 9th, 2016
+### designed to be executed with SARTools 1.3.0
 ################################################################################
 
 ################################################################################

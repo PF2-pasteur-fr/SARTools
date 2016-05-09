@@ -37,7 +37,7 @@ exportResults.edgeR <- function(out.edgeR, group, counts, alpha=0.05){
     # ajout d'elements depuis res
     res.name <- data.frame(Id=rownames(res[[name]]),FC=round(2^(res[[name]][,"logFC"]),3),
                            log2FoldChange=round(res[[name]][,"logFC"],3),pvalue=res[[name]][,"PValue"],
-						   padj=res[[name]][,"FDR"])
+						   padj=res[[name]][,ifelse("FDR" %in% names(res[[name]]), "FDR", "FWER")])
     complete.name <- merge(complete.name, res.name, by="Id", all=TRUE)
     # ajout d'elements depuis dge
     dge.add <- data.frame(Id=rownames(dge$counts),tagwise.dispersion=round(dge$tagwise.dispersion,4),
