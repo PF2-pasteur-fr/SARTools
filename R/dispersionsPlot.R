@@ -14,7 +14,7 @@ dispersionsPlot <- function(dds, outfile=TRUE){
   disp <- log(disp)
   mean.disp <- mean(disp,na.rm=TRUE)
   sd.disp <- sd(disp,na.rm=TRUE)
-  if (outfile) png(filename="figures/dispersionsPlot.png",width=800,height=400)
+  if (outfile) png(filename="figures/dispersionsPlot.png",width=3600,height=1800,res=300)
 	par(mfrow=c(1,2))
     # dispersions plot
 	plotDispEsts(dds, main="Dispersions", las=1, xlab="Mean of normalized counts", ylab="Dispersion")

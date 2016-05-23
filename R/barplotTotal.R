@@ -10,7 +10,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 barplotTotal <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
-  if (outfile) png(filename="figures/barplotTotal.png",width=min(800,400+200*ncol(counts)/10),height=400)
+  if (outfile) png(filename="figures/barplotTotal.png",width=min(3600,1800+800*ncol(counts)/10),height=1800,res=300)
   barplot(colSums(counts),
           main = "Total read count per sample",
 		  ylab = "Total read count",

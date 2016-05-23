@@ -10,7 +10,7 @@
 
 clusterPlot <- function(counts.trans, group, outfile=TRUE){
   hc <- hclust(dist(t(counts.trans)), method="ward.D")
-  if (outfile) png(filename="figures/cluster.png",width=400,height=400) 
+  if (outfile) png(filename="figures/cluster.png",width=1800,height=1800,res=300) 
     plot(hc, hang=-1, ylab="Height", las=2, xlab="Method: Euclidean distance - Ward criterion", main="Cluster dendrogram")
   if (outfile) dev.off()
 }

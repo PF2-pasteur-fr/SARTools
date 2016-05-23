@@ -10,7 +10,7 @@
 rawpHist <- function(complete, outfile=TRUE){
   nrow <- ceiling(sqrt(length(complete)))
   ncol <- ceiling(length(complete)/nrow)
-  if (outfile) png(filename="figures/rawpHist.png", width=400*max(ncol,nrow), height=400*min(ncol,nrow))
+  if (outfile) png(filename="figures/rawpHist.png", width=1800*max(ncol,nrow), height=1800*min(ncol,nrow), res=300)
     par(mfrow=sort(c(nrow,ncol)))
     for (name in names(complete)){
       hist(complete[[name]][,"pvalue"], nclass=50, xlab="Raw p-value", 

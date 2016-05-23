@@ -25,7 +25,7 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
     norm.counts <- removeNull(norm.counts)    
   }
 
-  if (outfile) png(filename="figures/countsBoxplots.png",width=2*min(500,400+200*ncol(norm.counts)/10),height=400)
+  if (outfile) png(filename="figures/countsBoxplots.png",width=2*min(2200,1800+800*ncol(norm.counts)/10),height=1800,res=300)
     par(mfrow=c(1,2))
 	# raw counts
     boxplot(log2(counts+1), col = col[as.integer(group)], las = 2,

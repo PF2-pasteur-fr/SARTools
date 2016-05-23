@@ -13,7 +13,7 @@ In addition to the SARTools package itself, the workflow requires the installati
 To install the SARTools package from GitHub, open a R session and:
 - install DESeq2, edgeR and genefilter with `source("http://bioconductor.org/biocLite.R")` and `biocLite(c("DESeq2", "edgeR", "genefilter"))` (if not installed yet)
 - install devtools with `install.packages("devtools")` (if not installed yet)
-- Note: Ubuntu users may have to install some libraries (libxml2-dev, libcurl4-dev and libssl-dev) to be able to install DESeq2 and devtools
+- Note: Ubuntu users may have to install some libraries (libxml2-dev, libcurl4-openssl-dev and libssl-dev) to be able to install DESeq2 and devtools
 - for Windows users only, install [Rtools](http://cran.r-project.org/bin/windows/Rtools/) or check that it is already installed (needed to build the package)
 - load the devtools R package with `library(devtools)`
 - run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
