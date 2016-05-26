@@ -25,6 +25,15 @@ How to use SARTools?
 
 A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package.
 
+### Using Conda
+
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/r-sartools/README.html)
+
+1. Install miniconda2 http://conda.pydata.org/miniconda.html
+2. Install the SARTools R library and its dependencies using conda `conda install r-sartools`
+
+Note: if you want to set a dedicate conda environment for SARTools, use `conda create -n sartools r-sartools` and follow the instructions to activate it.
+
 About SARTools
 --------------
 The SARTools package has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, bioRxiv, 2015, doi: http://dx.doi.org/10.1101/021741 when using this tool for any analysis published.
