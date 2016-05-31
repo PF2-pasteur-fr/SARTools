@@ -8,6 +8,8 @@ SARTools is distributed with two R script templates (`template_script_DESeq2.r` 
 How to install SARTools?
 ------------------------
 
+### Within R
+
 In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online, see the dedicated webpages). SARTools needs R version 3.3.0 or higher, DESeq2 1.12.0 or higher and edgeR 3.12.0 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
 
 To install the SARTools package from GitHub, open a R session and:
@@ -18,13 +20,6 @@ To install the SARTools package from GitHub, open a R session and:
 - load the devtools R package with `library(devtools)`
 - run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
 
-Please read the NEWS file to see the latest improvements!
-
-How to use SARTools?
---------------------
-
-A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package.
-
 ### Using Conda
 
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/r-sartools/README.html)
@@ -32,7 +27,14 @@ A HTML vignette is available within the vignettes folder on GitHub and provides 
 1. Install miniconda2 http://conda.pydata.org/miniconda.html
 2. Install the SARTools R library and its dependencies using conda `conda install r-sartools`
 
-Note: if you want to set a dedicate conda environment for SARTools, use `conda create -n sartools r-sartools` and follow the instructions to activate it.
+Note: if you want to set a dedicated conda environment for SARTools, use `conda create -n sartools r-sartools` and follow the instructions to activate it.
+
+How to use SARTools?
+--------------------
+
+A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package.
+
+Please read the NEWS file to see the latest improvements!
 
 About SARTools
 --------------

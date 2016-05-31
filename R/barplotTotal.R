@@ -11,10 +11,11 @@
 
 barplotTotal <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
   if (outfile) png(filename="figures/barplotTotal.png",width=min(3600,1800+800*ncol(counts)/10),height=1800,res=300)
-  barplot(colSums(counts),
-          main = "Total read count per sample",
-		  ylab = "Total read count",
-		  ylim = c(0, max(colSums(counts))*1.2),
+  libsize <- colSums(counts)/1e6
+  barplot(libsize,
+          main = "Total read count per sample (million)",
+		  ylab = "Total read count (million)",
+		  ylim = c(0, max(libsize)*1.2),
 		  col = col[as.integer(group)],
 		  las = 2)
   legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
