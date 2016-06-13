@@ -8,7 +8,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 BCVPlot <- function(dge, outfile=TRUE){	
-  if (outfile) png(filename="figures/BCV.png", width=400, height=400)
+  if (outfile) png(filename="figures/BCV.png", width=1800, height=1800, res=300)
     plotBCV(dge, las = 1, main = "BCV plot")
   if (outfile) dev.off()	
 }

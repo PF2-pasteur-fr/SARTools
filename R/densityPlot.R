@@ -10,7 +10,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
-  if (outfile) png(filename="figures/densplot.png",width=400,height=400)
+  if (outfile) png(filename="figures/densplot.png",width=1800,height=1800,res=300)
     counts <- removeNull(counts)
     plot(density(log2(counts[,1]+1)), las = 1, lwd = 2,
          main = "Density of counts distribution",

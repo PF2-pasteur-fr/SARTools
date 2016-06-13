@@ -1,14 +1,15 @@
 citEntry(entry = "article",
-         title = "SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data",
+         title = "SARTools: A DESeq2- and EdgeR-Based R Pipeline for Comprehensive Differential Analysis of RNA-Seq Data",
          author = personList( as.person("Hugo Varet"),
+                              as.person("Loraine Brillet-Guéguen"),
                               as.person("Jean-Yves Coppée"),
                               as.person("Marie-Agnès Dillies")),
-         year = 2015,
-         journal = "bioRxiv",
-         doi = "10.1101/021741",
-         url = "http://biorxiv.org/content/early/2015/06/30/021741",
+         year = 2016,
+         journal = "PLoS One",
+         doi = "10.1371/journal.pone.0157022",
+         url = "http://dx.doi.org/10.1371/journal.pone.0157022",
          textVersion = 
-         paste("Hugo Varet, Jean-Yves Coppée and Marie-Agnès Dillies (2015):", 
-               "SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data.",
-                "bioRxiv, 2015, doi: http://dx.doi.org/10.1101/021741"))
+         paste("Hugo Varet, Loraine Brillet-Guéguen, Jean-Yves Coppée and Marie-Agnès Dillies (2016):", 
+               "SARTools: A DESeq2- and EdgeR-Based R Pipeline for Comprehensive Differential Analysis of RNA-Seq Data.",
+                "PLoS One, 2016, doi: http://dx.doi.org/10.1371/journal.pone.0157022"))
 

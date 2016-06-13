@@ -13,7 +13,7 @@ diagSizeFactorsPlots <- function(dds, outfile=TRUE, plots=c("diag","sf_libsize")
   if ("diag" %in% plots){
     nrow <- ceiling(sqrt(ncol(counts(dds))))
     ncol <- ceiling(ncol(counts(dds))/nrow)
-    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=300*max(ncol,nrow), height=300*min(ncol,nrow))
+    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=1400*max(ncol,nrow), height=1400*min(ncol,nrow), res=300)
     par(mfrow=sort(c(nrow,ncol)))
     geomeans <- exp(rowMeans(log(counts(dds))))
     samples <- colnames(counts(dds))
@@ -30,7 +30,7 @@ diagSizeFactorsPlots <- function(dds, outfile=TRUE, plots=c("diag","sf_libsize")
 
   # total read counts vs size factors
   if ("sf_libsize" %in% plots){
-    if (outfile) png(filename="figures/diagSizeFactorsTC.png",width=400,height=400)  
+    if (outfile) png(filename="figures/diagSizeFactorsTC.png",width=1800,height=1800,res=300)  
     plot(sizeFactors(dds), colSums(counts(dds)), pch=19, las=1, xlab="Size factors",
 	 ylab="Total number of reads",main="Diagnostic: size factors vs total number of reads")
     abline(lm(colSums(counts(dds)) ~ sizeFactors(dds) + 0), lty=2, col="grey")

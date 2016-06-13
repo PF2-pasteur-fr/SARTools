@@ -8,7 +8,7 @@ Author: `r author`
 
 Date: `r Sys.Date()`
 
-The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, J.-Y. Coppee and M.-A. Dillies, _SARTools: a DESeq2- and edgeR-based R pipeline for comprehensive differential analysis of RNA-seq data_, bioRxiv, 2015, doi: http://dx.doi.org/10.1101/021741 when using this tool for any analysis published.
+The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, L. Brillet-Guéguen, J.-Y. Coppee and M.-A. Dillies, _SARTools: A DESeq2- and EdgeR-Based R Pipeline for Comprehensive Differential Analysis of RNA-Seq Data_, PLoS One, 2016, doi: http://dx.doi.org/10.1371/journal.pone.0157022 when using this tool for any analysis published.
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ Figure 1 shows the total number of mapped reads for each sample. Reads that map 
 
 <figure>
 <center>
-    <img src="figures/barplotTotal.png" alt="Barplot total counts" />
+    <img src="figures/barplotTotal.png" alt="Barplot total counts" width=600 />
 	<figcaption> Figure 1: Number of mapped reads per sample. Colors refer to the biological condition of the sample. </figcaption>
 </center>
 </figure>
@@ -75,7 +75,7 @@ Figure 2 shows the proportion of features with no read count in each sample. We 
 
 <figure>
 <center>
-    <img src="figures/barplotNull.png" alt="Barplot null counts" />
+    <img src="figures/barplotNull.png" alt="Barplot null counts" width=600 />
 	<figcaption> Figure 2: Proportion of features with null read counts in each sample. </figcaption>
 </center>
 </figure>
@@ -84,7 +84,7 @@ Figure 3 shows the distribution of read counts for each sample. For sake of read
 
 <figure>
 <center>
-    <img src="figures/densplot.png" alt="Estimated densities of raw counts" />
+    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width="60%" />
 	<figcaption> Figure 3: Density distribution of read counts. </figcaption>
 </center>
 </figure>
@@ -93,7 +93,7 @@ It may happen that one or a few features capture a high proportion of reads (up 
 
 <figure>
 <center>
-    <img src="figures/majSeq.png" alt="Most represented sequences" />
+    <img src="figures/majSeq.png" alt="Most represented sequences" width=600 />
 	<figcaption> Figure 4: Percentage of reads associated with the sequence having the highest count (provided in each box on the graph) for each sample. </figcaption>
 </center>
 </figure>
@@ -127,7 +127,7 @@ Figure 6 shows the dendrogram obtained from `r typeTrans`-transformed data. An e
 
 <figure>
 <center>
-    <img src="figures/cluster.png" alt="Clustering" />
+    <img src="figures/cluster.png" alt="Clustering" width="60%" />
 	<figcaption> Figure 6: Sample clustering based on normalized data. </figcaption>
 </center>
 </figure>
@@ -170,7 +170,7 @@ The figure 9 shows that the scaling factors of DESeq2 and the total count normal
 
 <figure>
 <center>
-    <img src="figures/diagSizeFactorsTC.png" alt="Size factors vs total counts" />
+    <img src="figures/diagSizeFactorsTC.png" alt="Size factors vs total counts" width="60%" />
 	<figcaption> Figure 9: Plot of the estimated size factors and the total number of reads per sample. </figcaption>
 </center>
 </figure>
