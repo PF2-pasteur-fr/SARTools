@@ -27,7 +27,11 @@ descriptionPlots <- function(counts, group, col=c("lightblue","orange","MediumVi
   # SERE and pairwise scatter plots
   cat("Matrix of SERE statistics:\n")
   print(tabSERE(counts))
-  pairwiseScatterPlots(counts=counts, group=group)
-  
+  if (ncol(counts)<=30){
+    pairwiseScatterPlots(counts=counts, group=group)
+  } else{
+    warning("No pairwise scatter-plot produced because of a too high number of samples (>30).")
+  }
+
   return(majSequences)
 }
