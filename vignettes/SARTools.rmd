@@ -109,7 +109,7 @@ While running the script, PNG files are generated in the `figures` directory:
  - `barplotNull.png`: percentage of null counts per sample;
  - `densplot.png`: estimation of the density of the counts for each sample;	
  - `majSeq.png`: percentage of reads caught by the feature having the highest count in each sample;
- - `pairwiseScatter.png`: pairwise scatter plot between each pair of samples and SERE values;
+ - `pairwiseScatter.png`: pairwise scatter plot between each pair of samples and SERE values (not produced if more than 30 samples);
  - `diagSizeFactorsHist.png`: diagnostic of the estimation of the size factors (if use of DESeq2);
  - `diagSizeFactorsTC.png`: plot of the size factors vs the total number of reads (if use of DESeq2);
  - `countsBoxplot.png`: boxplots on raw and normalized counts;	
