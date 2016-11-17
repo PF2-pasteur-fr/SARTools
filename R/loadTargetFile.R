@@ -21,6 +21,8 @@ loadTargetFile <- function(targetFile, varInt, condRef, batch){
   rownames(target) <- as.character(target[,1])
   # check if varInt contains replicates
   if (min(table(target[,varInt]))<2) stop(paste("The factor of interest", varInt, "has a level without replicates"))
+  # check if NA in the target
+  if (any(is.na(cbind(target[,c(varInt, batch)], target[,1:2])))) stop("NA are present in the target file")
   # warning message if batch is numeric
   if (!is.null(batch) && is.numeric(target[,batch])) warning(paste("The", batch, "variable is numeric. Use factor() or rename the levels with letters to convert it into a factor"))
   cat("Target file:\n")

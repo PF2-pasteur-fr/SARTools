@@ -12,7 +12,7 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE){
   ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/MAPlot.png", width=1800*ncol, height=1800*nrow, res=300)
-    par(mfrow=sort(c(nrow,ncol)))
+    par(mfrow=c(nrow,ncol))
       for (name in names(complete)){
         complete.name <- complete[[name]]
         complete.name <- complete.name[complete.name$baseMean>0,]

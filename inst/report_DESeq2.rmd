@@ -202,7 +202,7 @@ The DESeq2 model assumes that the count data follow a negative binomial distribu
 
 <figure>
 <center>
-    <img src="figures/dispersionsPlot.png" alt="Dispersions estimations" width=600 />
+    <img src="figures/dispersionsPlot.png" alt="Dispersions estimations" width=1200 />
 	<figcaption> Figure 11: Dispersion estimates (left) and diagnostic of log-normality (right). </figcaption>
 </center>
 </figure>
