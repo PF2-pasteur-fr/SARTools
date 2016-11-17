@@ -9,9 +9,9 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 MAPlot <- function(complete, alpha=0.05, outfile=TRUE){
-  nrow <- ceiling(sqrt(length(complete)))
-  ncol <- ceiling(length(complete)/nrow)
-  if (outfile) png(filename="figures/MAPlot.png", width=1800*max(ncol,nrow), height=1800*min(ncol,nrow), res=300)
+  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  nrow <- ceiling(length(complete)/ncol)
+  if (outfile) png(filename="figures/MAPlot.png", width=1800*ncol, height=1800*nrow, res=300)
     par(mfrow=sort(c(nrow,ncol)))
       for (name in names(complete)){
         complete.name <- complete[[name]]

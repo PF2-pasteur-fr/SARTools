@@ -5,15 +5,16 @@
 #' @param out.DESeq2 the result of \code{run.DESeq2()}
 #' @param group factor vector of the condition from which each sample belongs
 #' @param alpha threshold to apply to adjusted p-values
+#' @param export TRUE to export the results (up, down and complete table) in the tables directory
 #' @return A list of \code{data.frame} containing counts, pvalues, FDR, log2FC...
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-exportResults.DESeq2 <- function(out.DESeq2, group, alpha=0.05){
+exportResults.DESeq2 <- function(out.DESeq2, group, alpha=0.05, export=TRUE){
   
   dds <- out.DESeq2$dds
   results <- out.DESeq2$results
   
-  # comptages bruts et normalisés
+  # comptages bruts et normalis?s
   counts <- data.frame(Id=rownames(counts(dds)), counts(dds), round(counts(dds, normalized=TRUE)))
   colnames(counts) <- c("Id", colnames(counts(dds)), paste0("norm.", colnames(counts(dds))))
   # baseMean avec identifiant
@@ -41,18 +42,20 @@ exportResults.DESeq2 <- function(out.DESeq2, group, alpha=0.05){
                             maxCooks=round(mcols(dds)$maxCooks,4))
     complete.name <- merge(complete.name, mcols.add, by="Id", all=TRUE)
     complete[[name]] <- complete.name
-	
-    # sélection des up et down
-	up.name <- complete.name[which(complete.name$padj <= alpha & complete.name$betaConv & complete.name$log2FoldChange>=0),]
-	up.name <- up.name[order(up.name$padj),]
-	down.name <- complete.name[which(complete.name$padj <= alpha & complete.name$betaConv & complete.name$log2FoldChange<=0),]
-	down.name <- down.name[order(down.name$padj),]
-
-	# exports
-	name <- gsub("_","",name)
-    write.table(complete.name, file=paste0("tables/",name,".complete.txt"), sep="\t", row.names=FALSE, dec=".", quote=FALSE)
-    write.table(up.name, file=paste0("tables/", name,".up.txt"), row.names=FALSE, sep="\t", dec=".", quote=FALSE)
-	write.table(down.name, file=paste0("tables/", name,".down.txt"), row.names=FALSE, sep="\t", dec=".", quote=FALSE)
+    
+    if (export){
+      # s?lection des up et down
+      up.name <- complete.name[which(complete.name$padj <= alpha & complete.name$betaConv & complete.name$log2FoldChange>=0),]
+      up.name <- up.name[order(up.name$padj),]
+      down.name <- complete.name[which(complete.name$padj <= alpha & complete.name$betaConv & complete.name$log2FoldChange<=0),]
+      down.name <- down.name[order(down.name$padj),]
+      
+      # exports
+      name <- gsub("_","",name)
+      write.table(complete.name, file=paste0("tables/",name,".complete.txt"), sep="\t", row.names=FALSE, dec=".", quote=FALSE)
+      write.table(up.name, file=paste0("tables/", name,".up.txt"), row.names=FALSE, sep="\t", dec=".", quote=FALSE)
+      write.table(down.name, file=paste0("tables/", name,".down.txt"), row.names=FALSE, sep="\t", dec=".", quote=FALSE)
+    }
   }
 
   return(complete)

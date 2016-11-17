@@ -4,7 +4,7 @@
 \alias{exportResults.edgeR}
 \title{Export results for edgeR analyses}
 \usage{
-exportResults.edgeR(out.edgeR, group, counts, alpha = 0.05)
+exportResults.edgeR(out.edgeR, group, counts, alpha = 0.05, export = TRUE)
 }
 \arguments{
 \item{out.edgeR}{the result of \code{run.edgeR()}}
@@ -14,6 +14,8 @@ exportResults.edgeR(out.edgeR, group, counts, alpha = 0.05)
 \item{counts}{non-filtered counts (used to keep them in the final table)}
 
 \item{alpha}{threshold to apply to adjusted p-values}
+
+\item{export}{TRUE to export the results (up, down and complete table) in the tables directory}
 }
 \value{
 A list of \code{data.frame} containing counts, pvalues, FDR, log2FC...

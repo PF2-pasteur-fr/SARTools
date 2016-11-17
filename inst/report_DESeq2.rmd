@@ -60,7 +60,7 @@ print(xtable(apply(counts,2,fun_summary),caption="Table 3: Summary of the raw co
 nbNull <- nrow(counts) - nrow(removeNull(counts)) # needed in one of the next paragraphs
 ```
 
-Figure 1 shows the total number of mapped reads for each sample. Reads that map on multiple locations on the transcriptome are counted more than once, as far as they are mapped on less than 50 different loci. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
+Figure 1 shows the total number of mapped and counted reads for each sample. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
 - different rRNA contamination levels between samples (even between biological replicates);
 - slight differences between library concentrations, since they may be difficult to measure with high precision.
 
@@ -84,7 +84,7 @@ Figure 3 shows the distribution of read counts for each sample. For sake of read
 
 <figure>
 <center>
-    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width="60%" />
+    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width=600 />
 	<figcaption> Figure 3: Density distribution of read counts. </figcaption>
 </center>
 </figure>
@@ -127,7 +127,7 @@ Figure 6 shows the dendrogram obtained from `r typeTrans`-transformed data. An e
 
 <figure>
 <center>
-    <img src="figures/cluster.png" alt="Clustering" width="60%" />
+    <img src="figures/cluster.png" alt="Clustering" width=600 />
 	<figcaption> Figure 6: Sample clustering based on normalized data. </figcaption>
 </center>
 </figure>
@@ -136,7 +136,7 @@ Another way of visualizing the experiment variability is to look at the first pr
 
 <figure>
 <center>
-    <img src="figures/PCA.png" alt="Principal component analysis" />
+    <img src="figures/PCA.png" alt="Principal component analysis" width=1200 />
 	<figcaption> Figure 7: First two components of a Principal Component Analysis, with percentages of variance associated with each axis. </figcaption>
 </center>
 </figure>
@@ -170,7 +170,7 @@ The figure 9 shows that the scaling factors of DESeq2 and the total count normal
 
 <figure>
 <center>
-    <img src="figures/diagSizeFactorsTC.png" alt="Size factors vs total counts" width="60%" />
+    <img src="figures/diagSizeFactorsTC.png" alt="Size factors vs total counts" width=600 />
 	<figcaption> Figure 9: Plot of the estimated size factors and the total number of reads per sample. </figcaption>
 </center>
 </figure>
@@ -179,7 +179,7 @@ Boxplots are often used as a qualitative measure of the quality of the normaliza
 
 <figure>
 <center>
-    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" />
+    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" width=1200 />
 	<figcaption> Figure 10: Boxplots of raw (left) and normalized (right) read counts. </figcaption>
 </center>
 </figure>
@@ -202,7 +202,7 @@ The DESeq2 model assumes that the count data follow a negative binomial distribu
 
 <figure>
 <center>
-    <img src="figures/dispersionsPlot.png" alt="Dispersions estimations" />
+    <img src="figures/dispersionsPlot.png" alt="Dispersions estimations" width=600 />
 	<figcaption> Figure 11: Dispersion estimates (left) and diagnostic of log-normality (right). </figcaption>
 </center>
 </figure>

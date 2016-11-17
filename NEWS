@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.4.0
+------------------------
+	o added a parameter in exportResults.DESeq2() and exportResults.edgeR() to avoid exporting the results
+	o adapted the plots when studying many samples and performing many comparisons
+
 CHANGES IN VERSION 1.3.2
 ------------------------
 	o pairwiseScatterPlots() function not executed with more than 30 samples

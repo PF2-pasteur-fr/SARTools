@@ -8,10 +8,10 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 rawpHist <- function(complete, outfile=TRUE){
-  nrow <- ceiling(sqrt(length(complete)))
-  ncol <- ceiling(length(complete)/nrow)
-  if (outfile) png(filename="figures/rawpHist.png", width=1800*max(ncol,nrow), height=1800*min(ncol,nrow), res=300)
-    par(mfrow=sort(c(nrow,ncol)))
+  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  nrow <- ceiling(length(complete)/ncol)
+  if (outfile) png(filename="figures/rawpHist.png", width=1800*ncol, height=1800*nrow, res=300)
+    par(mfrow=c(nrow,ncol))
     for (name in names(complete)){
       hist(complete[[name]][,"pvalue"], nclass=50, xlab="Raw p-value", 
 	       col="skyblue", las=1, main=paste0("Distribution of raw p-values - ",gsub("_"," ",name)))
