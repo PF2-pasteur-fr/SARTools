@@ -11,7 +11,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 loadTargetFile <- function(targetFile, varInt, condRef, batch){
-  target <- read.table(targetFile, header=TRUE, sep="\t")
+  target <- read.table(targetFile, header=TRUE, sep="\t", na.strings="")
   if (!I(varInt %in% names(target))) stop(paste("The factor of interest", varInt, "is not in the target file"))
   if (!is.null(batch) && !I(batch %in% names(target))) stop(paste("The batch effect", batch, "is not in the target file")) 
   target[,varInt] <- as.factor(target[,varInt])
