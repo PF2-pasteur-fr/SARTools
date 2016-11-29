@@ -38,6 +38,9 @@ loadCountData <- function(target, rawDir="raw", header=FALSE, skip=0,
   rownames(counts) <- rawCounts[,1]
   counts <- counts[order(rownames(counts)),]
   
+  # check that input counts are integers to fit edgeR and DESeq2 requirements
+  if (any(counts %% 1 != 0)) stop("Input counts are not integer values as required by DESeq2 and edgeR.")
+  
   cat("\nFeatures removed:\n")
   for (f in setdiff(featuresToRemove,"")){
     match <- grep(f, rownames(counts))

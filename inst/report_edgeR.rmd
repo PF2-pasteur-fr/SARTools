@@ -62,7 +62,7 @@ nbNull <- nrow(counts) - nrow(removeNull(counts))
 percentNull <- nbNull/nrow(counts)
 ```
 
-Figure 1 shows the total number of mapped reads for each sample. Reads that map on multiple locations on the transcriptome are counted more than once, as far as they are mapped on less than 50 different loci. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
+Figure 1 shows the total number of mapped and counted reads for each sample. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
 - different rRNA contamination levels between samples (even between biological replicates);
 - slight differences between library concentrations, since they may be difficult to measure with high precision.
 
@@ -86,7 +86,7 @@ Figure 3 shows the distribution of read counts for each sample. For sake of read
 
 <figure>
 <center>
-    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width="60%" />
+    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width=600 />
 	<figcaption> Figure 3: Density distribution of read counts. </figcaption>
 </center>
 </figure>
@@ -131,7 +131,7 @@ The main variability within the experiment is expected to come from biological d
 
 <figure>
 <center>
-    <img src="figures/cluster.png" alt="Clustering" width="60%" />
+    <img src="figures/cluster.png" alt="Clustering" width=600 />
 	<figcaption> Figure 6: Sample clustering based on normalized data. </figcaption>
 </center>
 </figure>
@@ -140,7 +140,7 @@ Another way of visualizing the experiment variability is to look at the first tw
 
 <figure>
 <center>
-    <img src="figures/MDS.png" alt="Multidimensional scaling plot" width="60%" />
+    <img src="figures/MDS.png" alt="Multidimensional scaling plot" width=600 />
 	<figcaption> Figure 7: Multidimensional scaling plot of the samples. </figcaption>
 </center>
 </figure>
@@ -167,7 +167,7 @@ Boxplots are often used to assess the quality of the normalization process, as t
 
 <figure>
 <center>
-    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" />
+    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" width=1200 />
 	<figcaption> Figure 8: Boxplots of raw (left) and normalized (right) read counts. </figcaption>
 </center>
 </figure>
@@ -186,7 +186,7 @@ The edgeR model assumes that the count data follow a negative binomial distribut
 
 <figure>
 <center>
-    <img src="figures/BCV.png" alt="Dispersions estimations" width="60%" />
+    <img src="figures/BCV.png" alt="Dispersions estimations" width=600 />
 	<figcaption> Figure 9: Dispersion estimates. </figcaption>
 </center>
 </figure>

@@ -11,10 +11,10 @@
 diagSizeFactorsPlots <- function(dds, outfile=TRUE, plots=c("diag","sf_libsize")){
   # histograms
   if ("diag" %in% plots){
-    nrow <- ceiling(sqrt(ncol(counts(dds))))
-    ncol <- ceiling(ncol(counts(dds))/nrow)
-    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=1400*max(ncol,nrow), height=1400*min(ncol,nrow), res=300)
-    par(mfrow=sort(c(nrow,ncol)))
+    ncol <- ifelse(ncol(counts(dds))<=4, ceiling(sqrt(ncol(counts(dds)))), 3)
+    nrow <- ceiling(ncol(counts(dds))/ncol)
+    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=1400*ncol, height=1400*nrow, res=300)
+    par(mfrow=c(nrow,ncol))
     geomeans <- exp(rowMeans(log(counts(dds))))
     samples <- colnames(counts(dds))
     counts.trans <- log2(counts(dds)/geomeans)
