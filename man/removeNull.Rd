@@ -18,4 +18,3 @@ Remove features with null counts in all samples. These features do not contain a
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

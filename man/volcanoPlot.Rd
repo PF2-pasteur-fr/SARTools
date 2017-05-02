@@ -22,4 +22,3 @@ Volcano plot for each comparison: -log10(adjusted P value) vs log2(FC) with one 
 \author{
 Hugo Varet
 }
-

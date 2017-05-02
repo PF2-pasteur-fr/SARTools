@@ -29,4 +29,3 @@ Export counts and edgeR results
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

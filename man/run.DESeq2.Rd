@@ -40,4 +40,3 @@ Wrapper to run DESeq2: create the \code{DESeqDataSet}, normalize data, estimate 
 \author{
 Hugo Varet
 }
-

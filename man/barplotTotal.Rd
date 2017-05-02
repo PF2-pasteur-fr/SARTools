@@ -25,4 +25,3 @@ Bar plot of the total number of reads per sample
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

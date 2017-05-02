@@ -25,6 +25,7 @@ loadTargetFile <- function(targetFile, varInt, condRef, batch){
   if (any(is.na(cbind(target[,c(varInt, batch)], target[,1:2])))) stop("NA are present in the target file")
   # warning message if batch is numeric
   if (!is.null(batch) && is.numeric(target[,batch])) warning(paste("The", batch, "variable is numeric. Use factor() or rename the levels with letters to convert it into a factor"))
+  if (any(grepl("[[:punct:]]", as.character(target[,varInt])))) stop(paste("The", varInt, "variable contains punctuation characters, please remove them"))
   cat("Target file:\n")
   print(target)
   return(target)

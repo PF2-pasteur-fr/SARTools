@@ -20,4 +20,3 @@ Number of down- and up-regulated features per comparison
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

@@ -4,7 +4,7 @@
 \alias{loadCountData}
 \title{Load count files}
 \usage{
-loadCountData(target, rawDir = "raw", header = FALSE, skip = 0,
+loadCountData(target, rawDir = "raw", skip = 0,
   featuresToRemove = c("alignment_not_unique", "ambiguous", "no_feature",
   "not_aligned", "too_low_aQual"))
 }
@@ -12,8 +12,6 @@ loadCountData(target, rawDir = "raw", header = FALSE, skip = 0,
 \item{target}{target \code{data.frame} of the project returned by \code{loadTargetFile()}}
 
 \item{rawDir}{path to the directory containing the count files}
-
-\item{header}{a logical value indicating whether the file contains the names of the variables as its first line}
 
 \item{skip}{number of lines of the data file to skip before beginning to read data}
 
@@ -31,4 +29,3 @@ If \code{featuresToRemove} is equal to \code{"rRNA"}, all the features containin
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

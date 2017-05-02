@@ -25,4 +25,3 @@ Bar plot of the percentage of null counts per sample
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

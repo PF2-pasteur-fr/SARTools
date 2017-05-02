@@ -20,4 +20,3 @@ A plot of the mean-dispersion relationship and a diagnostic of log normality of 
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

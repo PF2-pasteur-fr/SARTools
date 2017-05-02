@@ -63,4 +63,3 @@ This function generates the HTML report for a statistical analysis with DESeq2. 
 \author{
 Hugo Varet
 }
-

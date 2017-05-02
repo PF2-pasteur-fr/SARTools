@@ -15,10 +15,9 @@ The SERE coefficient for the two samples
 \description{
 Compute the SERE coefficient for two samples
 }
-\author{
-See paper published
-}
 \references{
 Schulze, Kanwar, Golzenleuchter et al, SERE: Single-parameter quality control and sample comparison for RNA-Seq, BMC Genomics, 2012
 }
-
+\author{
+See paper published
+}

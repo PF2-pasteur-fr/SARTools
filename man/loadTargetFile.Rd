@@ -27,4 +27,3 @@ The \code{batch} parameter is used only to check if it is available in the targe
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

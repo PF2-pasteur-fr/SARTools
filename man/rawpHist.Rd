@@ -20,4 +20,3 @@ Histogram of raw p-values for each comparison
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

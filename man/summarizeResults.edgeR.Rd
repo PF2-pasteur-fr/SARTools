@@ -27,4 +27,3 @@ Summarize edgeR analysis: diagnotic plots, dispersions plot, summary of the inde
 \author{
 Hugo Varet
 }
-

@@ -3,12 +3,15 @@
 #' Plots to assess the estimations of the size factors
 #'
 #' @param dds a \code{DESeqDataSet} object
+#' @param group factor vector of the condition from which each sample belongs
+#' @param col colors for the plots
 #' @param outfile TRUE to export the figure in a png file
 #' @param plots vector of plots to generate
 #' @return Two files in the figures directory: diagSizeFactorsHist.png containing one histogram per sample and diagSizeFactorsTC.png for a plot of the size factors vs the total number of reads
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-diagSizeFactorsPlots <- function(dds, outfile=TRUE, plots=c("diag","sf_libsize")){
+diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), 
+                                 outfile=TRUE, plots=c("diag","sf_libsize")){
   # histograms
   if ("diag" %in% plots){
     ncol <- ifelse(ncol(counts(dds))<=4, ceiling(sqrt(ncol(counts(dds)))), 3)
@@ -27,13 +30,22 @@ diagSizeFactorsPlots <- function(dds, outfile=TRUE, plots=c("diag","sf_libsize")
     }
     if (outfile) dev.off()
   }
-
+  
   # total read counts vs size factors
   if ("sf_libsize" %in% plots){
-    if (outfile) png(filename="figures/diagSizeFactorsTC.png",width=1800,height=1800,res=300)  
-    plot(sizeFactors(dds), colSums(counts(dds)), pch=19, las=1, xlab="Size factors",
-	 ylab="Total number of reads",main="Diagnostic: size factors vs total number of reads")
-    abline(lm(colSums(counts(dds)) ~ sizeFactors(dds) + 0), lty=2, col="grey")
+    if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=1800, height=1800, res=300)  
+    sf <- sizeFactors(dds)
+    libsize <- colSums(counts(dds))/1e6
+    plot(sf, libsize, pch=16, las=1,
+         col = col[as.integer(group)],
+         xlab="Size factors", ylab="Total number of reads (millions)",
+         main="Diagnostic: size factors vs total number of reads")
+    abs <- range(sf); meanAbs <- mean(abs); abs <- abs(abs[2]-abs[1])/25;
+    ord <- range(libsize); meanOrd <- mean(ord); ord <- abs(ord[2]-ord[1])/25;
+    text(sf - ifelse(sf > meanAbs, abs, -abs), 
+         libsize - ifelse(libsize > meanOrd, ord, -ord),
+         colnames(dds), col=col[as.integer(group)])
+    abline(lm(libsize ~ sf + 0), lty=2, col="grey")
     if (outfile) dev.off()
   }
 }

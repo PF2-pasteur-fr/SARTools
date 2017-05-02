@@ -23,4 +23,3 @@ Description plots of the counts according to the biological condition
 \author{
 Hugo Varet
 }
-

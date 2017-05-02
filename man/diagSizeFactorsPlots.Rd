@@ -4,10 +4,16 @@
 \alias{diagSizeFactorsPlots}
 \title{Assess the estimations of the size factors}
 \usage{
-diagSizeFactorsPlots(dds, outfile = TRUE, plots = c("diag", "sf_libsize"))
+diagSizeFactorsPlots(dds, group, col = c("lightblue", "orange",
+  "MediumVioletRed", "SpringGreen"), outfile = TRUE, plots = c("diag",
+  "sf_libsize"))
 }
 \arguments{
 \item{dds}{a \code{DESeqDataSet} object}
+
+\item{group}{factor vector of the condition from which each sample belongs}
+
+\item{col}{colors for the plots}
 
 \item{outfile}{TRUE to export the figure in a png file}
 
@@ -22,4 +28,3 @@ Plots to assess the estimations of the size factors
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

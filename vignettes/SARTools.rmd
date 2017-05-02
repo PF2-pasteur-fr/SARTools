@@ -30,14 +30,14 @@ The only file the user has to deal with for an analysis is either `template_scri
 
 ### 2.2 Data files
 
-The statistical analysis assumes that reads have already been mapped and that counts per feature (gene or transcript) are available. If counting has been done with HTSeq-count [4], output files are ready to be loaded in R with the dedicated SARTools function. If not, the user must supply one count file per sample with two tab delimited columns without header:
+The statistical analysis assumes that reads have already been mapped and that counts per feature (gene or transcript) are available. If counting has been done with HTSeq-count [4] or featureCounts [5], output files are ready to be loaded in R with the dedicated SARTools function. If not, the user must supply one count file per sample with two tab delimited columns without header:
 
  - the unique IDs of the features in the first column;
  - the raw counts associated with these features in the second column (null or positive integers).
 
 All the count data files have to be placed in a directory whose name will be passed as a parameter at the beginning of the R script. 
 
-The user has to supply another tab delimited file which describes the experiment, i.e. which contains the name of the biological condition associated with each sample. This file is called "target" as a reference to the target file needed when using the limma package [5]. This file has one row per sample and is composed of at least three columns with headers: 
+The user has to supply another tab delimited file which describes the experiment, i.e. which contains the name of the biological condition associated with each sample. This file is called "target" as a reference to the target file needed when using the limma package [6]. This file has one row per sample and is composed of at least three columns with headers: 
 
  - first column: unique names of the samples (short but informative as they will be displayed on all the figures);
  - second column: name of the count files;
@@ -73,10 +73,10 @@ All the parameters that can be modified by the user are at the beginning of the 
  - `condRef`: reference biological condition used to compute fold-changes (no default, must be one of the levels of `varInt`);
  - `batch`: adjustment variable to use as a batch effect, must be a column of the target file (`"day"` for example, or `NULL` if no batch effect needs to be taken into account);
  - `fitType`: (if use of DESeq2) type of model for the mean-dispersion relationship (`"parametric"` by default, or `"local"`);
- - `cooksCutoff`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the detection of the outliers [6];
- - `independentFiltering`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the independent filtering [7];
+ - `cooksCutoff`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the detection of the outliers [7];
+ - `independentFiltering`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the independent filtering [8];
  - `alpha`: significance threshold applied to the adjusted p-values to select the differentially expressed features (default is `0.05`);
- - `pAdjustMethod`: p-value adjustment method for multiple testing (`"BH"` by default, `"BY"` or any value of `p.adjust.methods`) [8,9];
+ - `pAdjustMethod`: p-value adjustment method for multiple testing (`"BH"` by default, `"BY"` or any value of `p.adjust.methods`) [9,10];
  - `typeTrans`: (if use of DESeq2) method of transformation of the counts for the clustering and the PCA (default is `"VST"` for Variance Stabilizing Transformation, or `"rlog"` for Regularized Log Transformation);
  - `locfunc`: (if use of DESeq2) function used for the estimation of the size factors (default is `"median"`, or `"shorth"` from the genefilter` package);
  - `cpmCutoff`: (if use of edgeR) counts-per-million cut-off to filter low counts (default is 1, set to 0 to disable filtering);
@@ -94,7 +94,7 @@ When the parameters have been defined, the user can run all the R code, either s
  - target with the count files loaded and the biological condition associated with each sample;
  - number of features and null counts in each file;
  - top and bottom of the count matrix;
- - SERE coefficients computed between each pair of samples [10];
+ - SERE coefficients computed between each pair of samples [11];
  - normalization factors (TMM for edgeR and size factors for DESeq2);
  - number of features discarded by the independent filtering (if use of DESeq2);
  - number of differentially expressed features.
@@ -139,7 +139,7 @@ This section aims at listing some problems that the user can face when analyzing
 ### 4.1 Inversion of samples
 For a variety of reasons, it might happen that some sample names are erroneously switched at a step of the experiment. This can be detected during the statistical analysis in several ways. Here, we have intentionally inverted two file names in a target file, such that the counts associated with these two samples (WT3 and KO3) are inverted. 
 
-The first tool to detect the inversion is the SERE statistic [10] since its goal is to measure the similarity between samples. The SERE values obtained are displayed on the lower triangle of the figure 1. We clearly observe that KO3 is more similar to WT1 (SERE=1.7) than to KO2 (3.4), which potentially reveals a problem within the samples under study. The same phenomenon happens with WT3 which is more similar to KO1 (1.6) than to WT1 (4.59).
+The first tool to detect the inversion is the SERE statistic [11] since its goal is to measure the similarity between samples. The SERE values obtained are displayed on the lower triangle of the figure 1. We clearly observe that KO3 is more similar to WT1 (SERE=1.7) than to KO2 (3.4), which potentially reveals a problem within the samples under study. The same phenomenon happens with WT3 which is more similar to KO1 (1.6) than to WT1 (4.59).
 
 ![figures/inversionpairwiseScatter.png](figures/inversionpairwiseScatter.png)
 
@@ -214,15 +214,17 @@ The user can try the R scripts `template_script_DESeq2.r` and `template_script_e
 
 [4] Anders S, Pyl TP, Huber W. **HTSeq - A Python framework to work with high-throughput sequencing data**. *Bioinformatics*. 2014; doi:10.1093/bioinformatics/btu638.
 
-[5] Ritchie ME, Phipson B, Wu D, et al. **limma powers differential expression analyses for RNA-sequencing and microarray studies**. *Nucleic Acids Research*. 2015; doi:10.1093/nar/gkv007.
+[5] Liao Y, Smyth GK and Shi W. **featureCounts: an efficient general purpose program for assigning sequence reads to genomic features**. *Bioinformatics*, 2014; doi:10.1093/bioinformatics/btt656.
 
-[6] Cook RD. **Detection of Influential Observation in Linear Regression**. *Technometrics*. 1977; DOI:10.1080/00401706.2000.10485981.
+[6] Ritchie ME, Phipson B, Wu D, et al. **limma powers differential expression analyses for RNA-sequencing and microarray studies**. *Nucleic Acids Research*. 2015; doi:10.1093/nar/gkv007.
 
-[7] Bourgon R, Gentleman R and Huber W. **Independent filtering increases detection power for high-throughput experiments**. *PNAS*. 2010; doi:10.1073/pnas.0914005107.
+[7] Cook RD. **Detection of Influential Observation in Linear Regression**. *Technometrics*. 1977; DOI:10.1080/00401706.2000.10485981.
 
-[8] Benjamini Y and Hochberg Y. **Controlling the false discovery rate: a practical and powerful approach to multiple testing**. *Journal of the Royal Statistical Society B*. 1995; doi:10.2307/2346101.
+[8] Bourgon R, Gentleman R and Huber W. **Independent filtering increases detection power for high-throughput experiments**. *PNAS*. 2010; doi:10.1073/pnas.0914005107.
 
-[9] Benjamini Y and Yekutieli D. **The control of the false discovery rate in multiple testing under dependency**. *Annals of Statistics*. 2001.
+[9] Benjamini Y and Hochberg Y. **Controlling the false discovery rate: a practical and powerful approach to multiple testing**. *Journal of the Royal Statistical Society B*. 1995; doi:10.2307/2346101.
 
-[10] Schulze SK, Kanwar R, Golzenleuchter M, et al. **SERE: Single-parameter quality control and sample comparison for RNA-Seq**. *BMC Genomics*. 2012; doi:10.1186/1471-2164-13-524.
+[10] Benjamini Y and Yekutieli D. **The control of the false discovery rate in multiple testing under dependency**. *Annals of Statistics*. 2001.
+
+[11] Schulze SK, Kanwar R, Golzenleuchter M, et al. **SERE: Single-parameter quality control and sample comparison for RNA-Seq**. *BMC Genomics*. 2012; doi:10.1186/1471-2164-13-524.
 

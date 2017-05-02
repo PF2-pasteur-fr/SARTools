@@ -25,4 +25,3 @@ Box-plots of raw and normalized counts distributions per sample to assess the ef
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-
