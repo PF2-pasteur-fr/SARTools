@@ -29,4 +29,3 @@ If \code{featuresToRemove} is equal to \code{"rRNA"}, all the features containin
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

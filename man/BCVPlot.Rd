@@ -20,4 +20,3 @@ Biological Coefficient of Variation plot (for edgeR objects)
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

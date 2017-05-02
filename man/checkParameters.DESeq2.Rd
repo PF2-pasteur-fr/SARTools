@@ -50,4 +50,3 @@ Check the format and the validity of the parameters which will be used for the a
 \author{
 Hugo Varet
 }
-

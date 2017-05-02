@@ -18,4 +18,3 @@ Compute the SERE statistic for each pair of samples
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

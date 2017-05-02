@@ -18,4 +18,3 @@ Compute the number of features discarded by the independent filtering for each c
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

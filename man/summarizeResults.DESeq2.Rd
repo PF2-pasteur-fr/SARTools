@@ -30,4 +30,3 @@ Summarize DESeq2 analysis: diagnotic plots, dispersions plot, summary of the ind
 \author{
 Hugo Varet
 }
-

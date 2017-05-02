@@ -27,4 +27,3 @@ Explore counts structure: PCA (DESeq2) or MDS (edgeR) and clustering
 \author{
 Hugo Varet
 }
-

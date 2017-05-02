@@ -30,4 +30,3 @@ Multi-Dimensional Scaling plot of samples based on the 500 most variant features
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

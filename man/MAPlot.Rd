@@ -22,4 +22,3 @@ MA-plot for each comparison: log2(FC) vs mean of normalized counts with one dot 
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

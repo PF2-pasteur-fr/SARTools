@@ -22,4 +22,3 @@ Scatter plots for pairwise comparaisons of log counts
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

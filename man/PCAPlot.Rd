@@ -28,4 +28,3 @@ Principal Component Analysis of samples based on the 500 most variant features o
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

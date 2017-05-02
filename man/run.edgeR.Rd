@@ -35,4 +35,3 @@ Wrapper to run edgeR: create the \code{dge} object, normalize data, estimate dis
 \author{
 Hugo Varet
 }
-

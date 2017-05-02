@@ -24,4 +24,3 @@ Export counts and DESeq2 results
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

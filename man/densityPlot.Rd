@@ -25,4 +25,3 @@ Estimation the counts density for each sample
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

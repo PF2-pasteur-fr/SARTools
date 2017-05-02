@@ -10,4 +10,3 @@ Provide R tools and an environment for the statistical analysis of RNA-Seq proje
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

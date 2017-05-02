@@ -27,4 +27,3 @@ Proportion of reads associated with the three most expressed sequences per sampl
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-

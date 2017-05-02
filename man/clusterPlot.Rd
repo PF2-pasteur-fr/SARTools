@@ -22,4 +22,3 @@ Clustering of the samples based on VST- or rlog-counts (if use of DESeq2) or cpm
 \author{
 Marie-Agnes Dillies and Hugo Varet
 }
-
