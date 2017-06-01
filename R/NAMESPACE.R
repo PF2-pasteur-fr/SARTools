@@ -6,7 +6,7 @@
 #' @importFrom graphics abline barplot boxplot curve hist legend lines pairs par plot points text
 #' @importFrom stats density dist dnorm formula hclust lm model.matrix p.adjust.methods prcomp quantile relevel sd var
 #' @importFrom utils combn head installed.packages packageVersion read.table tail write.table
-#' @importFrom knitr knit2html
+#' @importFrom rmarkdown render
 #' @importFrom SummarizedExperiment assay colData
 #' @importFrom S4Vectors mcols metadata
 #' @importFrom limma plotMDS

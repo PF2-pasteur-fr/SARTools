@@ -1,30 +1,17 @@
-# <center> Statistical report of project `r projectName`: </center>
-# <center> pairwise comparison(s) of conditions </center>
-# <center> with DESeq2 </center>
-
---------------------------------------------------------------------------------------------------------------------------
-
-Author: `r author`
-
-Date: `r Sys.Date()`
+---
+title: '`r paste0("Statistical report of project ", projectName, ": pairwise comparison(s) of conditions with DESeq2")`'
+author: '`r author`'
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+---
 
 The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, L. Brillet-Guéguen, J.-Y. Coppee and M.-A. Dillies, _SARTools: A DESeq2- and EdgeR-Based R Pipeline for Comprehensive Differential Analysis of RNA-Seq Data_, PLoS One, 2016, doi: http://dx.doi.org/10.1371/journal.pone.0157022 when using this tool for any analysis published.
 
---------------------------------------------------------------------------------------------------------------------------
-
-## Table of contents
-
-1. Introduction
-2. Description of raw data
-3. Variability within the experiment: data exploration
-4. Normalization
-5. Differential analysis
-6. R session information and parameters
-7. Bibliography
-
---------------------------------------------------------------------------------------------------------------------------
-
-## 1 Introduction
+# Introduction
 
 The analyses reported in this document are part of the `r projectName` project. The aim is to find features that are differentially expressed between `r paste(paste(levels(target[,varInt])[-nlevels(target[,varInt])],collapse=", "),levels(target[,varInt])[nlevels(target[,varInt])],sep=" and ")`. The statistical analysis process includes data normalization, graphical exploration of raw and normalized data, test for differential expression for each feature between the conditions, raw p-value adjustment and export of lists of features having a significant differential expression between the conditions. `r ifelse(!is.null(batch),paste0("In this analysis, the ",batch, " effect will be taken into account in the statistical models."),"")`
 
@@ -32,25 +19,23 @@ The analysis is performed using the R software [R Core Team, 2014], Bioconductor
 
 For more details about the DESeq2 methodology, please refer to its related publications [Anders, 2010 and Love, 2014].
 
---------------------------------------------------------------------------------------------------------------------------
-
-## 2 Description of raw data
+# Description of raw data
 
 The count data files and associated biological conditions are listed in the following table.
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 print(xtable(target,caption="Table 1: Data files and associated biological conditions."), type="html", include.rownames=FALSE, html.table.attributes = "align='center'")
 ```
 
 After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 print(xtable(head(counts),caption="Table 2: Partial view of the count data table.",digits=0), type="html", html.table.attributes = "align='center'")
 ```
 
 Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 fun_summary=function(x){
   out=c(quantile(x,c(0,0.25,0.5),type=1),mean(x),quantile(x,c(0.75,1),type=1))
   names(out)=c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
@@ -64,60 +49,53 @@ Figure 1 shows the total number of mapped and counted reads for each sample. We 
 - different rRNA contamination levels between samples (even between biological replicates);
 - slight differences between library concentrations, since they may be difficult to measure with high precision.
 
-<figure>
+
 <center>
-    <img src="figures/barplotTotal.png" alt="Barplot total counts" width=600 />
-	<figcaption> Figure 1: Number of mapped reads per sample. Colors refer to the biological condition of the sample. </figcaption>
+![Figure 1: Number of mapped reads per sample. Colors refer to the biological condition of the sample.](figures/barplotTotal.png){width=600}
+
 </center>
-</figure>
 
 Figure 2 shows the proportion of features with no read count in each sample. We expect this proportion to be similar within conditions. Features with null read counts in the `r ncol(counts)` samples are left in the data but are not taken into account for the analysis with DESeq2. Here, `r nbNull` features (`r round(100*nbNull/nrow(counts),2)`%) are in this situation (dashed line). Results for those features (fold-change and p-values) are set to NA in the results files.
 
-<figure>
 <center>
-    <img src="figures/barplotNull.png" alt="Barplot null counts" width=600 />
-	<figcaption> Figure 2: Proportion of features with null read counts in each sample. </figcaption>
+![Figure 2: Proportion of features with null read counts in each sample.](figures/barplotNull.png){width=600}
+
 </center>
-</figure>
 
 Figure 3 shows the distribution of read counts for each sample. For sake of readability, $\text{log}_2(\text{counts}+1)$ are used instead of raw counts. Again we expect replicates to have similar distributions. In addition, this figure shows if read counts are preferably low, medium or high. This depends on the organisms as well as the biological conditions under consideration.
 
-<figure>
 <center>
-    <img src="figures/densplot.png" alt="Estimated densities of raw counts" width=600 />
-	<figcaption> Figure 3: Density distribution of read counts. </figcaption>
+![Figure 3: Density distribution of read counts.](figures/densplot.png){width=600}
+
 </center>
-</figure>
 
 It may happen that one or a few features capture a high proportion of reads (up to 20% or more). This phenomenon should not influence the normalization process. The DESeq2 normalization has proved to be robust to this situation [Dillies, 2012]. Anyway, we expect these high count features to be the same across replicates. They are not necessarily the same across conditions. Figure 4 and table 4 illustrate the possible presence of such high count features in the data set.
 
-<figure>
 <center>
-    <img src="figures/majSeq.png" alt="Most represented sequences" width=600 />
-	<figcaption> Figure 4: Percentage of reads associated with the sequence having the highest count (provided in each box on the graph) for each sample. </figcaption>
-</center>
-</figure>
+![Figure 4: Percentage of reads associated with the sequence having the highest count (provided in each box on the graph) for each sample.](figures/majSeq.png){width=600}
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
-print(xtable(majSequences,caption="Table 4: Percentage of reads associated with the sequences having the highest counts."), type="html", html.table.attributes = "align='center'")
+</center>
+
+
+```{r , echo=FALSE, results="asis"}
+print(xtable(as.matrix(majSequences),caption="Table 4: Percentage of reads associated with the sequences having the highest counts."), type="html", html.table.attributes = "align='center'")
 ```
 
 We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different ($\text{log}_2(\text{counts}+1)$ are used instead of raw count values). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [Schulze, 2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
+
 - 0 when samples are identical (no variability at all: this may happen in the case of a sample duplication);
+
 - 1 for technical replicates (technical variability follows a Poisson distribution);
+
 - greater than 1 for biological replicates and samples from different biological conditions (biological variability is higher than technical one, data are over-dispersed with respect to Poisson). The higher the SERE value, the lower the similarity. It is expected to be lower between biological replicates than between samples of different biological conditions. Hence, the SERE statistic can be used to detect inversions between samples.
 
-<figure>
+
 <center>
-    <img src="figures/pairwiseScatter.png" alt="Pairwise scatter plot (not produced when more than 30 samples)" />
-	<figcaption> Figure 5: Pairwise comparison of samples. </figcaption>
+![Figure 5: Pairwise comparison of samples (not produced when more than 30 samples).](figures/pairwiseScatter.png)
+
 </center>
-</figure>
 
-
---------------------------------------------------------------------------------------------------------------------------
-
-## 3 Variability within the experiment: data exploration
+# Variability within the experiment: data exploration
 
 The main variability within the experiment is expected to come from biological differences between the samples. This can be checked in two ways. The first one is to perform a hierarchical clustering of the whole sample set. This is performed after a transformation of the count data which can be either a Variance Stabilizing Transformation (VST) or a regularized log transformation (rlog) [Anders, 2010 and Love, 2014].
 
@@ -125,106 +103,93 @@ A VST is a transformation of the data that makes them homoscedastic, meaning tha
 
 Figure 6 shows the dendrogram obtained from `r typeTrans`-transformed data. An euclidean distance is computed between samples, and the dendrogram is built upon the Ward criterion. We expect this dendrogram to group replicates and separate biological conditions.
 
-<figure>
 <center>
-    <img src="figures/cluster.png" alt="Clustering" width=600 />
-	<figcaption> Figure 6: Sample clustering based on normalized data. </figcaption>
+![Figure 6: Sample clustering based on normalized data.](figures/cluster.png){width=600}
+
 </center>
-</figure>
 
 Another way of visualizing the experiment variability is to look at the first principal components of the PCA, as shown on the figure 7. On this figure, the first principal component (PC1) is expected to separate samples from the different biological conditions, meaning that the biological variability is the main source of variance in the data.
 
-<figure>
-<center>
-    <img src="figures/PCA.png" alt="Principal component analysis" width=1200 />
-	<figcaption> Figure 7: First two components of a Principal Component Analysis, with percentages of variance associated with each axis. </figcaption>
-</center>
-</figure>
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+<center>
+![Figure 7: First two components of a Principal Component Analysis, with percentages of variance associated with each axis.](figures/PCA.png){width=1200}
+
+</center>
+
+
+```{r , echo=FALSE, results="asis"}
 if (!is.null(batch)){
   cat("For the statistical analysis, we need to take into account the effect of the ",batch," parameter. Statistical models and tests will thus be adjusted on it.\n")
 }
 ```
 
---------------------------------------------------------------------------------------------------------------------------
-
-## 4 Normalization
+# Normalization
 
 Normalization aims at correcting systematic technical biases in the data, in order to make read counts comparable across samples. The normalization proposed by DESeq2 relies on the hypothesis that most features are not differentially expressed. It computes a scaling factor for each sample. Normalized read counts are obtained by dividing raw read counts by the scaling factor associated with the sample they belong to. Scaling factors around 1 mean (almost) no normalization is performed. Scaling factors lower than 1 will produce normalized counts higher than raw ones, and the other way around. Two options are available to compute scaling factors: locfunc="median" (default) or locfunc="shorth". Here, the normalization was performed with locfunc="`r locfunc`".
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 print(xtable(t(matrix(out.DESeq2$sf, dimnames=list(target$label,"Size factor"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
 ```
 
 The histograms (figure 8) can help to validate the choice of the normalization parameter ("median" or "shorth"). Under the hypothesis that most features are not differentially expressed, each size factor represented by a red line is expected to be close to the mode of the distribution of the counts divided by their geometric means across samples.
 
-<figure>
 <center>
-    <img src="figures/diagSizeFactorsHist.png" alt="Diagnostic of size factors" />
-	<figcaption> Figure 8: Diagnostic of the estimation of the size factors. </figcaption>
+![Figure 8: Diagnostic of the estimation of the size factors.](figures/diagSizeFactorsHist.png)
+
 </center>
-</figure>
 
 The figure 9 shows that the scaling factors of DESeq2 and the total count normalization factors may not perform similarly.
 
-<figure>
 <center>
-    <img src="figures/diagSizeFactorsTC.png" alt="Size factors vs total counts" width=600 />
-	<figcaption> Figure 9: Plot of the estimated size factors and the total number of reads per sample. </figcaption>
+![Figure 9: Plot of the estimated size factors and the total number of reads per sample.](figures/diagSizeFactorsTC.png){width=600}
+
 </center>
-</figure>
 
 Boxplots are often used as a qualitative measure of the quality of the normalization process, as they show how distributions are globally affected during this process. We expect normalization to stabilize distributions across samples. Figure 10 shows boxplots of raw (left) and normalized (right) data respectively.
 
-<figure>
 <center>
-    <img src="figures/countsBoxplots.png" alt="Boxplots of raw and normalized counts" width=1200 />
-	<figcaption> Figure 10: Boxplots of raw (left) and normalized (right) read counts. </figcaption>
+![Figure 10: Boxplots of raw (left) and normalized (right) read counts.](figures/countsBoxplots.png){width=1200}
+
 </center>
-</figure>
 
---------------------------------------------------------------------------------------------------------------------------
+# Differential analysis
 
-## 5 Differential analysis
-
-### 5.1 Modelisation
+## Modelisation
 
 DESeq2 aims at fitting one linear model per feature. For this project, the design used is counts `r paste(as.character(design(out.DESeq2$dds)),collapse=" ")` and the goal is to estimate the models' coefficients which can be interpreted as $\log_2(\texttt{FC})$. These coefficients will then be tested to get p-values and adjusted p-values.
 
-### 5.2 Outlier detection
+## Outlier detection
 
 Model outliers are features for which at least one sample seems unrelated to the experimental or study design. For every feature and for every sample, the Cook's distance [Cook, 1977] reflects how the sample matches the model. A large value of the Cook's distance indicates an outlier count and p-values are not computed for the corresponding feature. `r ifelse(!cooksCutoff,"For this project, the detection of model outliers have been turned off by setting the cut-off to the infinite.","")`
 
-### 5.3 Dispersions estimation
+## Dispersions estimation
 
 The DESeq2 model assumes that the count data follow a negative binomial distribution which is a robust alternative to the Poisson law when data are over-dispersed (the variance is higher than the mean). The first step of the statistical procedure is to estimate the dispersion of the data. Its purpose is to determine the shape of the mean-variance relationship. The default is to apply a GLM (Generalized Linear Model) based method (fitType="parametric"), which can handle complex designs but may not converge in some cases. The alternative is to use fitType="local" as described in the original paper [Anders, 2010]. The parameter used for this project is fitType="`r fitType`". Then, DESeq2 imposes a Cox Reid-adjusted profile likelihood maximization [Cox, 1987 and McCarthy, 2012] and uses the maximum _a posteriori_ (MAP) of the dispersion [Wu, 2013].
 
-<figure>
+
 <center>
-    <img src="figures/dispersionsPlot.png" alt="Dispersions estimations" width=1200 />
-	<figcaption> Figure 11: Dispersion estimates (left) and diagnostic of log-normality (right). </figcaption>
+![Figure 11: Dispersion estimates (left) and diagnostic of log-normality (right).](figures/dispersionsPlot.png){width=1200}
+
 </center>
-</figure>
 
 The left panel on figure 11 shows the result of the dispersion estimation step. The x- and y-axes represent the mean count value and the estimated dispersion respectively. Black dots represent empirical dispersion estimates for each feature (from the observed counts). The red dots show the mean-variance relationship function (fitted dispersion value) as estimated by the model. The blue dots are the final estimates from the maximum _a posteriori_ and are used to perform the statistical test. Blue circles (if any) point out dispersion outliers. These are features with a very high empirical variance (computed from observed counts). These high dispersion values fall far from the model estimation. For these features, the statistical test is based on the empirical variance in order to be more conservative than with the MAP dispersion. These features will have low chance to be declared significant. The figure on the right panel allows to check the hypothesis of log-normality of the dispersions.
 
-### 5.4 Statistical test for differential expression
+## Statistical test for differential expression
 
 Once the dispersion estimation and the model fitting have been done, DESeq2 can perform the statistical testing. Figure 12 shows the distributions of raw p-values computed by the statistical test for the comparison(s) done. This distribution is expected to be a mixture of a uniform distribution on $[0,1]$ and a peak around 0 corresponding to the differentially expressed features.
 
-<figure>
-<center>
-    <img src="figures/rawpHist.png" alt="Histogram(s) of raw p-values" />
-	<figcaption> Figure 12: Distribution(s) of raw p-values. </figcaption>
-</center>
-</figure>
 
-### 5.5 Independent filtering
+<center>
+![Figure 12: Distribution(s) of raw p-values.](figures/rawpHist.png)
+
+</center>
+
+
+## Independent filtering
 
 DESeq2 can perform an independent filtering to increase the detection power of differentially expressed features at the same experiment-wide type I error. Since features with very low counts are not likely to see significant differences typically due to high dispersion, it defines a threshold on the mean of the normalized counts irrespective of the biological condition. This procedure is independent because the information about the variables in the design formula is not used [Love, 2014]. 
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 if (independentFiltering){
   cat("Table 6 reports the thresholds used for each comparison and the number of features discarded by the independent filtering. Adjusted p-values of discarded features are then set to NA.\n")
   print(xtable(summaryResults$tabIndepFiltering,caption="Table 6: Number of features discarded by the independent filtering for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
@@ -233,31 +198,31 @@ if (independentFiltering){
 }
 ```
 
-### 5.6 Final results
+## Final results
 
 A p-value adjustment is performed to take into account multiple testing and control the false positive rate to a chosen level $\alpha$. For this analysis, a `r pAdjustMethod` p-value adjustment was performed [Benjamini, 1995 and 2001] and the level of controlled false positive rate was set to `r alpha`.
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 print(xtable(summaryResults$nDiffTotal,caption=paste0(ifelse(independentFiltering,"Table 7: ","Table 6: "),"Number of up-, down- and total number of differentially expressed features for each comparison.")),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
 ```
 
 Figure 13 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high $\log_2(\text{FC})$ to be displayed on the plot.
 
-<figure>
+
 <center>
-    <img src="figures/MAPlot.png" alt="MA-plot(s)" />
-	<figcaption> Figure 13: MA-plot(s) of each comparison. Red dots represent significantly differentially expressed features. </figcaption>
+![Figure 13: MA-plot(s) of each comparison. Red dots represent significantly differentially expressed features.](figures/MAPlot.png)
+
 </center>
-</figure>
+
 
 Figure 14 shows the volcano plots for the comparisons performed and differentially expressed features are still highlighted in red. A volcano plot represents the log of the adjusted P value as a function of the log ratio of differential expression.
 
-<figure>
+
 <center>
-    <img src="figures/volcanoPlot.png" alt="Volcano plot(s)" />
-	<figcaption> Figure 14: Volcano plot(s) of each comparison. Red dots represent significantly differentially expressed features. </figcaption>
+![Figure 14: Volcano plot(s) of each comparison. Red dots represent significantly differentially expressed features.](figures/volcanoPlot.png)
+
 </center>
-</figure>
+
 
 Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
 - TestVsRef.complete.txt contains results for all the features;
@@ -284,13 +249,11 @@ These files contain the following columns:
 - betaConv: convergence of the coefficients of the model (TRUE or FALSE);
 - maxCooks: maximum Cook's distance of the feature.
 
---------------------------------------------------------------------------------------------------------------------------
-
-## 6 R session information and parameters
+# R session information and parameters
 
 The versions of the R software and Bioconductor packages used for this analysis are listed below. It is important to save them if one wants to re-perform the analysis in the same conditions.
 
-```{r , cache=TRUE, echo=FALSE, results="asis"}
+```{r , echo=FALSE, results="asis"}
 si <- as.character(toLatex(sessionInfo()))
 si <- si[-c(1,length(si))]
 si <- gsub("(\\\\verb)|(\\|)", "", si)
@@ -320,9 +283,7 @@ Parameter values used for this analysis are:
 - locfunc: `r locfunc`
 - colors: `r colors`
 
---------------------------------------------------------------------------------------------------------------------------
-
-## 7 Bibliography
+# Bibliography
 
 - R Core Team, **R: A Language and Environment for Statistical Computing**, _R Foundation for Statistical Computing_, 2014
 - Gentleman, Carey, Bates et al, **Bioconductor: Open software development for computational biology and bioinformatics**, _Genome Biology_, 2004

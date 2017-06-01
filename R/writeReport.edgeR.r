@@ -26,14 +26,19 @@
 
 writeReport.edgeR <- function(target,counts,out.edgeR,summaryResults,majSequences,
                               workDir,projectName,author,targetFile,rawDir,
-			  	              featuresToRemove,varInt,condRef,batch,
-			  	              alpha,pAdjustMethod,colors,gene.selection,
-							  normalizationMethod){
-  knit2html(input=system.file("report_edgeR.rmd", package="SARTools"),
-            output=paste0(projectName, "_report.html"),
-			quiet=TRUE, title="Statistical report")
+                              featuresToRemove,varInt,condRef,batch,
+                              alpha,pAdjustMethod,colors,gene.selection,
+                              normalizationMethod){
+  rmarkdown::render(input=system.file("report_edgeR.rmd", package="SARTools"),
+                    output_file=paste0(projectName, "_report.html"),
+                    output_dir=workDir,
+                    intermediates_dir=workDir,
+                    knit_root_dir=workDir,
+                    run_pandoc=TRUE,
+                    quiet=TRUE,
+                    clean=TRUE)
   # delete unwanted directory/file
-  unlink("cache",force=TRUE,recursive=TRUE)
-  unlink(paste0("report_edgeR.md"),force=TRUE)
+  # unlink("cache",force=TRUE,recursive=TRUE)
+  # unlink(paste0("report_edgeR.md"),force=TRUE)
   cat("HTML report created\n")
 }

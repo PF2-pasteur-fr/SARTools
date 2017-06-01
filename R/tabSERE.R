@@ -7,10 +7,10 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 tabSERE <- function(counts){
-  sere <- matrix(NA, ncol=ncol(counts), nrow=ncol(counts))
-  for (i in 1:ncol(counts)){
-    for (j in 1:ncol(counts)){
-      sere[i,j] <- SERE(counts[,c(i,j)])
+  sere <- matrix(0, ncol=ncol(counts), nrow=ncol(counts))
+  for (i in 1:(ncol(counts)-1)){
+    for (j in (i+1):ncol(counts)){
+      sere[i,j] <- sere[j,i] <- SERE(counts[,c(i,j)])
     }
   }
   colnames(sere) <- rownames(sere) <- colnames(counts)
