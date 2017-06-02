@@ -1,6 +1,6 @@
 CHANGES IN VERSION 1.5.0
 ------------------------
-	o new HTML report
+	o new HTML report (dynamic table of contents, automatic bibliography)
 	o simplified SERE calculations
 
 CHANGES IN VERSION 1.4.1

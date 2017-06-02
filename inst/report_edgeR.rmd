@@ -7,6 +7,7 @@ output:
     toc: TRUE
     toc_float: TRUE
     number_sections: TRUE
+bibliography: bibliography.bib
 ---
 
 The SARTools R package which generated this report has been developped at PF2 - Institut Pasteur by M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr). Thanks to cite H. Varet, L. Brillet-Guéguen, J.-Y. Coppee and M.-A. Dillies, _SARTools: A DESeq2- and EdgeR-Based R Pipeline for Comprehensive Differential Analysis of RNA-Seq Data_, PLoS One, 2016, doi: http://dx.doi.org/10.1371/journal.pone.0157022 when using this tool for any analysis published.
@@ -15,9 +16,9 @@ The SARTools R package which generated this report has been developped at PF2 - 
 
 The analyses reported in this document are part of the `r projectName` project. The aim is to find features that are differentially expressed between `r paste(paste(levels(target[,varInt])[-nlevels(target[,varInt])],collapse=", "),levels(target[,varInt])[nlevels(target[,varInt])],sep=" and ")`. The statistical analysis process includes data normalization, graphical exploration of raw and normalized data, test for differential expression for each feature between the conditions, raw p-value adjustment and export of lists of features having a significant differential expression between the conditions. `r ifelse(!is.null(batch),paste0("In this analysis, the ",batch, " effect will be taken into account in the statistical models."),"")`
 
-The analysis is performed using the R software [R Core Team, 2014], Bioconductor [Gentleman, 2004] packages including edgeR [Robinson, 2010] and the SARTools package developed at PF2 - Institut Pasteur. Normalization and differential analysis are carried out according to the edgeR model and package. This report comes with additional tab-delimited text files that contain lists of differentially expressed features.
+The analysis is performed using the R software [@rcoreteam], Bioconductor [@Gentleman2004] packages including edgeR [@robinson2010] and the SARTools package developed at PF2 - Institut Pasteur. Normalization and differential analysis are carried out according to the edgeR model and package. This report comes with additional tab-delimited text files that contain lists of differentially expressed features.
 
-For more details about the edgeR methodology, please refer to its related publications [Robinson, 2007, 2008, 2010 and McCarthy, 2012].
+For more details about the edgeR methodology, please refer to its related publications [@robinson2007; @robinson2008; @robinson2010; @mccarthy2012].
 
 # Description of raw data
 
@@ -47,6 +48,7 @@ percentNull <- nbNull/nrow(counts)
 ```
 
 Figure 1 shows the total number of mapped and counted reads for each sample. We expect total read counts to be similar within conditions, they may be different across conditions. Total counts sometimes vary widely between replicates. This may happen for several reasons, including:
+
 - different rRNA contamination levels between samples (even between biological replicates);
 - slight differences between library concentrations, since they may be difficult to measure with high precision.
 
@@ -75,7 +77,7 @@ Figure 3 shows the distribution of read counts for each sample. For sake of read
 </center>
 
 
-It may happen that one or a few features capture a high proportion of reads (up to 20% or more). This phenomenon should not influence the normalization process. The edgeR normalization has proved to be robust to this situation [Dillies, 2012]. Anyway, we expect these high count features to be the same across replicates. They are not necessarily the same across conditions. Figure 4 and table 4 illustrate the possible presence of such high count features in the data set.
+It may happen that one or a few features capture a high proportion of reads (up to 20% or more). This phenomenon should not influence the normalization process. The edgeR normalization has proved to be robust to this situation [@dillies2013]. Anyway, we expect these high count features to be the same across replicates. They are not necessarily the same across conditions. Figure 4 and table 4 illustrate the possible presence of such high count features in the data set.
 
 
 <center>
@@ -88,7 +90,7 @@ It may happen that one or a few features capture a high proportion of reads (up 
 print(xtable(as.matrix(majSequences),caption="Table 4: Percentage of reads associated with the sequences having the highest counts."), type="html", html.table.attributes = "align='center'")
 ```
 
-We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different ($\text{log}_2(\text{counts}+1)$ are used instead of raw count values). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [Schulze, 2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
+We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different ($\text{log}_2(\text{counts}+1)$ are used instead of raw count values). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [@Schulze2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
 
 - 0 when samples are identical (no variability at all: this may happen in the case of a sample duplication);
 
@@ -184,7 +186,7 @@ Once the dispersion estimation and the model fitting have been done, edgeR can p
 
 ## Final results
 
-A p-value adjustment is performed to take into account multiple testing and control the false positive rate to a chosen level $\alpha$. For this analysis, a `r pAdjustMethod` p-value adjustment was performed [Benjamini, 1995 and 2001] and the level of controlled false positive rate was set to `r alpha`.
+A p-value adjustment is performed to take into account multiple testing and control the false positive rate to a chosen level $\alpha$. For this analysis, a `r pAdjustMethod` p-value adjustment was performed [@BH1995; @BY2001] and the level of controlled false positive rate was set to `r alpha`.
 
 ```{r , echo=FALSE, results="asis"}
 print(xtable(summaryResults$nDiffTotal,caption="Table 6: Number of up-, down- and total number of differentially expressed features for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
@@ -264,15 +266,3 @@ Parameter values used for this analysis are:
 - colors: `r colors`
 
 # Bibliography
-
-- R Core Team, **R: A Language and Environment for Statistical Computing**, _R Foundation for Statistical Computing_, 2014
-- Gentleman, Carey, Bates et al, **Bioconductor: Open software development for computational biology and bioinformatics**, _Genome Biology_, 2004
-- Robinson and Smyth, **Moderated statistical tests for assessing differences in tag abundance**, _Bioinformatics_, 2007
-- Robinson and Smyth, **Small-sample estimation of negative binomial dispersion, with applications to SAGE data**, _Biostatistics_, 2008
-- Robinson, McCarthy and Smyth, **edgeR: a Bioconductor package for differential expression analysis of digital gene expression data**, _Bioinformatics_, 2010
-- Dillies, Rau, Aubert et al, **A comprehensive evaluation of normalization methods for Illumina RNA-seq data analysis**, _Briefings in Bioinformatics_, 2012
-- Schulze, Kanwar, Golzenleuchter et al, **SERE: Single-parameter quality control and sample comparison for RNA-Seq**, _BMC Genomics_, 2012
-- McCarthy, Chen and Smyth, **Differential expression analysis of multifactor RNA-Seq experiments with respect to biological variation**, _Nucleic Acids Research_, 2012
-- Wu, Wang and Wu, **A new shrinkage estimator for dispersion improves differential expression detection in RNA-seq data**, _Biostatistics_, 2013
-- Benjamini and Hochberg, **Controlling the False Discovery Rate : A Practical and Powerful Approach to Multiple Testing**, _Journal of the Royal Statistical Society_, 1995
-- Benjamini and Yekutieli, **The control of the false discovery rate in multiple testing under dependency**, _The Annals of Statistics_, 2001
