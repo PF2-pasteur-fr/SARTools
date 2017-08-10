@@ -2,6 +2,7 @@ CHANGES IN VERSION 1.5.0
 ------------------------
 	o new HTML report (dynamic table of contents, automatic bibliography)
 	o simplified SERE calculations
+	o use of warning() instead of print() in checkParameters.edgeR() and checkParameters.DESeq2()
 
 CHANGES IN VERSION 1.4.1
 ------------------------
