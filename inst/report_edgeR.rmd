@@ -226,9 +226,9 @@ These files contain the following columns:
 - `r paste(paste(levels(target[,varInt])[-nlevels(target[,varInt])],collapse=", "),levels(target[,varInt])[nlevels(target[,varInt])],sep=" and ")`: means (rounded) of normalized counts of the biological conditions;
 - FoldChange: fold change of expression, calculated as $2^{\log_2(\text{FC})}$;
 - log2FoldChange: $\log_2(\text{FC})$ as estimated by the GLM model. It reflects the differential expression between Test and Ref and can be interpreted as $\log_2(\frac{\text{Test}}{\text{Ref}})$. If this value is:
-  + around 0: the feature expression is similar in both conditions;
-  + positive: the feature is up-regulated ($\text{Test} > \text{Ref}$);
-  + negative: the feature is down-regulated ($\text{Test} < \text{Ref}$);
+    + around 0: the feature expression is similar in both conditions;
+    + positive: the feature is up-regulated ($\text{Test} > \text{Ref}$);
+    + negative: the feature is down-regulated ($\text{Test} < \text{Ref}$);
 - pvalue: raw p-value from the statistical test;
 - padj: adjusted p-value on which the cut-off $\alpha$ is applied;
 - tagwise.dispersion: dispersion parameter estimated from feature counts (i.e. black dots on figure 9);
