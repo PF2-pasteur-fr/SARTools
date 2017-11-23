@@ -14,7 +14,7 @@
 MDSPlot <- function(dge, group, n=min(500,nrow(dge$counts)), gene.selection=c("pairwise", "common"),
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
   if (outfile) png(filename="figures/MDS.png", width=1800, height=1800, res=300)
-    coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1])
+    coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1], plot=FALSE)
     abs=range(coord$x); abs=abs(abs[2]-abs[1])/25;
     ord=range(coord$y); ord=abs(ord[2]-ord[1])/25;
     plot(coord$x,coord$y, col=col[as.integer(group)], las=1, main="Multi-Dimensional Scaling plot",
