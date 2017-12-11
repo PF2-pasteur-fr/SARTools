@@ -60,11 +60,11 @@ Figure 1 shows the total number of mapped and counted reads for each sample. We 
 </center>
 
 
-Figure 2 shows the proportion of features with no read count in each sample. We expect this proportion to be similar within conditions. Features with null read counts in the `r ncol(counts)` samples will not be taken into account for the analysis with edgeR. Here, `r nbNull` features (`r round(100*percentNull,2)`%) are in this situation (dashed line).
+Figure 2 shows the percentage of features with no read count in each sample. We expect this percentage to be similar within conditions. Features with null read counts in the `r ncol(counts)` samples will not be taken into account for the analysis with edgeR. Here, `r nbNull` features (`r round(100*percentNull,2)`%) are in this situation (dashed line).
 
 
 <center>
-![Figure 2: Proportion of features with null read counts in each sample.](figures/barplotNull.png){width=600}
+![Figure 2: Percentage of features with null read counts in each sample.](figures/barplotNull.png){width=600}
 
 </center>
 

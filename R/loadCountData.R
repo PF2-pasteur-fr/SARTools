@@ -16,7 +16,7 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
   files <- as.character(target[,2])
   
   # detect if input count files are from featureCounts or HTSeq-count
-  f1 <- read.table(paste(rawDir,files[1],sep="/"), sep="\t", quote="\"", header=FALSE, nrows=1, stringsAsFactors=FALSE)
+  f1 <- read.table(file.path(rawDir, files[1]), sep="\t", quote="\"", header=FALSE, nrows=1, stringsAsFactors=FALSE)
   if (ncol(f1) >= 6 && all(apply(f1[1,1:6], 2, is.character))){
     # counter featurecounts
     idCol <- 1
@@ -33,7 +33,7 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
     }
   }
   
-  rawCounts <- read.table(paste(rawDir,files[1],sep="/"), sep="\t", quote="\"", header=header, skip=skip, stringsAsFactors=FALSE)
+  rawCounts <- read.table(file.path(rawDir, files[1]), sep="\t", quote="\"", header=header, skip=skip, stringsAsFactors=FALSE)
   rawCounts <- rawCounts[,c(idCol, countsCol)]
   colnames(rawCounts) <- c("Id", labels[1])
   if (any(duplicated(rawCounts$Id))) stop("Duplicated feature names in ", files[1])
@@ -41,7 +41,7 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
   cat(files[1],": ",length(rawCounts[,labels[1]])," rows and ",sum(rawCounts[,labels[1]]==0)," null count(s)\n",sep="")
   
   for (i in 2:length(files)){
-    tmp <- read.table(paste(rawDir,files[i],sep="/"), sep="\t", header=header, skip=skip, stringsAsFactors=FALSE)
+    tmp <- read.table(file.path(rawDir, files[i]), sep="\t", header=header, skip=skip, stringsAsFactors=FALSE)
     tmp <- tmp[,c(idCol, countsCol)]
     colnames(tmp) <- c("Id", labels[i])
     if (any(duplicated(tmp$Id))) stop("Duplicated feature names in ", files[i])

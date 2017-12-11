@@ -1,3 +1,11 @@
+CHANGES IN VERSION 1.6.0
+------------------------
+	o use "percentage" instead of "proportion" in some plots
+	o added pandoc-citeproc as potential requirement for some users
+	o added rmarkdown version 1.4 requirement to have knit_root_dir parameter in render()
+	o use file.path() instead of paste() when dealing with paths to import/create files
+	o added cpmCutoff parameter to writeReport.edgeR()
+
 CHANGES IN VERSION 1.5.1
 ------------------------
 	o fixed a bug in bullet points

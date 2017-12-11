@@ -18,17 +18,18 @@
 #' @param batch variable to take as a batch effect
 #' @param alpha threshold of statistical significance
 #' @param pAdjustMethod p-value adjustment method: \code{"BH"} (default) or \code{"BY"}
+#' @param cpmCutoff counts-per-million cut-off to filter low counts
 #' @param colors vector of colors of each biological condition on the plots
 #' @param gene.selection selection of the features in \code{MDSPlot()} (\code{"pairwise"} by default)
 #' @param normalizationMethod normalization method: \code{"TMM"} (default), \code{"RLE"} (DESeq) or \code{"upperquartile"}
 #' @details This function generates the HTML report for a statistical analysis with edgeR. It uses the tables and graphs created during the workflow as well as the parameters defined at the beginning of the script.
 #' @author Hugo Varet
 
-writeReport.edgeR <- function(target,counts,out.edgeR,summaryResults,majSequences,
-                              workDir,projectName,author,targetFile,rawDir,
-                              featuresToRemove,varInt,condRef,batch,
-                              alpha,pAdjustMethod,colors,gene.selection,
-                              normalizationMethod){
+writeReport.edgeR <- function(target, counts, out.edgeR, summaryResults, majSequences,
+                              workDir, projectName, author, targetFile, rawDir,
+                              featuresToRemove, varInt, condRef, batch,
+                              alpha, pAdjustMethod, cpmCutoff, colors,
+                              gene.selection, normalizationMethod){
   rmarkdown::render(input=system.file("report_edgeR.rmd", package="SARTools"),
                     output_file=paste0(projectName, "_report.html"),
                     output_dir=workDir,
@@ -37,8 +38,5 @@ writeReport.edgeR <- function(target,counts,out.edgeR,summaryResults,majSequence
                     run_pandoc=TRUE,
                     quiet=TRUE,
                     clean=TRUE)
-  # delete unwanted directory/file
-  # unlink("cache",force=TRUE,recursive=TRUE)
-  # unlink(paste0("report_edgeR.md"),force=TRUE)
   cat("HTML report created\n")
 }

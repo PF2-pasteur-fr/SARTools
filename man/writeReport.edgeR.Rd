@@ -6,7 +6,7 @@
 \usage{
 writeReport.edgeR(target, counts, out.edgeR, summaryResults, majSequences,
   workDir, projectName, author, targetFile, rawDir, featuresToRemove, varInt,
-  condRef, batch, alpha, pAdjustMethod, colors, gene.selection,
+  condRef, batch, alpha, pAdjustMethod, cpmCutoff, colors, gene.selection,
   normalizationMethod)
 }
 \arguments{
@@ -41,6 +41,8 @@ writeReport.edgeR(target, counts, out.edgeR, summaryResults, majSequences,
 \item{alpha}{threshold of statistical significance}
 
 \item{pAdjustMethod}{p-value adjustment method: \code{"BH"} (default) or \code{"BY"}}
+
+\item{cpmCutoff}{counts-per-million cut-off to filter low counts}
 
 \item{colors}{vector of colors of each biological condition on the plots}
 

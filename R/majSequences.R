@@ -23,8 +23,8 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
   if (outfile) png(filename="figures/majSeq.png",width=min(3600,1800+800*ncol(counts)/10),height=1800,res=300)
     maj <- apply(p, 2, max)
     seqname <- rownames(p)[apply(p, 2, which.max)]
-    x <- barplot(maj, col=col[as.integer(group)], main="Proportion of reads from most expressed sequence",
-	             ylim=c(0, max(maj)*1.2), las=2, ylab="Proportion of reads")
+    x <- barplot(maj, col=col[as.integer(group)], main="Percentage of reads from most expressed sequence",
+	             ylim=c(0, max(maj)*1.2), las=2, ylab="Percentage of reads")
     legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
     for (i in 1:length(seqname)) text(x[i], maj[i]/2, seqname[i], cex=0.8, srt=90, adj=0)
   if (outfile) dev.off()

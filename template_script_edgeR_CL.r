@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### June 1st, 2017
-### designed to be executed with SARTools 1.5.0
+### Dec 11th, 2017
+### designed to be executed with SARTools 1.6.0
 ### run "Rscript template_script_edgeR_CL.r --help" to get some help
 ################################################################################
 
@@ -163,5 +163,5 @@ save.image(file=paste0(projectName, ".RData"))
 writeReport.edgeR(target=target, counts=counts, out.edgeR=out.edgeR, summaryResults=summaryResults,
                   majSequences=majSequences, workDir=workDir, projectName=projectName, author=author,
                   targetFile=targetFile, rawDir=rawDir, featuresToRemove=featuresToRemove, varInt=varInt,
-                  condRef=condRef, batch=batch, alpha=alpha, pAdjustMethod=pAdjustMethod, colors=colors,
-                  gene.selection=gene.selection, normalizationMethod=normalizationMethod)
+                  condRef=condRef, batch=batch, alpha=alpha, pAdjustMethod=pAdjustMethod, cpmCutoff=cpmCutoff,
+                  colors=colors, gene.selection=gene.selection, normalizationMethod=normalizationMethod)

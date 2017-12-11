@@ -40,8 +40,5 @@ writeReport.DESeq2 <- function(target, counts, out.DESeq2, summaryResults, majSe
                     run_pandoc=TRUE,
                     quiet=TRUE,
                     clean=TRUE)
-  # delete unwanted directory/file
-  # unlink("cache",force=TRUE,recursive=TRUE)
-  # unlink("report_DESeq2.md",force=TRUE)
   cat("HTML report created\n")
 }
