@@ -37,12 +37,14 @@ locfunc <- "median"                                  # "median" (default) or "sh
 colors <- c("dodgerblue","firebrick1",               # vector of colors of each biological condition on the plots
             "MediumVioletRed","SpringGreen")
 
+graph <- NULL
+
 ################################################################################
 ###                             running script                               ###
 ################################################################################
 setwd(workDir)
 library(SARTools)
-
+if (! is.null(graph)) options(bitmapType='cairo')
 # checking parameters
 checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFile,
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
