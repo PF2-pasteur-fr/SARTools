@@ -12,3 +12,4 @@ VignetteBuilder: knitr
 Encoding: latin1
 Description: Provide R tools and an environment for the statistical analysis of RNA-Seq projects: load and clean data, produce figures, perform statistical analysis/testing with DESeq2 or edgeR, export results and create final report.
 License: GPL-2
+RoxygenNote: 6.0.1
