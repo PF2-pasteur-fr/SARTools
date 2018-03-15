@@ -94,7 +94,7 @@ make_option(c("-C", "--colors"),
 make_option(c("-g", "--graph"),
 		default=NULL,
 		dest="graph",
-		help="activate cairo type"),
+		help="activate cairo type")
 
 )
 
