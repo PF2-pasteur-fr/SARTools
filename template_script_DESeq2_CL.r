@@ -91,7 +91,7 @@ make_option(c("-C", "--colors"),
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
-make_option(c("-g", "--graph"),
+make_option(c("-g", "--graph"), action="store_true",
 		default=NULL,
 		dest="graph",
 		help="activate cairo type")
@@ -124,7 +124,6 @@ typeTrans <- opt$typeTrans                           # transformation for PCA/cl
 locfunc <- opt$locfunc                               # "median" (default) or "shorth" to estimate the size factors
 colors <- unlist(strsplit(opt$cols, ","))            # vector of colors of each biologicial condition on the plots
 graph <- opt$graph									 # cario activted or not default NULL
-
 # print(paste("workDir", workDir))
 # print(paste("projectName", projectName))
 # print(paste("author", author))
