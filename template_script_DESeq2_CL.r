@@ -91,9 +91,9 @@ make_option(c("-C", "--colors"),
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
-make_option(c("-g", "--graph"), action="store_true",
+make_option(c("-g", "--forceCairoGraph"), action="store_true",
 		default=FALSE,
-		dest="graph",
+		dest="forceCairoGraph",
 		help="activate cairo type")
 
 )
@@ -123,7 +123,7 @@ pAdjustMethod <- opt$pAdjustMethod                   # p-value adjustment method
 typeTrans <- opt$typeTrans                           # transformation for PCA/clustering: "VST" ou "rlog"
 locfunc <- opt$locfunc                               # "median" (default) or "shorth" to estimate the size factors
 colors <- unlist(strsplit(opt$cols, ","))            # vector of colors of each biologicial condition on the plots
-graph <- opt$graph									 # cario activted or not default NULL
+forceCairoGraph <- opt$forceCairoGraph				 # force cairo as plotting device if enabled
 # print(paste("workDir", workDir))
 # print(paste("projectName", projectName))
 # print(paste("author", author))
@@ -148,7 +148,7 @@ graph <- opt$graph									 # cario activted or not default NULL
 # setwd(workDir)
 library(SARTools)
 #activate cairo plotting if not null
-if (graph) options(bitmapType='cairo')
+if (forceCairoGraph) options(bitmapType='cairo')
 # checking parameters
 problem <- checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFile,
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,

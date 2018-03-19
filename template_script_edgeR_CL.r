@@ -81,9 +81,9 @@ make_option(c("-C", "--colors"),
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
-make_option(c("-g", "--graph"), action="store_true",
+make_option(c("-g", "--forceCairoGraph"), action="store_true",
 		default=FALSE,
-		dest="graph",
+		dest="forceCairoGraph",
 		help="activate cairo type")
 )
 
@@ -110,7 +110,7 @@ gene.selection <- opt$gene.selection                 # selection of the features
 normalizationMethod <- opt$normalizationMethod       # normalization method in calcNormFactors
 cpmCutoff <- opt$cpmCutoff                           # counts-per-million cut-off to filter low counts
 colors <- unlist(strsplit(opt$cols, ","))            # vector of colors of each biologicial condition on the plots
-graph <- opt$graph
+forceCairoGraph <- opt$forceCairoGraph				 # force cairo as plotting device if enabled
 # print(paste("workDir", workDir))
 # print(paste("projectName", projectName))
 # print(paste("author", author))
@@ -132,7 +132,7 @@ graph <- opt$graph
 ################################################################################
 # setwd(workDir)
 library(SARTools)
-if (graph) options(bitmapType='cairo')
+if (forceCairoGraph) options(bitmapType='cairo')
 # checking parameters
 problem <- checkParameters.edgeR(projectName=projectName,author=author,targetFile=targetFile,
                       rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
