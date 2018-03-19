@@ -92,7 +92,7 @@ make_option(c("-C", "--colors"),
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
 make_option(c("-g", "--graph"), action="store_true",
-		default=NULL,
+		default=FALSE,
 		dest="graph",
 		help="activate cairo type")
 
@@ -148,7 +148,7 @@ graph <- opt$graph									 # cario activted or not default NULL
 # setwd(workDir)
 library(SARTools)
 #activate cairo plotting if not null
-if (! is.null(graph)) options(bitmapType='cairo')
+if (graph) options(bitmapType='cairo')
 # checking parameters
 problem <- checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFile,
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,

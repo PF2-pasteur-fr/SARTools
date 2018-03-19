@@ -82,7 +82,7 @@ make_option(c("-C", "--colors"),
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
 make_option(c("-g", "--graph"), action="store_true",
-		default=NULL,
+		default=FALSE,
 		dest="graph",
 		help="activate cairo type")
 )
@@ -132,7 +132,7 @@ graph <- opt$graph
 ################################################################################
 # setwd(workDir)
 library(SARTools)
-if (! is.null(graph)) options(bitmapType='cairo')
+if (graph) options(bitmapType='cairo')
 # checking parameters
 problem <- checkParameters.edgeR(projectName=projectName,author=author,targetFile=targetFile,
                       rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
