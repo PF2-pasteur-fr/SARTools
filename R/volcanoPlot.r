@@ -11,7 +11,7 @@
 volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE){
   ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
   nrow <- ceiling(length(complete)/ncol)
-  if (outfile) png(filename="figures/volcanoPlot.png", width=1800*ncol, height=1800*nrow, res=300)
+  if (outfile) png(filename="figures/volcanoPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
     par(mfrow=c(nrow,ncol))
     for (name in names(complete)){
       complete.name <- complete[[name]]
