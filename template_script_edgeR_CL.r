@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### Dec 11th, 2017
-### designed to be executed with SARTools 1.6.0
+### March 20th, 2018
+### designed to be executed with SARTools 1.6.1
 ### run "Rscript template_script_edgeR_CL.r --help" to get some help
 ################################################################################
 
@@ -81,10 +81,11 @@ make_option(c("-C", "--colors"),
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
-make_option(c("-g", "--forceCairoGraph"), action="store_true",
-		default=FALSE,
-		dest="forceCairoGraph",
-		help="activate cairo type")
+make_option(c("-g", "--forceCairoGraph"),
+            action="store_true",
+            default=FALSE,
+            dest="forceCairoGraph",
+            help="activate cairo type")
 )
 
 # now parse the command line to check which option is given and get associated values
@@ -132,7 +133,8 @@ forceCairoGraph <- opt$forceCairoGraph				 # force cairo as plotting device if e
 ################################################################################
 # setwd(workDir)
 library(SARTools)
-if (forceCairoGraph) options(bitmapType='cairo')
+if (forceCairoGraph) options(bitmapType="cairo")
+
 # checking parameters
 problem <- checkParameters.edgeR(projectName=projectName,author=author,targetFile=targetFile,
                       rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,

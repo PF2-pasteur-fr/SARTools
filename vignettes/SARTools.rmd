@@ -82,8 +82,8 @@ All the parameters that can be modified by the user are at the beginning of the 
  - `cpmCutoff`: (if use of edgeR) counts-per-million cut-off to filter low counts (default is 1, set to 0 to disable filtering);
  - `gene.selection`: (if use of edgeR) method of selection of the features for the MultiDimensional Scaling plot (`"pairwise"` by default or `common`);
  - `normalizationMethod`: (if use of edgeR) normalization method in `calcNormFactors()`: `"TMM"` (default), `"RLE"` (DESeq method) or `"upperquartile"`;
- - `colors`: colors used for the figures (one per biological condition), 4 are given by default.
-
+ - `colors`: colors used for the figures (one per biological condition), 4 are given by default;
+ - `forceCairoGraph`: `TRUE` to force the use of cairo with `options(bitmapType="cairo")` (`FALSE` by default).
 
 All these parameters will be saved and written at the end of the HTML report in order to keep track of what has been done.
 

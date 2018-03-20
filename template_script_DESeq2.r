@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
-### Dec 11th, 2017
-### designed to be executed with SARTools 1.6.0
+### March 20th, 2018
+### designed to be executed with SARTools 1.6.1
 ################################################################################
 
 ################################################################################
@@ -44,7 +44,8 @@ forceCairoGraph <- FALSE
 ################################################################################
 setwd(workDir)
 library(SARTools)
-if (forceCairoGraph) options(bitmapType='cairo')
+if (forceCairoGraph) options(bitmapType="cairo")
+
 # checking parameters
 checkParameters.DESeq2(projectName=projectName,author=author,targetFile=targetFile,
                        rawDir=rawDir,featuresToRemove=featuresToRemove,varInt=varInt,
