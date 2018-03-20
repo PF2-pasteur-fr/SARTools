@@ -11,7 +11,7 @@
 pairwiseScatterPlots <- function(counts, group, outfile=TRUE){
   ncol <- ncol(counts)
   if (ncol <= 30){
-    if (outfile) png(filename="figures/pairwiseScatter.png", width=700*ncol, height=700*ncol, res=300)
+    if (outfile) png(filename="figures/pairwiseScatter.png", width=cairoSizeWrapper(700*ncol), height=cairoSizeWrapper(700*ncol), res=300)
     # defining panel and lower.panel functions
     panel <- function(x,y,...){points(x, y, pch=".");abline(a=0,b=1,lty=2);}
     lower.panel <- function(x,y,...){

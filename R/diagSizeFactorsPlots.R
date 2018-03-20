@@ -16,7 +16,7 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
   if ("diag" %in% plots){
     ncol <- ifelse(ncol(counts(dds))<=4, ceiling(sqrt(ncol(counts(dds)))), 3)
     nrow <- ceiling(ncol(counts(dds))/ncol)
-    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=1400*ncol, height=1400*nrow, res=300)
+    if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=cairoSizeWrapper(1400*ncol), height=cairoSizeWrapper(1400*nrow), res=300)
     par(mfrow=c(nrow,ncol))
     geomeans <- exp(rowMeans(log(counts(dds))))
     samples <- colnames(counts(dds))

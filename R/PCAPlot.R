@@ -20,7 +20,7 @@ PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)),
   prp <- round(prp[1:3],2)
 
   # create figure
-  if (outfile) png(filename="figures/PCA.png",width=1800*2,height=1800,res=300)
+  if (outfile) png(filename="figures/PCA.png",width=cairoSizeWrapper(1800*2),height=cairoSizeWrapper(1800),res=300)
     par(mfrow=c(1,2))
 	# axes 1 et 2
 	abs=range(pca$x[,1]); abs=abs(abs[2]-abs[1])/25;
