@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### March 20th, 2018
-### designed to be executed with SARTools 1.6.1
+### May 16th, 2018
+### designed to be executed with SARTools 1.6.2
 ### run "Rscript template_script_edgeR_CL.r --help" to get some help
 ################################################################################
 
@@ -81,7 +81,7 @@ make_option(c("-C", "--colors"),
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 
-make_option(c("-g", "--forceCairoGraph"),
+make_option(c("-f", "--forceCairoGraph"),
             action="store_true",
             default=FALSE,
             dest="forceCairoGraph",
