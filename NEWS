@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.6.2
 ------------------------
 	o fixed a bug in template_script_edgeR_CL.r to use forceCairoGraph option
+	o fixed a bug in loadCountData() function
 
 ------------------------
 	o new boolean parameter forceCairoGraph
