@@ -60,8 +60,8 @@ checkParameters.DESeq2 <- function(projectName,author,targetFile,rawDir,
     message("batch must be NULL or a character vector of length 1")
     problem <- TRUE
   }
-  if (!is.character(fitType) | length(fitType)!=1 || !I(fitType %in% c("parametric","local"))){
-    message("fitType must be equal to 'parametric' or 'local'")
+  if (!is.character(fitType) | length(fitType)!=1 || !I(fitType %in% c("parametric","local","mean"))){
+    message("fitType must be equal to 'parametric', 'local', or 'mean'")
     problem <- TRUE
   }
   if (!is.logical(cooksCutoff) | length(cooksCutoff)!=1){
@@ -100,7 +100,7 @@ checkParameters.DESeq2 <- function(projectName,author,targetFile,rawDir,
     message("colors must be a vector of colors")
     problem <- TRUE
   }
-  
+
   if (!problem){
     print("All the parameters are correct")
   }
