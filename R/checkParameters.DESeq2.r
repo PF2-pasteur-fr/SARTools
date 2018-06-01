@@ -100,7 +100,7 @@ checkParameters.DESeq2 <- function(projectName,author,targetFile,rawDir,
     message("colors must be a vector of colors")
     problem <- TRUE
   }
-
+  
   if (!problem){
     print("All the parameters are correct")
   }

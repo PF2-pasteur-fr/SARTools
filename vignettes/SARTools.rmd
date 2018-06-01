@@ -72,7 +72,7 @@ All the parameters that can be modified by the user are at the beginning of the 
  - `varInt`: variable of interest, i.e. biological condition, in the target file (`"group"` by default);
  - `condRef`: reference biological condition used to compute fold-changes (no default, must be one of the levels of `varInt`);
  - `batch`: adjustment variable to use as a batch effect, must be a column of the target file (`"day"` for example, or `NULL` if no batch effect needs to be taken into account);
- - `fitType`: (if use of DESeq2) type of model for the mean-dispersion relationship (`"parametric"` by default, or `"local"`);
+ - `fitType`: (if use of DESeq2) type of model for the mean-dispersion relationship (`"parametric"` by default, or `"local"` or `"mean"`);
  - `cooksCutoff`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the detection of the outliers [7];
  - `independentFiltering`: (if use of DESeq2) `TRUE` (default) of `FALSE` to execute or not the independent filtering [8];
  - `alpha`: significance threshold applied to the adjusted p-values to select the differentially expressed features (default is `0.05`);
