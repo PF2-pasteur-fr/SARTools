@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.6.3
+------------------------
+	o now allows fitType="mean" in DESeq2
+
 CHANGES IN VERSION 1.6.2
 ------------------------
 	o fixed a bug in template_script_edgeR_CL.r to use forceCairoGraph option
