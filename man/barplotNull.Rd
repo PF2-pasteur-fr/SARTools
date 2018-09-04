@@ -4,8 +4,8 @@
 \alias{barplotNull}
 \title{Percentage of null counts per sample}
 \usage{
-barplotNull(counts, group, col = c("lightblue", "orange", "MediumVioletRed",
-  "SpringGreen"), outfile = TRUE)
+barplotNull(counts, group, col = c("lightblue", "orange",
+  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

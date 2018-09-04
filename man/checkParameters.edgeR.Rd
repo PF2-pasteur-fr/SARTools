@@ -4,9 +4,9 @@
 \alias{checkParameters.edgeR}
 \title{Check the parameters (when using edgeR)}
 \usage{
-checkParameters.edgeR(projectName, author, targetFile, rawDir, featuresToRemove,
-  varInt, condRef, batch, alpha, pAdjustMethod, cpmCutoff, gene.selection,
-  normalizationMethod, colors)
+checkParameters.edgeR(projectName, author, targetFile, rawDir,
+  featuresToRemove, varInt, condRef, batch, alpha, pAdjustMethod,
+  cpmCutoff, gene.selection, normalizationMethod, colors)
 }
 \arguments{
 \item{projectName}{name of the project}

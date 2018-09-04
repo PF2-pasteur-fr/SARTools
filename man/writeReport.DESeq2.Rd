@@ -4,10 +4,10 @@
 \alias{writeReport.DESeq2}
 \title{Write HTML report for DESeq2 analyses}
 \usage{
-writeReport.DESeq2(target, counts, out.DESeq2, summaryResults, majSequences,
-  workDir, projectName, author, targetFile, rawDir, featuresToRemove, varInt,
-  condRef, batch, fitType, cooksCutoff, independentFiltering, alpha,
-  pAdjustMethod, typeTrans, locfunc, colors)
+writeReport.DESeq2(target, counts, out.DESeq2, summaryResults,
+  majSequences, workDir, projectName, author, targetFile, rawDir,
+  featuresToRemove, varInt, condRef, batch, fitType, cooksCutoff,
+  independentFiltering, alpha, pAdjustMethod, typeTrans, locfunc, colors)
 }
 \arguments{
 \item{target}{target \code{data.frame} of the project returned by \code{loadTargetFile()}}

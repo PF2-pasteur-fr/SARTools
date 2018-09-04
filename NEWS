@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.6.4
+------------------------
+        o fixed a bug when in loadCountData() if gene IDs contain only numeric values
+
 CHANGES IN VERSION 1.6.3
 ------------------------
 	o now allows fitType="mean" in DESeq2

@@ -5,9 +5,9 @@
 \title{Write HTML report for edgeR analyses}
 \usage{
 writeReport.edgeR(target, counts, out.edgeR, summaryResults, majSequences,
-  workDir, projectName, author, targetFile, rawDir, featuresToRemove, varInt,
-  condRef, batch, alpha, pAdjustMethod, cpmCutoff, colors, gene.selection,
-  normalizationMethod)
+  workDir, projectName, author, targetFile, rawDir, featuresToRemove,
+  varInt, condRef, batch, alpha, pAdjustMethod, cpmCutoff, colors,
+  gene.selection, normalizationMethod)
 }
 \arguments{
 \item{target}{target \code{data.frame} of the project returned by \code{loadTargetFile()}}
