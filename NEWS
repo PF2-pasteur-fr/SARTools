@@ -1,5 +1,9 @@
 CHANGES IN VERSION 1.6.4
 ------------------------
+        o added the "stat" column of the DESeq2 results to the exported tables
+
+CHANGES IN VERSION 1.6.4
+------------------------
         o fixed a bug when in loadCountData() if gene IDs contain only numeric values
 
 CHANGES IN VERSION 1.6.3
@@ -11,6 +15,7 @@ CHANGES IN VERSION 1.6.2
 	o fixed a bug in template_script_edgeR_CL.r to use forceCairoGraph option
 	o fixed a bug in loadCountData() function
 
+CHANGES IN VERSION 1.6.1
 ------------------------
 	o new boolean parameter forceCairoGraph
 	o adapt size of PNG plots if width/height are too large
