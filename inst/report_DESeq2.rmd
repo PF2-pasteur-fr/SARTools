@@ -245,6 +245,7 @@ These files contain the following columns:
     + around 0: the feature expression is similar in both conditions;
     + positive: the feature is up-regulated ($\text{Test} > \text{Ref}$);
     + negative: the feature is down-regulated ($\text{Test} < \text{Ref}$);
+- stat: Wald statistic for the coefficient tested;
 - pvalue: raw p-value from the statistical test;
 - padj: adjusted p-value on which the cut-off $\alpha$ is applied;
 - dispGeneEst: dispersion parameter estimated from feature counts (i.e. black dots on figure 11);
