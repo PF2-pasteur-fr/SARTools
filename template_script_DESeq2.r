@@ -25,7 +25,7 @@ varInt <- "group"                                    # factor of interest
 condRef <- "WT"                                      # reference biological condition
 batch <- NULL                                        # blocking factor: NULL (default) or "batch" for example
 
-fitType <- "parametric"                              # mean-variance relationship: "parametric" (default) or "local"
+fitType <- "parametric"                              # mean-variance relationship: "parametric" (default), "local" or "mean"
 cooksCutoff <- TRUE                                  # TRUE/FALSE to perform the outliers detection (default is TRUE)
 independentFiltering <- TRUE                         # TRUE/FALSE to perform independent filtering (default is TRUE)
 alpha <- 0.05                                        # threshold of statistical significance

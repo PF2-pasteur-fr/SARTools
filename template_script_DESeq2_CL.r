@@ -54,7 +54,7 @@ make_option(c("-b", "--batch"),
 make_option(c("-f", "--fitType"),
 			default="parametric",
 			dest="fitType", 
-			help="mean-variance relationship: [default: %default] or local"),
+			help="mean-variance relationship: [default: %default],local or mean"),
 
 make_option(c("-o", "--cooksCutoff"),
 			default=TRUE,
@@ -116,7 +116,7 @@ featuresToRemove <- unlist(strsplit(opt$FTR, ","))   # names of the features to 
 varInt <- opt$varInt                                 # factor of interest
 condRef <- opt$condRef                               # reference biological condition
 batch <- opt$batch                                   # blocking factor: NULL (default) or "batch" for example
-fitType <- opt$fitType                               # mean-variance relationship: "parametric" (default) or "local"
+fitType <- opt$fitType                               # mean-variance relationship: "parametric" (default), "local" or "mean"
 cooksCutoff <- opt$cooksCutoff                       # outliers detection threshold (NULL to let DESeq2 choosing it)
 independentFiltering <- opt$independentFiltering     # TRUE/FALSE to perform independent filtering (default is TRUE)
 alpha <- as.numeric(opt$alpha)                       # threshold of statistical significance
