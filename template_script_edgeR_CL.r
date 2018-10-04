@@ -2,7 +2,7 @@
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
 ### May 16th, 2018
-### designed to be executed with SARTools 1.6.5
+### designed to be executed with SARTools 1.6.6
 ### run "Rscript template_script_edgeR_CL.r --help" to get some help
 ################################################################################
 
