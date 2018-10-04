@@ -1,4 +1,8 @@
-CHANGES IN VERSION 1.6.4
+CHANGES IN VERSION 1.6.6
+------------------------
+	o fixed a bug introduced in version 1.6.4 when giving featureCounts files as input
+
+CHANGES IN VERSION 1.6.5
 ------------------------
         o added the "stat" column of the DESeq2 results to the exported tables
 

@@ -16,7 +16,7 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
   files <- as.character(target[,2])
   
   # detect if input count files are from featureCounts or HTSeq-count
-  f1 <- read.table(file.path(rawDir, files[1]), sep="\t", quote="\"", header=FALSE, nrows=1, stringsAsFactors=FALSE)
+  f1 <- read.table(file.path(rawDir, files[1]), sep="\t", quote="\"", header=FALSE, skip=5, nrows=5, stringsAsFactors=FALSE)
   if (ncol(f1) >= 7 && is.numeric(f1[,7])){
     # counter featurecounts
     idCol <- 1
