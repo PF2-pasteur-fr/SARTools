@@ -8,11 +8,14 @@
 #' @param cooksCutoff outliers detection threshold (TRUE to let DESeq2 choosing it or FALSE to disable the outliers detection)
 #' @param alpha significance threshold to apply to the adjusted p-values
 #' @param col colors for the plots
+#' @param log2FClim numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)
+#' @param padjlim numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)
 #' @return A list containing: (i) a list of \code{data.frames} from \code{exportResults.DESeq2()}, (ii) the table summarizing the independent filtering procedure and (iii) a table summarizing the number of differentially expressed features
 #' @author Hugo Varet
 
 summarizeResults.DESeq2 <- function(out.DESeq2, group, independentFiltering=TRUE, cooksCutoff=TRUE,
-                                    alpha=0.05, col=c("lightblue","orange","MediumVioletRed","SpringGreen")){
+                                    alpha=0.05, col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
+                                    log2FClim=NULL, padjlim=NULL){
   # create the figures/tables directory if does not exist
   if (!I("figures" %in% dir())) dir.create("figures", showWarnings=FALSE)
   if (!I("tables" %in% dir())) dir.create("tables", showWarnings=FALSE)
@@ -50,10 +53,10 @@ summarizeResults.DESeq2 <- function(out.DESeq2, group, independentFiltering=TRUE
   rawpHist(complete=complete)
   
   # MA-plots
-  MAPlot(complete=complete, alpha=alpha)
+  MAPlot(complete=complete, alpha=alpha, log2FClim=log2FClim)
  
   # Volcano plots
-  volcanoPlot(complete=complete, alpha=alpha)
+  volcanoPlot(complete=complete, alpha=alpha, padjlim=padjlim)
  
   return(list(complete=complete, tabIndepFiltering=tabIndepFiltering, nDiffTotal=nDiffTotal))
 }

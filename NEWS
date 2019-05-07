@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.6.7
 ------------------------
         o modified the installation guidelines for the Bioconductor packages
+	o new parameters in the MAPlot() and volcanoPlot() functions thanks to Ken Field suggestion on GitHub
 
 CHANGES IN VERSION 1.6.6
 ------------------------
