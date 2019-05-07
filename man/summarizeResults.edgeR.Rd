@@ -5,7 +5,8 @@
 \title{Summarize edgeR analysis}
 \usage{
 summarizeResults.edgeR(out.edgeR, group, counts, alpha = 0.05,
-  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"))
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  log2FClim = NULL, padjlim = NULL)
 }
 \arguments{
 \item{out.edgeR}{the result of \code{run.edgeR()}}
@@ -17,6 +18,10 @@ summarizeResults.edgeR(out.edgeR, group, counts, alpha = 0.05,
 \item{alpha}{significance threshold to apply to the adjusted p-values}
 
 \item{col}{colors for the plots}
+
+\item{log2FClim}{numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)}
+
+\item{padjlim}{numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)}
 }
 \value{
 A list containing: (i) a list of \code{data.frames} from \code{exportResults.edgeR()} and (ii) a table summarizing the number of differentially expressed features

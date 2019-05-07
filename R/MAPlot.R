@@ -5,10 +5,11 @@
 #' @param complete A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})
 #' @param alpha cut-off to apply on each adjusted p-value
 #' @param outfile TRUE to export the figure in a png file
+#' @param log2FClim numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)
 #' @return A file named MAPlot.png in the figures directory containing one MA-plot per comparison
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MAPlot <- function(complete, alpha=0.05, outfile=TRUE){
+MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
   ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/MAPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
@@ -18,7 +19,11 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE){
         complete.name <- complete.name[complete.name$baseMean>0,]
         complete.name$padj <- ifelse(is.na(complete.name$padj),1,complete.name$padj)
         log2FC <- complete.name$log2FoldChange
-        ylim <- 1.1 * c(-1,1) * quantile(abs(log2FC[is.finite(log2FC)]), probs=0.99)
+        if (is.null(log2FClim)){
+          ylim <- 1.1 * c(-1,1) * quantile(abs(log2FC[is.finite(log2FC)]), probs=0.99)
+        } else{
+          ylim <- log2FClim
+        }
         plot(complete.name$baseMean, pmax(ylim[1], pmin(ylim[2], log2FC)),
 	         log = "x", cex=0.45, las = 1, ylim = ylim,
              col = ifelse(complete.name[,"padj"] < alpha, "red", "black"),
