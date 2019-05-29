@@ -17,12 +17,12 @@ pairwiseScatterPlots <- function(counts, group, outfile=TRUE){
     lower.panel <- function(x,y,...){
       horizontal <- (par("usr")[1] + par("usr")[2]) / 2;
       vertical <- (par("usr")[3] + par("usr")[4]) / 2; 
-      text(horizontal, vertical, round(SERE(2^cbind(x,y) - 1), digits=2), cex=ncol/2.5)
+      text(horizontal, vertical, round(SERE(2^cbind(x,y) - 1), digits=2), cex=sqrt(ncol))
     }
     # use of the paris function
     pairs(log2(counts+1), panel=panel, lower.panel=lower.panel,
-          las=1, labels=paste(colnames(counts),group,sep="\n"),
-          main="Pairwise scatter plot",cex.labels=ncol/2,cex.main=ncol/4)
+          las=1, labels=paste(colnames(counts), group, sep="\n"),
+          main="Pairwise scatter plot", cex.labels=sqrt(ncol), cex.main=ncol/4)
     if (outfile) dev.off()
   } else{
     warning("No pairwise scatter-plot produced because of a too high number of samples (>30).")
