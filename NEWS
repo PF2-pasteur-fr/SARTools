@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.6.8
+------------------------
+	o fixed a bug to build the vignette when installing the package from GitHub
+	o new size for the sample names in pairwiseScatterPlots()
+
 CHANGES IN VERSION 1.6.7
 ------------------------
         o modified the installation guidelines for the Bioconductor packages

@@ -22,13 +22,13 @@ To install the SARTools package from GitHub, open a R session and:
 
 - for Windows users only, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) or check that it is already installed (needed to build the package)
 - load the devtools R package with `library(devtools)`
-- run `install_github("PF2-pasteur-fr/SARTools", build_vignettes=TRUE)`
+- run `install_github("PF2-pasteur-fr/SARTools", build_opts="--no-resave-data")`
 
 ### Using Conda
 
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/r-sartools/README.html)
 
-1. Install [miniconda2](http://conda.pydata.org/miniconda.html)
+1. Install [miniconda](https://docs.conda.io/en/latest/miniconda.html)
 2. Install the SARTools R library and its dependencies using conda `conda install r-sartools`
 
 Note: if you want to set a dedicated conda environment for SARTools, use `conda create -n sartools r-sartools` and follow the instructions to activate it.
