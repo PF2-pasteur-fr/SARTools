@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.6.9
+------------------------
+	o new vignette style
+	o print duplicated feature ids alongwith the error message in loadCountData()
+
 CHANGES IN VERSION 1.6.8
 ------------------------
 	o fixed a bug to build the vignette when installing the package from GitHub
