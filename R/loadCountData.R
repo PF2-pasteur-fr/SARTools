@@ -36,7 +36,10 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
   rawCounts <- read.table(file.path(rawDir, files[1]), sep="\t", quote="\"", header=header, skip=skip, stringsAsFactors=FALSE)
   rawCounts <- rawCounts[,c(idCol, countsCol)]
   colnames(rawCounts) <- c("Id", labels[1])
-  if (any(duplicated(rawCounts$Id))) stop("Duplicated feature names in ", files[1])
+  if (any(duplicated(rawCounts$Id))){
+    stop("Duplicated feature names in ", files[1], ": ", 
+         paste(unique(rawCounts$Id[duplicated(rawCounts$Id)]), collapse=", "))
+  }
   cat("Loading files:\n")
   cat(files[1],": ",length(rawCounts[,labels[1]])," rows and ",sum(rawCounts[,labels[1]]==0)," null count(s)\n",sep="")
   
@@ -44,7 +47,10 @@ loadCountData <- function(target, rawDir="raw", skip=0, featuresToRemove=c("alig
     tmp <- read.table(file.path(rawDir, files[i]), sep="\t", quote="\"", header=header, skip=skip, stringsAsFactors=FALSE)
     tmp <- tmp[,c(idCol, countsCol)]
     colnames(tmp) <- c("Id", labels[i])
-    if (any(duplicated(tmp$Id))) stop("Duplicated feature names in ", files[i])
+    if (any(duplicated(tmp$Id))){
+      stop("Duplicated feature names in ", files[i], ": ", 
+           paste(unique(tmp$Id[duplicated(tmp$Id)]), collapse=", "))
+    }
     rawCounts <- merge(rawCounts, tmp, by="Id", all=TRUE)
     cat(files[i],": ",length(tmp[,labels[i]])," rows and ",sum(tmp[,labels[i]]==0)," null count(s)\n",sep="")
   }

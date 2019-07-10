@@ -1,16 +1,26 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-\usepackage[utf8]{inputenc}
-%\VignetteIndexEntry{tutorial}
--->
+---
+title: "SARTools vignette for the differential analysis of 2 or more conditions with DESeq2 or edgeR"
+author: "M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr) - Transcriptome and Epigenome Platform, Institut Pasteur, Paris"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+abstract: >
+  [SARTools](https://github.com/PF2-pasteur-fr/SARTools) (version `r packageVersion("SARTools")`) is a R package dedicated to the differential analysis of RNA-seq data. It provides tools to generate descriptive and diagnostic graphs, to run the differential analysis with one of the well known DESeq2 or edgeR packages and to export the results into easily readable tab-delimited files. It also facilitates the generation of a HTML report which displays all the figures produced, explains the statistical methods and gives the results of the differential analysis. Note that SARTools does not intend to replace DESeq2 or edgeR: it simply provides an environment to go with them. For more details about the methodology behind DESeq2 or edgeR, the user should read their documentations and papers.
 
-# SARTools vignette for the differential analysis of 2 or more conditions with DESeq2 or edgeR
+output:
+  rmarkdown::html_document:
+    highlight: pygments
+    toc: true
+    fig_width: 5
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\usepackage[utf8]{inputenc}
+---
 
-SARTools version: `r packageVersion("SARTools")`
-
-Authors: M.-A. Dillies and H. Varet (hugo.varet@pasteur.fr) - Transcriptome and Epigenome Platform, Institut Pasteur, Paris
-
-Website: https://github.com/PF2-pasteur-fr/SARTools
+```{r setup, echo=FALSE, results="hide"}
+knitr::opts_chunk$set(tidy=FALSE, cache=TRUE, dev="png",
+                      message=FALSE, error=FALSE, warning=TRUE)
+```
 
 ## 1 Introduction
 
@@ -141,7 +151,7 @@ For a variety of reasons, it might happen that some sample names are erroneously
 
 The first tool to detect the inversion is the SERE statistic [11] since its goal is to measure the similarity between samples. The SERE values obtained are displayed on the lower triangle of the figure 1. We clearly observe that KO3 is more similar to WT1 (SERE=1.7) than to KO2 (3.4), which potentially reveals a problem within the samples under study. The same phenomenon happens with WT3 which is more similar to KO1 (1.6) than to WT1 (4.59).
 
-![figures/inversionpairwiseScatter.png](figures/inversionpairwiseScatter.png)
+![](figures/inversionpairwiseScatter.png)
 
 Figure 1: pairwise scatter plot and SERE statistics when inverting samples.
 
@@ -149,20 +159,20 @@ The clustering can also help detect such an inversion of samples. Indeed, on the
 
 The Principal Component Analysis on the right panel of figure 2 (or the Multi-Dimensional Scaling plot) is a tool which allows exploration of the structure of the data. Samples are displayed on a two dimensional graph which can help the user to assess the distances between samples. The PCA presented here leads to the same conclusion as the dendrogram. 
 
-![figures/inversionclusterPCA.png](figures/inversionclusterPCA.png)
+![](figures/inversionclusterPCA.png)
 
 Figure 2: clustering dendrogram (left) and PCA (right) when inverting samples.
 
 Finally, when testing for differential expression, if two samples have been inverted during the process, the histogram of the raw p-values can have an unexpected shape. Instead of having a uniform distribution, with a possible peak at 0 for the differentially expressed features, the distribution may be skewed toward the right (figure 3).
 
-![figures/inversionrawpHist.png](figures/inversionrawpHist.png)
+![](figures/inversionrawpHist.png)
 
 Figure 3: raw p-values histogram when inverting samples.
 
 ### 4.2 Batch effect
-A batch effect is a source of variation in the counts due to splitting the whole sample set into subgroups during the wet-lab part of the experiment. To illustrate this phenomenon, figure 4 shows the results of the clustering and of the PCA for an experiment with 12 samples: 6 WT and 6 KO labeled from 1 to 6 within each condition. 
+A batch effect is a source of variation in the counts due to splitting the whole sample set into subgroups during the wet-lab part of the experiment. To illustrate this phenomenon, figure 4 shows the results of the clustering and of the PCA for an experiment with 12 samples: 6 WT and 6 KO labeled from 1 to 6 within each condition.
 
-![figures/batchclusterPCA.png](figures/batchclusterPCA.png)
+![](figures/batchclusterPCA.png)
 
 Figure 4: clustering dendrogram (left) and PCA (right) with a batch effect.
 
@@ -175,11 +185,11 @@ Warning: batch effects can be taken into account only if they do not confound wi
 ### 4.3 Number of reads and outliers
 A sample with a total number of reads or a number of null counts too much different from the others may reveal a problem during the experiment, the sequencing or the alignment. The user can check this in the two first barplots of the HTML report (total number of reads and percentage of null counts). Moreover, such a sample will probably be outlier on the PCA/MDS plot, i.e. it will fall far from the other samples. It will often be preferable to remove it from the statistical analysis. For example, the figures 5 and 6 illustrate this phenomenon and suggest the removal of sample WT3 from the analysis.
 
-![figures/outlierbarplots.png](figures/outlierbarplots.png)
+![](figures/outlierbarplots.png)
 
 Figure 5: WT3 has a small total number of reads (left) and a high percentage of null counts (right).
 
-![figures/outlierPCA.png](figures/outlierPCA.png)
+![](figures/outlierPCA.png)
 
 Figure 6: WT3 falls far from the other samples on the first factorial plane of the PCA.
 
@@ -189,7 +199,7 @@ It may happen that some features (ribosomal RNA for example) take up a large num
 ### 4.5 Normalization parameter (with DESeq2)
 In order to normalize the counts, DESeq2 computes size factors. There are two options to compute them: `"median"` (default) or `"shorth"`. The default parameter often works well but the HTML report contains a figure which allows an assessment of the quality of the estimation of the size factors: there is one histogram per sample with a vertical red line corresponding to the value of the size factor. If the estimation of the size factor is correct, the red line must fall on the mode of the histogram for each sample. If this is not the case, the user should use the `"shorth"` parameter. Results with `"median"` and `"shorth"` for the same sample are given on figure 7 for an experiment where it was preferable to use `"shorth"`.
 
-![figures/diagSF.png](figures/diagSF.png)
+![](figures/diagSF.png)
 
 Figure 7: size factor diagnostic for one sample with `"median"` (left) and `"shorth"` (right).
 
@@ -206,25 +216,24 @@ The user can try the R scripts `template_script_DESeq2.r` and `template_script_e
 
 ## Bibliography
 
-[1] Anders S, Huber W. **Differential expression analysis for sequence count data**. *Genome Biology*. 2010; doi:10.1186/gb-2010-11-10-r106.
+[1] Anders S, Huber W. **Differential expression analysis for sequence count data**. *Genome Biology*. 2010.
 
-[2] Love M, Huber W, Anders S. **Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2**. *Genome Biology*. 2014; doi:10.1186/s13059-014-0550-8.
+[2] Love M, Huber W, Anders S. **Moderated estimation of fold change and dispersion for RNA-Seq data with DESeq2**. *Genome Biology*. 2014.
 
-[3] Robinson M, McCarthy DJ, Smyth GK. **edgeR: a Bioconductor package for differential expression analysis of digital gene expression data**. *Bioinformatics*. 2009; doi:10.1093/bioinformatics/btp616.
+[3] Robinson M, McCarthy DJ, Smyth GK. **edgeR: a Bioconductor package for differential expression analysis of digital gene expression data**. *Bioinformatics*. 2009.
 
-[4] Anders S, Pyl TP, Huber W. **HTSeq - A Python framework to work with high-throughput sequencing data**. *Bioinformatics*. 2014; doi:10.1093/bioinformatics/btu638.
+[4] Anders S, Pyl TP, Huber W. **HTSeq - A Python framework to work with high-throughput sequencing data**. *Bioinformatics*. 2014.
 
-[5] Liao Y, Smyth GK and Shi W. **featureCounts: an efficient general purpose program for assigning sequence reads to genomic features**. *Bioinformatics*, 2014; doi:10.1093/bioinformatics/btt656.
+[5] Liao Y, Smyth GK and Shi W. **featureCounts: an efficient general purpose program for assigning sequence reads to genomic features**. *Bioinformatics*, 2014.
 
-[6] Ritchie ME, Phipson B, Wu D, et al. **limma powers differential expression analyses for RNA-sequencing and microarray studies**. *Nucleic Acids Research*. 2015; doi:10.1093/nar/gkv007.
+[6] Ritchie ME, Phipson B, Wu D, et al. **limma powers differential expression analyses for RNA-sequencing and microarray studies**. *Nucleic Acids Research*. 2015.
 
-[7] Cook RD. **Detection of Influential Observation in Linear Regression**. *Technometrics*. 1977; DOI:10.1080/00401706.2000.10485981.
+[7] Cook RD. **Detection of Influential Observation in Linear Regression**. *Technometrics*. 1977.
 
-[8] Bourgon R, Gentleman R and Huber W. **Independent filtering increases detection power for high-throughput experiments**. *PNAS*. 2010; doi:10.1073/pnas.0914005107.
+[8] Bourgon R, Gentleman R and Huber W. **Independent filtering increases detection power for high-throughput experiments**. *PNAS*. 2010.
 
-[9] Benjamini Y and Hochberg Y. **Controlling the false discovery rate: a practical and powerful approach to multiple testing**. *Journal of the Royal Statistical Society B*. 1995; doi:10.2307/2346101.
+[9] Benjamini Y and Hochberg Y. **Controlling the false discovery rate: a practical and powerful approach to multiple testing**. *Journal of the Royal Statistical Society B*. 1995.
 
 [10] Benjamini Y and Yekutieli D. **The control of the false discovery rate in multiple testing under dependency**. *Annals of Statistics*. 2001.
 
-[11] Schulze SK, Kanwar R, Golzenleuchter M, et al. **SERE: Single-parameter quality control and sample comparison for RNA-Seq**. *BMC Genomics*. 2012; doi:10.1186/1471-2164-13-524.
-
+[11] Schulze SK, Kanwar R, Golzenleuchter M, et al. **SERE: Single-parameter quality control and sample comparison for RNA-Seq**. *BMC Genomics*. 2012.
