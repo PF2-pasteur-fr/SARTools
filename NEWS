@@ -2,6 +2,7 @@ CHANGES IN VERSION 1.6.9
 ------------------------
 	o new vignette style
 	o print duplicated feature ids alongwith the error message in loadCountData()
+	o README update as Bioconductor dependencies are now automatically installed
 
 CHANGES IN VERSION 1.6.8
 ------------------------
