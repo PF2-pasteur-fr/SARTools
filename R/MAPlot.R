@@ -26,7 +26,7 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
     p[[name]] <- ggplot(data=complete.name, aes(x=.data$baseMean, y=.data$log2FoldChange, color=.data$padj<=alpha, shape=.data$shape)) +
       scale_x_continuous(trans = log10_trans(),
                          breaks = trans_breaks("log10", function(x) 10^x),
-                         labels = trans_format("log10", math_format())) +
+                         labels = trans_format("log10", math_format(~10^.x))) +
       geom_point(show.legend=FALSE, alpha=0.5) +
       scale_colour_manual(values=c("black","red")) +
       xlab("") +
