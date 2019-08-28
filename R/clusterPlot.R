@@ -10,7 +10,12 @@
 
 clusterPlot <- function(counts.trans, group, outfile=TRUE){
   hc <- hclust(dist(t(counts.trans)), method="ward.D")
-  if (outfile) png(filename="figures/cluster.png",width=1800,height=1800,res=300) 
-    plot(hc, hang=-1, ylab="Height", las=2, xlab="Method: Euclidean distance - Ward criterion", main="Cluster dendrogram")
+  if (outfile) png(filename="figures/cluster.png", width=1800, height=1800, res=300) 
+  print(ggdendrogram(hc, theme_dendro=FALSE) +
+          xlab("Samples") +
+          ylab("Height") +
+          ggtitle("Cluster dendrogram\nEuclidean distance, Ward criterion") +
+          theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+          scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))))
   if (outfile) dev.off()
 }

@@ -13,21 +13,36 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
   ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/volcanoPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
-    par(mfrow=c(nrow,ncol))
-    for (name in names(complete)){
-      complete.name <- complete[[name]]
-      complete.name$padj[which(complete.name$padj==0)] <- .Machine$double.xmin
-      log10pval <- -log10(complete.name$padj)
-      if (is.null(padjlim)){
-        ylim <- c(0,1) * quantile(log10pval, probs=0.99, na.rm=TRUE)
-      } else{
-        ylim <- c(0,1) * -log10(padjlim)
-      }
-      plot(complete.name$log2FoldChange, pmin(ylim[2], log10pval), ylim=ylim, las=1, cex=0.45,
-           xlab=expression(log[2]~fold~change), ylab=expression(-log[10]~adjusted~P~value),
-           col=ifelse(complete.name$padj <= alpha, "red", "black"), pch=ifelse(log10pval >= ylim[2], 2, 20),
-           main=paste0("Volcano plot - ",gsub("_"," ",name)))
-      abline(h=-log10(alpha), lty=2, col="lightgray")
+  p <- list()
+  for (name in names(complete)){
+    complete.name <- complete[[name]]
+    complete.name$padj[which(complete.name$padj==0)] <- .Machine$double.xmin
+    complete.name <- complete.name[which(!is.na(complete.name$padj)),]
+    if (is.null(padjlim)) padjlim.name <- quantile(complete.name$padj, probs=0.01, na.rm=TRUE) else padjlim.name <- padjlim
+    complete.name$shape <- complete.name$padj < padjlim.name
+    complete.name$padj[which(complete.name$padj < padjlim.name)] <- padjlim.name
+    reverselog_trans <- function(base = exp(1)) {
+      trans <- function(x) -log(x, base)
+      inv <- function(x) base^(-x)
+      trans_new(paste0("reverselog-", format(base)), trans, inv,
+                log_breaks(base = base),
+                domain = c(.Machine$double.xmin, Inf))
     }
+    p[[name]] <- ggplot(data=complete.name, 
+                        aes(x=.data$log2FoldChange, y=.data$padj, color=.data$padj<=alpha, shape=.data$shape)) +
+      geom_point(show.legend=FALSE, alpha=0.5) +
+      scale_y_continuous(trans = reverselog_trans(10),
+                         breaks = trans_breaks("log10", function(x) 10^x),
+                         labels = trans_format("log10", math_format(~10^.x))) +
+      scale_colour_manual(values=c("black", "red")) +
+      xlab("") +
+      ylab("") +
+      ggtitle(gsub("_", " ", name))
+  }
+  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
+                                       top=textGrob("Volcano plot", x=0.01, just="left", gp=gpar(fontsize=20)),
+                                       bottom=textGrob(expression(log[2]~fold~change), gp=gpar(fontsize=15)),
+                                       left=textGrob("adjusted P-value", rot=90, gp=gpar(fontsize=15)))
+  do.call(tmpfun, p)
   if (outfile) dev.off()
 }

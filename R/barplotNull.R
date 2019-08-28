@@ -10,15 +10,19 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 barplotNull <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
-  if (outfile) png(filename="figures/barplotNull.png",width=min(3600,1800+800*ncol(counts)/10),height=1800,res=300)
+  if (outfile) png(filename="figures/barplotNull.png", width=min(3600, 1800+800*ncol(counts)/10), height=1800, res=300)
     percentage <- apply(counts, 2, function(x){sum(x == 0)})*100/nrow(counts)
     percentage.allNull <- (nrow(counts) - nrow(removeNull(counts)))*100/nrow(counts)
-    barplot(percentage, las = 2,
-            col = col[as.integer(group)],
-		    ylab = "Percentage of null counts",
-		    main = "Percentage of null counts per sample", 
-	  	    ylim = c(0,1.2*ifelse(max(percentage)==0,1,max(percentage))))
-    abline(h = percentage.allNull, lty = 2, lwd = 2)
-    legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
+    d <- data.frame(percentage=percentage, sample=names(percentage), group)
+    print(ggplot(d, aes(x=.data$sample, y=.data$percentage, fill=.data$group)) +
+            geom_bar(stat="identity", show.legend=TRUE) +
+            labs(fill="") +
+            scale_fill_manual(values=col) +
+            xlab("Samples") + 
+            ylab("Percentage of null counts") +
+            scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+            ggtitle("Percentage of null counts per sample") +
+            theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+            geom_hline(yintercept=percentage.allNull, linetype="dashed", color="black", size=1))
   if (outfile) dev.off()
 }

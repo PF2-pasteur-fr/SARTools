@@ -26,13 +26,13 @@ For more details about the DESeq2 methodology, please refer to its related publi
 The count data files and associated biological conditions are listed in the following table.
 
 ```{r , echo=FALSE, results="asis"}
-print(xtable(target,caption="Table 1: Data files and associated biological conditions."), type="html", include.rownames=FALSE, html.table.attributes = "align='center'")
+kable_styling(kable(target, row.names=FALSE, caption="Table 1: Data files and associated biological conditions.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 ```
 
 After loading the data we first have a look at the raw data table itself. The data table contains one row per annotated feature and one column per sequenced sample. Row names of this table are feature IDs (unique identifiers). The table contains raw count values representing the number of reads that map onto the features. For this project, there are `r nrow(counts)` features in the count data table.
 
 ```{r , echo=FALSE, results="asis"}
-print(xtable(head(counts),caption="Table 2: Partial view of the count data table.",digits=0), type="html", html.table.attributes = "align='center'")
+kable_styling(kable(head(counts[, 1:min(ncol(counts), 10)]), row.names=TRUE, digits=0, caption="Table 2: Partial view of the count data table.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 ```
 
 Looking at the summary of the count table provides a basic description of these raw counts (min and max values, median, etc).
@@ -43,7 +43,7 @@ fun_summary=function(x){
   names(out)=c("Min.","1st Qu.","Median","Mean","3rd Qu.","Max.")
   return(round(out,0))
 }
-print(xtable(apply(counts,2,fun_summary),caption="Table 3: Summary of the raw counts.",digits=0), type="html", html.table.attributes = "align='center'")
+kable_styling(kable(t(apply(counts, 2, fun_summary)), row.names=TRUE, digits=0, caption="Table 3: Summary of the raw counts.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 nbNull <- nrow(counts) - nrow(removeNull(counts)) # needed in one of the next paragraphs
 ```
 
@@ -65,7 +65,7 @@ Figure 2 shows the percentage of features with no read count in each sample. We 
 
 </center>
 
-Figure 3 shows the distribution of read counts for each sample. For sake of readability, $\text{log}_2(\text{counts}+1)$ are used instead of raw counts. Again we expect replicates to have similar distributions. In addition, this figure shows if read counts are preferably low, medium or high. This depends on the organisms as well as the biological conditions under consideration.
+Figure 3 shows the distribution of read counts for each sample (on a log scale to improve readability). Again we expect replicates to have similar distributions. In addition, this figure shows if read counts are preferably low, medium or high. This depends on the organisms as well as the biological conditions under consideration.
 
 <center>
 ![Figure 3: Density distribution of read counts.](figures/densplot.png){width=600}
@@ -81,10 +81,10 @@ It may happen that one or a few features capture a high proportion of reads (up 
 
 
 ```{r , echo=FALSE, results="asis"}
-print(xtable(as.matrix(majSequences),caption="Table 4: Percentage of reads associated with the sequences having the highest counts."), type="html", html.table.attributes = "align='center'")
+kable_styling(kable(t(as.matrix(majSequences))[,1:min(10, nrow(majSequences))], row.names=TRUE, digits=2, caption="Table 4: Percentage of reads associated with the sequences having the highest counts.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 ```
 
-We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different ($\text{log}_2(\text{counts}+1)$ are used instead of raw count values). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [@Schulze2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
+We may wish to assess the similarity between samples across conditions. A pairwise scatter plot is produced (figure 5) to show how replicates and samples from different biological conditions are similar or different (using a log scale). Moreover, as the Pearson correlation has been shown not to be relevant to measure the similarity between replicates, the SERE statistic has been proposed as a similarity index between RNA-Seq samples [@Schulze2012]. It measures whether the variability between samples is random Poisson variability or higher. Pairwise SERE values are printed in the lower triangle of the pairwise scatter plot. The value of the SERE statistic is:
 
 - 0 when samples are identical (no variability at all: this may happen in the case of a sample duplication);
 
@@ -94,7 +94,7 @@ We may wish to assess the similarity between samples across conditions. A pairwi
 
 
 <center>
-![Figure 5: Pairwise comparison of samples (not produced when more than 30 samples).](figures/pairwiseScatter.png)
+![Figure 5: Pairwise comparison of samples (not produced when more than 12 samples).](figures/pairwiseScatter.png)
 
 </center>
 
@@ -131,7 +131,7 @@ if (!is.null(batch)){
 Normalization aims at correcting systematic technical biases in the data, in order to make read counts comparable across samples. The normalization proposed by DESeq2 relies on the hypothesis that most features are not differentially expressed. It computes a scaling factor for each sample. Normalized read counts are obtained by dividing raw read counts by the scaling factor associated with the sample they belong to. Scaling factors around 1 mean (almost) no normalization is performed. Scaling factors lower than 1 will produce normalized counts higher than raw ones, and the other way around. Two options are available to compute scaling factors: locfunc="median" (default) or locfunc="shorth". Here, the normalization was performed with locfunc="`r locfunc`".
 
 ```{r , echo=FALSE, results="asis"}
-print(xtable(t(matrix(out.DESeq2$sf, dimnames=list(target$label,"Size factor"))),caption="Table 5: Normalization factors."), type="html", html.table.attributes = "align='center'")
+kable_styling(kable(t(matrix(out.DESeq2$sf, dimnames=list(target$label,"Size factor"))), row.names=TRUE, digits=2, caption="Table 5: Normalization factors.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 ```
 
 The histograms (figure 8) can help to validate the choice of the normalization parameter ("median" or "shorth"). Under the hypothesis that most features are not differentially expressed, each size factor represented by a red line is expected to be close to the mode of the distribution of the counts divided by their geometric means across samples.
@@ -195,7 +195,7 @@ DESeq2 can perform an independent filtering to increase the detection power of d
 ```{r , echo=FALSE, results="asis"}
 if (independentFiltering){
   cat("Table 6 reports the thresholds used for each comparison and the number of features discarded by the independent filtering. Adjusted p-values of discarded features are then set to NA.\n")
-  print(xtable(summaryResults$tabIndepFiltering,caption="Table 6: Number of features discarded by the independent filtering for each comparison."),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
+  kable_styling(kable(summaryResults$tabIndepFiltering, row.names=FALSE, digits=2, caption="Table 6: Number of features discarded by the independent filtering for each comparison.", format="html"), c("striped", "bordered", "responsive"), font_size=12)
 } else{
   cat("For this project, no independent filtering has been performed.")
 }
@@ -206,7 +206,7 @@ if (independentFiltering){
 A p-value adjustment is performed to take into account multiple testing and control the false positive rate to a chosen level $\alpha$. For this analysis, a `r pAdjustMethod` p-value adjustment was performed [@BH1995 and BY2001] and the level of controlled false positive rate was set to `r alpha`.
 
 ```{r , echo=FALSE, results="asis"}
-print(xtable(summaryResults$nDiffTotal,caption=paste0(ifelse(independentFiltering,"Table 7: ","Table 6: "),"Number of up-, down- and total number of differentially expressed features for each comparison.")),type="html",include.rownames=FALSE, html.table.attributes = "align='center'")
+kable_styling(kable(summaryResults$nDiffTotal, row.names=FALSE, digits=0, caption=paste0(ifelse(independentFiltering,"Table 7: ","Table 6: "),"Number of up-, down- and total number of differentially expressed features for each comparison."), format="html"), c("striped", "bordered", "responsive"), font_size=12)
 ```
 
 Figure 13 represents the MA-plot of the data for the comparisons done, where differentially expressed features are highlighted in red. A MA-plot represents the log ratio of differential expression as a function of the mean intensity for each feature. Triangles correspond to features having a too low/high $\log_2(\text{FC})$ to be displayed on the plot.

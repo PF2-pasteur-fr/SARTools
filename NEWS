@@ -1,3 +1,10 @@
+CHANGES IN VERSION 1.7.0
+------------------------
+	o plots are now generated using ggplot2
+	o pairwise scatter plot is no longer produced with more than 12 samples
+	o PCA and MDS labels are placed using geom_text_repel()
+	o tables in the HTML report are produced with kable() instead of xtable()
+
 CHANGES IN VERSION 1.6.9
 ------------------------
 	o new vignette style
@@ -11,7 +18,7 @@ CHANGES IN VERSION 1.6.8
 
 CHANGES IN VERSION 1.6.7
 ------------------------
-        o modified the installation guidelines for the Bioconductor packages
+	o modified the installation guidelines for the Bioconductor packages
 	o new parameters in the MAPlot() and volcanoPlot() functions thanks to Ken Field suggestion on GitHub
 
 CHANGES IN VERSION 1.6.6
@@ -20,11 +27,11 @@ CHANGES IN VERSION 1.6.6
 
 CHANGES IN VERSION 1.6.5
 ------------------------
-        o added the "stat" column of the DESeq2 results to the exported tables
+	o added the "stat" column of the DESeq2 results to the exported tables
 
 CHANGES IN VERSION 1.6.4
 ------------------------
-        o fixed a bug when in loadCountData() if gene IDs contain only numeric values
+	o fixed a bug when in loadCountData() if gene IDs contain only numeric values
 
 CHANGES IN VERSION 1.6.3
 ------------------------

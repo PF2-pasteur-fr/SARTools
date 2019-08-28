@@ -11,16 +11,19 @@
 #' @return A file named MDS.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MDSPlot <- function(dge, group, n=min(500,nrow(dge$counts)), gene.selection=c("pairwise", "common"),
+MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("pairwise", "common"),
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
   if (outfile) png(filename="figures/MDS.png", width=1800, height=1800, res=300)
     coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1], plot=FALSE)
-    abs=range(coord$x); abs=abs(abs[2]-abs[1])/25;
-    ord=range(coord$y); ord=abs(ord[2]-ord[1])/25;
-    plot(coord$x,coord$y, col=col[as.integer(group)], las=1, main="Multi-Dimensional Scaling plot",
-         xlab="Leading logFC dimension 1", ylab="Leading logFC dimension 2", cex=2, pch=16)
-    abline(h=0,v=0,lty=2,col="lightgray")
-    text(coord$x - ifelse(coord$x>0,abs,-abs), coord$y - ifelse(coord$y>0,ord,-ord),
-         colnames(dge$counts), col=col[as.integer(group)])
+    coord <- as.data.frame(coord)
+    d <- data.frame(coord[,c("x", "y")], group=group, sample=row.names(coord))
+    print(ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
+      geom_point(show.legend=TRUE) +
+      labs(color="") +
+      scale_colour_manual(values=col) +
+      geom_text_repel(show.legend=FALSE) +
+      xlab("Leading logFC dimension 1") +
+      ylab("Leading logFC dimension 2") +
+      ggtitle("Multi-Dimensional Scaling plot"))
   if (outfile) dev.off()      
 }
