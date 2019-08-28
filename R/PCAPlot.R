@@ -27,10 +27,10 @@ PCAPlot <- function(counts.trans, group, n=min(500, nrow(counts.trans)),
     index2 <- axes[2]
     d <- data.frame(x=pca$x[,index1], y=pca$x[,index2], group=group, sample=rownames(pca$x))
     ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
-      geom_point(show.legend=TRUE) +
+      geom_point(show.legend=TRUE, size=3) +
       labs(color="") +
       scale_colour_manual(values=col) +
-      geom_text_repel(show.legend=FALSE) +
+      geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
       xlab(paste0("PC", index1, " (",prp[index1],"%)")) +
       ylab(paste0("PC", index2, " (",prp[index2],"%)"))
   }

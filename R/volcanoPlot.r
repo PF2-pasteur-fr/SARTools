@@ -42,7 +42,7 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
   tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
                                        top=textGrob("Volcano plot", x=0.01, just="left", gp=gpar(fontsize=20)),
                                        bottom=textGrob(expression(log[2]~fold~change), gp=gpar(fontsize=15)),
-                                       left=textGrob("adjusted P-value", rot=90, gp=gpar(fontsize=15)))
+                                       left=textGrob("Adjusted P-value", rot=90, gp=gpar(fontsize=15)))
   do.call(tmpfun, p)
   if (outfile) dev.off()
 }

@@ -15,7 +15,8 @@ clusterPlot <- function(counts.trans, group, outfile=TRUE){
           xlab("Samples") +
           ylab("Height") +
           ggtitle("Cluster dendrogram\nEuclidean distance, Ward criterion") +
-          theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+          theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5),
+                axis.text.y=element_text(angle=0)) +
           scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))))
   if (outfile) dev.off()
 }

@@ -18,10 +18,10 @@ MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("
     coord <- as.data.frame(coord)
     d <- data.frame(coord[,c("x", "y")], group=group, sample=row.names(coord))
     print(ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
-      geom_point(show.legend=TRUE) +
+      geom_point(show.legend=TRUE, size=3) +
       labs(color="") +
       scale_colour_manual(values=col) +
-      geom_text_repel(show.legend=FALSE) +
+      geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
       xlab("Leading logFC dimension 1") +
       ylab("Leading logFC dimension 2") +
       ggtitle("Multi-Dimensional Scaling plot"))

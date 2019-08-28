@@ -44,9 +44,9 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
     if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=1800, height=1800, res=300)
     d <- data.frame(sf=sizeFactors(dds), libsize=colSums(counts(dds))/1e6, group, sample=colnames(dds))
     print(ggplot(data=d, aes(x=.data$sf, y=.data$libsize, color=.data$group, label=.data$sample)) + 
-            geom_point(show.legend = FALSE) +
+            geom_point(show.legend=FALSE, size=3) +
             scale_colour_manual(values=col) +
-            geom_text_repel(show.legend = FALSE) +
+            geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
             xlab("Size factors") +
             ylab("Total number of reads (millions)") +
             ggtitle("Diagnostic: size factors vs total number of reads") +
