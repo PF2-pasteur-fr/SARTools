@@ -14,7 +14,7 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
                                  outfile=TRUE, plots=c("diag","sf_libsize")){
   # histograms
   if ("diag" %in% plots){
-    ncol <- ifelse(ncol(counts(dds))<=4, ceiling(sqrt(ncol(counts(dds)))), 3)
+    ncol <- 2
     nrow <- ceiling(ncol(counts(dds))/ncol)
     if (outfile) png(filename="figures/diagSizeFactorsHist.png", width=cairoSizeWrapper(1400*ncol), height=cairoSizeWrapper(1400*nrow), res=300)
     p <- list()
@@ -27,14 +27,12 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
       p[[j]] <- ggplot(data=d, aes(x=.data$x)) +
         geom_histogram(bins=100) +
         scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
-        xlab("") +
+        xlab(expression(log[2]~(counts/geometric~mean))) +
         ylab("") +
-        ggtitle(paste0("Sample ", samples[j])) +
+        ggtitle(paste0("Size factor diagnostic - ", samples[j])) +
         geom_vline(xintercept=log2(sizeFactors(dds)[j]), linetype="dashed", color="red", size=1)
     }
-    tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
-                                         bottom=textGrob(expression(log[2]~(counts/geometric~mean)), gp=gpar(fontsize=15)),
-                                         top=textGrob("Size factors diagnostic", x=0.01, just="left", gp=gpar(fontsize=20)))
+    tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
     do.call(tmpfun, p)
     if (outfile) dev.off()
   }

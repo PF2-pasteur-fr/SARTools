@@ -8,7 +8,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 rawpHist <- function(complete, outfile=TRUE){
-  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/rawpHist.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
   p <- list()
@@ -18,13 +18,11 @@ rawpHist <- function(complete, outfile=TRUE){
     p[[name]] <- ggplot(data=complete.name, aes(x=.data$pvalue)) +
       geom_histogram(binwidth=0.02) +
       scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
-      xlab("") +
-      ylab("") +
-      ggtitle(gsub("_"," ",name))
+      xlab("Raw p-value") +
+      ylab("Frequency") +
+      ggtitle(paste0("Distribution of raw p-values - ", gsub("_"," ",name)))
   }
-  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
-                                       top=textGrob("Distribution of raw p-values", x=0.01, just="left", gp=gpar(fontsize=20)),
-                                       bottom=textGrob("Raw p-value", gp=gpar(fontsize=15)))
+  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
   do.call(tmpfun, p)
   if (outfile) dev.off()
 }

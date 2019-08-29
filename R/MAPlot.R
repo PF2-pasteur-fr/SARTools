@@ -10,7 +10,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
-  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/MAPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
   p <- list()
@@ -29,14 +29,11 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
                          labels = trans_format("log10", math_format(~10^.x))) +
       geom_point(show.legend=FALSE, alpha=0.5) +
       scale_colour_manual(values=c("black","red")) +
-      xlab("") +
-      ylab("") +
-      ggtitle(gsub("_"," ",name))
+      xlab("Mean of normalized counts") +
+      ylab(expression(log[2]~fold~change)) +
+      ggtitle(paste0("MA-plot - ", gsub("_"," ",name)))
   }
-  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
-                                       top=textGrob("MA-plot", x=0.01, just="left", gp=gpar(fontsize=20)),
-                                       bottom=textGrob("Mean of normalized counts", gp=gpar(fontsize=15)),
-                                       left=textGrob(expression(log[2]~fold~change), rot=90, gp=gpar(fontsize=15)))
+  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
   do.call(tmpfun, p)
   if (outfile) dev.off()
 }

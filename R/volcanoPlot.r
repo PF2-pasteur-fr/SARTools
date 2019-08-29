@@ -10,7 +10,7 @@
 #' @author Hugo Varet
 
 volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
-  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/volcanoPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
   p <- list()
@@ -35,14 +35,11 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
                          breaks = trans_breaks("log10", function(x) 10^x),
                          labels = trans_format("log10", math_format(~10^.x))) +
       scale_colour_manual(values=c("black", "red")) +
-      xlab("") +
-      ylab("") +
-      ggtitle(gsub("_", " ", name))
+      xlab(expression(log[2]~fold~change)) +
+      ylab("Adjusted P-value") +
+      ggtitle(paste0("Volcano plot - ", gsub("_", " ", name)))
   }
-  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol,
-                                       top=textGrob("Volcano plot", x=0.01, just="left", gp=gpar(fontsize=20)),
-                                       bottom=textGrob(expression(log[2]~fold~change), gp=gpar(fontsize=15)),
-                                       left=textGrob("Adjusted P-value", rot=90, gp=gpar(fontsize=15)))
+  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
   do.call(tmpfun, p)
   if (outfile) dev.off()
 }
