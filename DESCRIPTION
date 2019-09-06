@@ -2,7 +2,7 @@ Package: SARTools
 Type: Package
 Title: Statistical Analysis of RNA-Seq Tools
 Version: 1.7.0
-Date: 2019-08-27
+Date: 2019-09-06
 Author: Marie-Agnes Dillies and Hugo Varet
 Maintainer: Hugo Varet <hugo.varet@pasteur.fr>
 Depends: R (>= 3.3.0),

@@ -20,12 +20,13 @@ PCAPlot <- function(counts.trans, group, n=min(500, nrow(counts.trans)),
   prp <- round(prp[1:3],2)
 
   # create figure
-  if (outfile) png(filename="figures/PCA.png", width=cairoSizeWrapper(1850*2), height=cairoSizeWrapper(1800), res=300)
+  if (outfile) png(filename="figures/PCA.png", width=cairoSizeWrapper(1900*2), height=cairoSizeWrapper(1800), res=300)
   
   tmpFunction <- function(axes=c(1, 2)){
     index1 <- axes[1]
     index2 <- axes[2]
-    d <- data.frame(x=pca$x[,index1], y=pca$x[,index2], group=group, sample=rownames(pca$x))
+    d <- data.frame(x=pca$x[,index1], y=pca$x[,index2], 
+                    group=group, sample=factor(rownames(pca$x), levels=rownames(pca$x)))
     ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
       geom_point(show.legend=TRUE, size=3) +
       labs(color="") +

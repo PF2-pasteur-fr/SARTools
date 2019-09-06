@@ -23,7 +23,7 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
   if (outfile) png(filename="figures/majSeq.png",width=min(3600,1800+800*ncol(counts)/10),height=1800,res=300)
     maj <- apply(p, 2, max)
     seqname <- rownames(p)[apply(p, 2, which.max)]
-    d <- data.frame(maj=maj, sample=names(maj), group, seqname=seqname)
+    d <- data.frame(maj=maj, sample=factor(names(maj), levels=names(maj)), group, seqname=seqname)
     print(ggplot(d, aes(x=.data$sample, y=.data$maj, fill=.data$group)) +
             geom_bar(stat="identity", show.legend=TRUE) +
             labs(fill="") +

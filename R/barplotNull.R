@@ -13,7 +13,7 @@ barplotNull <- function(counts, group, col=c("lightblue","orange","MediumVioletR
   if (outfile) png(filename="figures/barplotNull.png", width=min(3600, 1800+800*ncol(counts)/10), height=1800, res=300)
     percentage <- apply(counts, 2, function(x){sum(x == 0)})*100/nrow(counts)
     percentage.allNull <- (nrow(counts) - nrow(removeNull(counts)))*100/nrow(counts)
-    d <- data.frame(percentage=percentage, sample=names(percentage), group)
+    d <- data.frame(percentage=percentage, sample=factor(names(percentage), levels=names(percentage)), group)
     print(ggplot(d, aes(x=.data$sample, y=.data$percentage, fill=.data$group)) +
             geom_bar(stat="identity", show.legend=TRUE) +
             labs(fill="") +

@@ -39,16 +39,18 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
   
   # total read counts vs size factors
   if ("sf_libsize" %in% plots){
-    if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=1800, height=1800, res=300)
-    d <- data.frame(sf=sizeFactors(dds), libsize=colSums(counts(dds))/1e6, group, sample=colnames(dds))
+    if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=1900, height=1800, res=300)
+    d <- data.frame(sf=sizeFactors(dds), libsize=colSums(counts(dds))/1e6, 
+                    group, sample=factor(colnames(dds), levels=colnames(dds)))
     print(ggplot(data=d, aes(x=.data$sf, y=.data$libsize, color=.data$group, label=.data$sample)) + 
-            geom_point(show.legend=FALSE, size=3) +
+            geom_point(show.legend=TRUE, size=3) +
             scale_colour_manual(values=col) +
+            labs(color="") +
             geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
             xlab("Size factors") +
             ylab("Total number of reads (millions)") +
             ggtitle("Diagnostic: size factors vs total number of reads") +
-            geom_abline(slope=coefficients(lm(libsize ~ sf + 0, data=d)), intercept=0, show.legend = FALSE, linetype="dashed", color="grey"))
+            geom_abline(slope=coefficients(lm(libsize ~ sf + 0, data=d)), intercept=0, show.legend=FALSE, linetype="dashed", color="grey"))
     if (outfile) dev.off()
   }
 }
