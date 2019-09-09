@@ -18,8 +18,9 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
     complete.name <- complete[[name]]
     complete.name$padj[which(complete.name$padj==0)] <- .Machine$double.xmin
     complete.name <- complete.name[which(!is.na(complete.name$padj)),]
+    complete.name$DE <- factor(ifelse(complete.name$padj <= alpha, "yes", "no"), levels=c("no", "yes"))
     if (is.null(padjlim)) padjlim.name <- quantile(complete.name$padj, probs=0.01, na.rm=TRUE) else padjlim.name <- padjlim
-    complete.name$shape <- complete.name$padj < padjlim.name
+    complete.name$outfield <- factor(ifelse(complete.name$padj < padjlim.name, "top", "in"), levels=c("in", "top"))
     complete.name$padj[which(complete.name$padj < padjlim.name)] <- padjlim.name
     reverselog_trans <- function(base = exp(1)) {
       trans <- function(x) -log(x, base)
@@ -29,12 +30,13 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
                 domain = c(.Machine$double.xmin, Inf))
     }
     p[[name]] <- ggplot(data=complete.name, 
-                        aes(x=.data$log2FoldChange, y=.data$padj, color=.data$padj<=alpha, shape=.data$shape)) +
+                        aes(x=.data$log2FoldChange, y=.data$padj, color=.data$DE, shape=.data$outfield)) +
       geom_point(show.legend=FALSE, alpha=0.5) +
       scale_y_continuous(trans = reverselog_trans(10),
                          breaks = trans_breaks("log10", function(x) 10^x),
                          labels = trans_format("log10", math_format(~10^.x))) +
-      scale_colour_manual(values=c("black", "red")) +
+      scale_colour_manual(values=c("no"="black", "yes"="red"), drop=FALSE) +
+      scale_shape_manual(values=c("in"=16, "top"=17), drop=FALSE) +
       xlab(expression(log[2]~fold~change)) +
       ylab("Adjusted P-value") +
       ggtitle(paste0("Volcano plot - ", gsub("_", " ", name)))

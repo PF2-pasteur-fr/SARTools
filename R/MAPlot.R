@@ -18,17 +18,23 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
     complete.name <- complete[[name]]
     complete.name <- complete.name[which(complete.name$baseMean>0),]
     complete.name$padj <- ifelse(is.na(complete.name$padj), 1, complete.name$padj)
+    complete.name$DE <- factor(ifelse(complete.name$padj <= alpha, "yes", "no"), levels=c("no", "yes"))
     py <- complete.name$log2FoldChange
     if (is.null(log2FClim)) ymax <- quantile(abs(py[is.finite(py)]), probs=0.99) else ymax <- log2FClim
     complete.name$log2FoldChange[which(py > ymax)] <- ymax
     complete.name$log2FoldChange[which(py < -ymax)] <- -ymax
-    complete.name$shape <- abs(py) > ymax
-    p[[name]] <- ggplot(data=complete.name, aes(x=.data$baseMean, y=.data$log2FoldChange, color=.data$padj<=alpha, shape=.data$shape)) +
+    complete.name$outfield <- factor(ifelse(py > ymax, "top", ifelse(py < -ymax, "bottom", "in")), 
+                                     levels=c("bottom", "in", "top"))
+    p[[name]] <- ggplot(data=complete.name, 
+                        aes(x=.data$baseMean, y=.data$log2FoldChange, color=.data$DE, fill=.data$DE, shape=.data$outfield)) +
       scale_x_continuous(trans = log10_trans(),
                          breaks = trans_breaks("log10", function(x) 10^x),
                          labels = trans_format("log10", math_format(~10^.x))) +
-      geom_point(show.legend=FALSE, alpha=0.5) +
-      scale_colour_manual(values=c("black","red")) +
+      geom_point(show.legend=FALSE, alpha=0.5, size=0.8) +
+      scale_colour_manual(values=c("no"="black", "yes"="red"), drop=FALSE) +
+      scale_shape_manual(values=c("bottom"=25, "in"=21, "top"=24), drop=FALSE) +
+      scale_fill_manual(values=c("no"="black", "yes"="red"), drop=FALSE) +
+      scale_y_continuous(expand=expand_scale(mult=c(0.03, 0.03))) +
       xlab("Mean of normalized counts") +
       ylab(expression(log[2]~fold~change)) +
       ggtitle(paste0("MA-plot - ", gsub("_"," ",name)))
@@ -37,5 +43,3 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
   do.call(tmpfun, p)
   if (outfile) dev.off()
 }
-
-
