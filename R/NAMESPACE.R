@@ -12,7 +12,6 @@
 #' @importFrom gridExtra grid.arrange
 #' @importFrom grDevices col2rgb dev.off png
 #' @importFrom limma plotMDS
-#' @importFrom RGraphics splitTextGrob
 #' @importFrom rlang .data
 #' @importFrom rmarkdown render
 #' @importFrom S4Vectors mcols metadata

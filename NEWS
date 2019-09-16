@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.7.1
+------------------------
+        o remove RGraphics dependency as it causes problems with conda
+
 CHANGES IN VERSION 1.7.0
 ------------------------
 	o plots are now generated using ggplot2
