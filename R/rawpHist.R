@@ -8,13 +8,21 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 rawpHist <- function(complete, outfile=TRUE){
-  ncol <- ifelse(length(complete)<=4, ceiling(sqrt(length(complete))), 3)
+  ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/rawpHist.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
-    par(mfrow=c(nrow,ncol))
-    for (name in names(complete)){
-      hist(complete[[name]][,"pvalue"], nclass=50, xlab="Raw p-value", 
-	       col="skyblue", las=1, main=paste0("Distribution of raw p-values - ",gsub("_"," ",name)))
-    }
+  p <- list()
+  for (name in names(complete)){
+    complete.name <- complete[[name]]
+    complete.name <- complete.name[which(!is.na(complete.name$pvalue)),]
+    p[[name]] <- ggplot(data=complete.name, aes(x=.data$pvalue)) +
+      geom_histogram(binwidth=0.02) +
+      scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+      xlab("Raw p-value") +
+      ylab("Frequency") +
+      ggtitle(paste0("Distribution of raw p-values - ", gsub("_"," ",name)))
+  }
+  tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
+  do.call(tmpfun, p)
   if (outfile) dev.off()
 }

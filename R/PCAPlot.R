@@ -10,7 +10,7 @@
 #' @return A file named PCA.png in the figures directory with a pairwise plot of the three first principal components
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)), 
+PCAPlot <- function(counts.trans, group, n=min(500, nrow(counts.trans)), 
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
                     outfile=TRUE){
   # PCA on the 500 most variables features
@@ -20,31 +20,26 @@ PCAPlot <- function(counts.trans, group, n=min(500,nrow(counts.trans)),
   prp <- round(prp[1:3],2)
 
   # create figure
-  if (outfile) png(filename="figures/PCA.png",width=cairoSizeWrapper(1800*2),height=cairoSizeWrapper(1800),res=300)
-    par(mfrow=c(1,2))
-	# axes 1 et 2
-	abs=range(pca$x[,1]); abs=abs(abs[2]-abs[1])/25;
-    ord=range(pca$x[,2]); ord=abs(ord[2]-ord[1])/25;
-    plot(pca$x[,1], pca$x[,2],
-         las = 1, cex = 2, pch = 16, col = col[as.integer(group)],
-	     xlab = paste0("PC1 (",prp[1],"%)"), 
-	     ylab = paste0("PC2 (",prp[2],"%)"), 
-	     main = "Principal Component Analysis - Axes 1 and 2")
-    abline(h=0,v=0,lty=2,col="lightgray")
-    text(pca$x[,1] - ifelse(pca$x[,1]>0,abs,-abs), pca$x[,2] - ifelse(pca$x[,2]>0,ord,-ord),
-         colnames(counts.trans), col=col[as.integer(group)])
-
-	# axes 1 et 3
-	abs=range(pca$x[,1]); abs=abs(abs[2]-abs[1])/25;
-    ord=range(pca$x[,3]); ord=abs(ord[2]-ord[1])/25;
-    plot(pca$x[,1], pca$x[,3],
-         las = 1, cex = 2, pch = 16, col = col[as.integer(group)],
-	     xlab = paste0("PC1 (",prp[1],"%)"), 
-	     ylab = paste0("PC3 (",prp[3],"%)"), 
-	     main = "Principal Component Analysis - Axes 1 and 3")
-    abline(h=0,v=0,lty=2,col="lightgray")
-    text(pca$x[,1] - ifelse(pca$x[,1]>0,abs,-abs), pca$x[,3] - ifelse(pca$x[,3]>0,ord,-ord),
-         colnames(counts.trans), col=col[as.integer(group)])
+  if (outfile) png(filename="figures/PCA.png", width=cairoSizeWrapper(1900*2), height=cairoSizeWrapper(1800), res=300)
+  
+  tmpFunction <- function(axes=c(1, 2)){
+    index1 <- axes[1]
+    index2 <- axes[2]
+    d <- data.frame(x=pca$x[,index1], y=pca$x[,index2], 
+                    group=group, sample=factor(rownames(pca$x), levels=rownames(pca$x)))
+    ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
+      geom_point(show.legend=TRUE, size=3) +
+      labs(color="") +
+      scale_colour_manual(values=col) +
+      geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
+      xlab(paste0("PC", index1, " (",prp[index1],"%)")) +
+      ylab(paste0("PC", index2, " (",prp[index2],"%)"))
+  }
+  p1 <- tmpFunction(c(1, 2))
+  p2 <- tmpFunction(c(1, 3))
+  grid.arrange(p1, p2, nrow=1, ncol=2, 
+               top=textGrob("Principal Component Analysis", x=0.01, hjust=0, gp=gpar(fontsize=15)))
+  
   if (outfile) dev.off()
 
   return(invisible(pca$x))

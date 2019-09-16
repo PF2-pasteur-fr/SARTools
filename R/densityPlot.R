@@ -10,16 +10,19 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
-  if (outfile) png(filename="figures/densplot.png",width=1800,height=1800,res=300)
+  if (outfile) png(filename="figures/densplot.png", width=2000, height=1800, res=300)
     counts <- removeNull(counts)
-    plot(density(log2(counts[,1]+1)), las = 1, lwd = 2,
-         main = "Density of counts distribution",
-	     xlab = expression(log[2] ~ (raw ~ count + 1)),
-	     ylim = c(0,max(apply(counts,2,function(x){max(density(log2(x+1))$y)}))*1.05),
-         col = col[as.integer(group)[1]])
-    for (i in 2:ncol(counts)){
-      lines(density(log2(counts[,i]+1)),col=col[as.integer(group)[i]],lwd=2)
-    }
-  legend("topright", levels(group), lty=1, col=col[1:nlevels(group)], lwd=2, bty="n")
+    d <- stack(data.frame(counts))
+    d$group <- rep(group, each=nrow(counts))
+    print(ggplot(d, aes(x=.data$values+1)) +
+            stat_density(aes(group=.data$ind, color=.data$group), position="identity", geom="line", show.legend=TRUE) +
+            scale_x_continuous(trans = log10_trans(),
+                               breaks = trans_breaks("log10", function(x) 10^x),
+                               labels = trans_format("log10", math_format(~10^.x))) +
+            labs(color="") +
+            scale_colour_manual(values=col) +
+            xlab("Raw counts") +
+            ylab("Density") +
+            ggtitle("Density of counts distribution"))
   if (outfile) dev.off()
 }

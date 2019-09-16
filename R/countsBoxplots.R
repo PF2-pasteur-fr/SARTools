@@ -18,22 +18,43 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
   } else{
     counts <- object$counts
     counts <- removeNull(counts)
-	tmm <- object$samples$norm.factors
+    tmm <- object$samples$norm.factors
     N <- colSums(object$counts)
     f <- tmm * N/mean(tmm * N)
     norm.counts <- scale(object$counts, center=FALSE, scale=f)
     norm.counts <- removeNull(norm.counts)    
   }
 
-  if (outfile) png(filename="figures/countsBoxplots.png",width=2*min(2200,1800+800*ncol(norm.counts)/10),height=1800,res=300)
-    par(mfrow=c(1,2))
-	# raw counts
-    boxplot(log2(counts+1), col = col[as.integer(group)], las = 2,
-	        main = "Raw counts distribution", ylab = expression(log[2] ~ (raw ~ count + 1)))
-    legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
-	# norm counts
-    boxplot(log2(norm.counts+1), col = col[as.integer(group)], las = 2,
-	        main = "Normalized counts distribution", ylab = expression(log[2] ~ (norm ~ count + 1)))
-    legend("topright", levels(group), fill=col[1:nlevels(group)], bty="n")
+  if (outfile) png(filename="figures/countsBoxplots.png", width=2*min(2200, 1800+800*ncol(norm.counts)/10), height=1800, res=300)
+  d <- stack(as.data.frame(counts))
+  d$group <- rep(group, each=nrow(counts))
+  p1 <- ggplot(d) + 
+    geom_boxplot(aes(x=.data$ind, y=.data$values+1, fill=.data$group), show.legend=TRUE) +
+    labs(fill="") +
+    scale_y_continuous(trans = log10_trans(),
+                       breaks = trans_breaks("log10", function(x) 10^x),
+                       labels = trans_format("log10", math_format(~10^.x))) +
+    scale_fill_manual(values=col) +
+    xlab("Samples") +
+    ylab("Raw counts") +
+    ggtitle("Raw counts distribution") +
+    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+  
+  d <- stack(as.data.frame(norm.counts))
+  d$group <- rep(group, each=nrow(norm.counts))
+  p2 <- ggplot(d) + 
+    geom_boxplot(aes(x=.data$ind, y=.data$values+1, fill=.data$group), show.legend=TRUE) +
+    labs(fill="") +
+    scale_y_continuous(trans = log10_trans(),
+                       breaks = trans_breaks("log10", function(x) 10^x),
+                       labels = trans_format("log10", math_format(~10^.x))) +
+    scale_fill_manual(values=col) +
+    xlab("Samples") +
+    ylab("Normalized counts") +
+    ggtitle("Normalized counts distribution") +
+    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+  
+  grid.arrange(p1, p2, nrow=1, ncol=2)
   if (outfile) dev.off()
+    
 }
