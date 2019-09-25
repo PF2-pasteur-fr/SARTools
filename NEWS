@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.7.1
 ------------------------
-        o remove RGraphics dependency as it causes problems with conda
+	o remove RGraphics dependency as it causes problems with conda
+	o replaced stat_summary_hex() by stat_summary_2d() in pairwiseScatterPlots() as it required to install the hexbin package
 
 CHANGES IN VERSION 1.7.0
 ------------------------

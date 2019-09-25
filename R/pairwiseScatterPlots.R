@@ -21,7 +21,7 @@ pairwiseScatterPlots <- function(counts, group, outfile=TRUE){
         if (i==j) next
         if (i > j){
           p[[k]] <- ggplot(data=cbind(d, z=1), aes_string(x=names(d)[i], y=names(d)[j], z="z")) +
-            stat_summary_hex(fun=function(z) log(sum(z)), bins=50, show.legend=FALSE) +
+            stat_summary_2d(fun=function(z) log(sum(z)), bins=60, show.legend=FALSE) +
             scale_x_continuous(trans = log10_trans(),
                                breaks = trans_breaks("log10", function(x) 10^x),
                                labels = trans_format("log10", math_format(~10^.x))) +
