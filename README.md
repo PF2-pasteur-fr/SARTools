@@ -35,7 +35,7 @@ Note: if you want to set a dedicated conda environment for SARTools, use `conda 
 How to use SARTools?
 --------------------
 
-A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package.
+A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package. Note that it is not available when SARTools has been installed using conda.
 
 Be careful to use the R script associated with the version of SARTools installed on your system.
 
