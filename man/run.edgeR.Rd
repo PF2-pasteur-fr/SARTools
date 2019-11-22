@@ -4,8 +4,17 @@
 \alias{run.edgeR}
 \title{Wrapper to run edgeR}
 \usage{
-run.edgeR(counts, target, varInt, condRef, batch = NULL, cpmCutoff = 1,
-  normalizationMethod = "TMM", pAdjustMethod = "BH", ...)
+run.edgeR(
+  counts,
+  target,
+  varInt,
+  condRef,
+  batch = NULL,
+  cpmCutoff = 1,
+  normalizationMethod = "TMM",
+  pAdjustMethod = "BH",
+  ...
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

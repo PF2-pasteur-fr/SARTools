@@ -4,8 +4,12 @@
 \alias{densityPlot}
 \title{Density plot of all samples}
 \usage{
-densityPlot(counts, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
+densityPlot(
+  counts,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

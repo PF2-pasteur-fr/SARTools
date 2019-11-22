@@ -4,9 +4,19 @@
 \alias{run.DESeq2}
 \title{Wrapper to run DESeq2}
 \usage{
-run.DESeq2(counts, target, varInt, batch = NULL, locfunc = "median",
-  fitType = "parametric", pAdjustMethod = "BH", cooksCutoff = TRUE,
-  independentFiltering = TRUE, alpha = 0.05, ...)
+run.DESeq2(
+  counts,
+  target,
+  varInt,
+  batch = NULL,
+  locfunc = "median",
+  fitType = "parametric",
+  pAdjustMethod = "BH",
+  cooksCutoff = TRUE,
+  independentFiltering = TRUE,
+  alpha = 0.05,
+  ...
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of raw counts}

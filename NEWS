@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.7.2
+------------------------
+	o the levels of the variable of interest are now ordered as they appear in the target file (after the reference level set as parameter)
+
 CHANGES IN VERSION 1.7.1
 ------------------------
 	o remove RGraphics dependency as it causes problems with conda

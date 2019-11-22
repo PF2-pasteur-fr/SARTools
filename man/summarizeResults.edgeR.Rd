@@ -4,9 +4,15 @@
 \alias{summarizeResults.edgeR}
 \title{Summarize edgeR analysis}
 \usage{
-summarizeResults.edgeR(out.edgeR, group, counts, alpha = 0.05,
+summarizeResults.edgeR(
+  out.edgeR,
+  group,
+  counts,
+  alpha = 0.05,
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  log2FClim = NULL, padjlim = NULL)
+  log2FClim = NULL,
+  padjlim = NULL
+)
 }
 \arguments{
 \item{out.edgeR}{the result of \code{run.edgeR()}}

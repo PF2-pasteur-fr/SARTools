@@ -4,9 +4,16 @@
 \alias{summarizeResults.DESeq2}
 \title{Summarize DESeq2 analysis}
 \usage{
-summarizeResults.DESeq2(out.DESeq2, group, independentFiltering = TRUE,
-  cooksCutoff = TRUE, alpha = 0.05, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), log2FClim = NULL, padjlim = NULL)
+summarizeResults.DESeq2(
+  out.DESeq2,
+  group,
+  independentFiltering = TRUE,
+  cooksCutoff = TRUE,
+  alpha = 0.05,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  log2FClim = NULL,
+  padjlim = NULL
+)
 }
 \arguments{
 \item{out.DESeq2}{the result of \code{run.DESeq2()}}

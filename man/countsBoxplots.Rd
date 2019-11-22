@@ -4,8 +4,12 @@
 \alias{countsBoxplots}
 \title{Box-plots of (normalized) counts distribution per sample}
 \usage{
-countsBoxplots(object, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
+countsBoxplots(
+  object,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE
+)
 }
 \arguments{
 \item{object}{a \code{DESeqDataSet} object from DESeq2 or a \code{DGEList} object from edgeR}
