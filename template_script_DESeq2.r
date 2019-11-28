@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
-### March 20th, 2018
-### designed to be executed with SARTools 1.7.0
+### November 28th, 2019
+### designed to be executed with SARTools 1.7.2
 ################################################################################
 
 ################################################################################
@@ -34,8 +34,10 @@ pAdjustMethod <- "BH"                                # p-value adjustment method
 typeTrans <- "VST"                                   # transformation for PCA/clustering: "VST" or "rlog"
 locfunc <- "median"                                  # "median" (default) or "shorth" to estimate the size factors
 
-colors <- c("dodgerblue","firebrick1",               # vector of colors of each biological condition on the plots
-            "MediumVioletRed","SpringGreen")
+colors <- c("#f3c300", "#875692", "#f38400",         # vector of colors of each biological condition on the plots
+            "#a1caf1", "#be0032", "#c2b280",
+            "#848482", "#008856", "#e68fac",
+            "#0067a5", "#f99379", "#604e97")
 
 forceCairoGraph <- FALSE
 

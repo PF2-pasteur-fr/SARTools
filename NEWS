@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.7.2
 ------------------------
 	o the levels of the variable of interest are now ordered as they appear in the target file (after the reference level set as parameter)
+	o new default colors as some previous ones are not compatible with ggplot2
 
 CHANGES IN VERSION 1.7.1
 ------------------------
