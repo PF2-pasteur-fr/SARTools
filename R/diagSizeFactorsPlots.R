@@ -39,7 +39,7 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
   
   # total read counts vs size factors
   if ("sf_libsize" %in% plots){
-    if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=1900, height=1800, res=300)
+    if (outfile) png(filename="figures/diagSizeFactorsTC.png", width=2000, height=1800, res=300)
     d <- data.frame(sf=sizeFactors(dds), libsize=colSums(counts(dds))/1e6, 
                     group, sample=factor(colnames(dds), levels=colnames(dds)))
     print(ggplot(data=d, aes(x=.data$sf, y=.data$libsize, color=.data$group, label=.data$sample)) + 

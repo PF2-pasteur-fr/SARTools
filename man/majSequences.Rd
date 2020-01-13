@@ -4,8 +4,13 @@
 \alias{majSequences}
 \title{Most expressed sequences per sample}
 \usage{
-majSequences(counts, n = 3, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
+majSequences(
+  counts,
+  n = 3,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

@@ -1,8 +1,8 @@
 ################################################################################
 ### R script to compare several conditions with the SARTools and edgeR packages
 ### Hugo Varet
-### May 16th, 2018
-### designed to be executed with SARTools 1.7.0
+### November 28th, 2019
+### designed to be executed with SARTools 1.7.2
 ### run "Rscript template_script_edgeR_CL.r --help" to get some help
 ################################################################################
 
@@ -77,7 +77,7 @@ make_option(c("-n", "--normalizationMethod"),
 			help="normalization method in calcNormFactors: \"TMM\", \"RLE\" or \"upperquartile\" [default: %default]"),
 
 make_option(c("-C", "--colors"),
-			default="dodgerblue,firebrick1,MediumVioletRed,SpringGreen,chartreuse,cyan,darkorchid,darkorange",
+			default="#f3c300,#875692,#f38400,#a1caf1,#be0032,#c2b280,#848482,#008856,#e68fac,#0067a5",
 			dest="cols",
 			help="colors of each biological condition on the plots\n\t\t\"col1,col2,col3,col4\"\n\t\t[default: %default]"),
 

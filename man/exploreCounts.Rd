@@ -4,9 +4,13 @@
 \alias{exploreCounts}
 \title{Explore counts structure}
 \usage{
-exploreCounts(object, group, typeTrans = "VST",
-  gene.selection = "pairwise", col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"))
+exploreCounts(
+  object,
+  group,
+  typeTrans = "VST",
+  gene.selection = "pairwise",
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen")
+)
 }
 \arguments{
 \item{object}{a \code{DESeqDataSet} from DESeq2 or \code{DGEList} object from edgeR}

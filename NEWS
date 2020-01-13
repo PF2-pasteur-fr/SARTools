@@ -1,6 +1,12 @@
+CHANGES IN VERSION 1.7.2
+------------------------
+	o the levels of the variable of interest are now ordered as they appear in the target file (after the reference level set as parameter)
+	o new default colors as some previous ones are not compatible with ggplot2
+
 CHANGES IN VERSION 1.7.1
 ------------------------
-        o remove RGraphics dependency as it causes problems with conda
+	o remove RGraphics dependency as it causes problems with conda
+	o replaced stat_summary_hex() by stat_summary_2d() in pairwiseScatterPlots() as it required to install the hexbin package
 
 CHANGES IN VERSION 1.7.0
 ------------------------

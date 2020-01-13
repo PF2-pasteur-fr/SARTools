@@ -4,8 +4,11 @@
 \alias{descriptionPlots}
 \title{Description plots of the counts}
 \usage{
-descriptionPlots(counts, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"))
+descriptionPlots(
+  counts,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen")
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

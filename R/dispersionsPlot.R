@@ -14,9 +14,9 @@ dispersionsPlot <- function(dds, outfile=TRUE){
   d <- as.data.frame(mcols(dds)[,c("baseMean", "dispGeneEst", "dispFit", "dispersion")])
   d <- d[which(d$baseMean > 0),]
   d <- data.frame(baseMean=rep(d$baseMean, 3),
-                  value=c(d$dispGeneEst, d$dispFit, d$dispersion),
-                  variable=factor(rep(c("dispGeneEst", "dispFit", "dispersion"), each=nrow(d)),
-                                  levels=c("dispGeneEst", "dispFit", "dispersion")))
+                  value=c(d$dispGeneEst, d$dispersion, d$dispFit),
+                  variable=factor(rep(c("dispGeneEst", "dispersion", "dispFit"), each=nrow(d)),
+                                  levels=c("dispGeneEst", "dispersion", "dispFit")))
   p1 <- ggplot(d, aes(x=.data$baseMean, y=.data$value, colour=.data$variable)) + 
     geom_point(size=0.1) +
     scale_x_continuous(trans = log10_trans(),
@@ -28,9 +28,9 @@ dispersionsPlot <- function(dds, outfile=TRUE){
     ylab("Dispersion") + 
     xlab("Mean of normalized counts") +
     scale_colour_manual(
-      values=c("Black", "#e41a1c", "#377eb8"), 
-      breaks=c("dispGeneEst", "dispFit", "dispersion"), 
-      labels=c("Estimate", "Fit", "Final"),
+      values=c("Black", "#377eb8", "#e41a1c"),
+      breaks=c("dispGeneEst", "dispersion", "dispFit"),
+      labels=c("Estimate", "Final", "Fit"),
       name="") +
     guides(colour = guide_legend(override.aes = list(size=2))) +
     ggtitle("Dispersions")

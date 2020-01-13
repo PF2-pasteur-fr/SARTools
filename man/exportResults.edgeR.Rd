@@ -4,8 +4,7 @@
 \alias{exportResults.edgeR}
 \title{Export results for edgeR analyses}
 \usage{
-exportResults.edgeR(out.edgeR, group, counts, alpha = 0.05,
-  export = TRUE)
+exportResults.edgeR(out.edgeR, group, counts, alpha = 0.05, export = TRUE)
 }
 \arguments{
 \item{out.edgeR}{the result of \code{run.edgeR()}}

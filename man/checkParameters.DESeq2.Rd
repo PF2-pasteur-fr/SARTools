@@ -4,9 +4,24 @@
 \alias{checkParameters.DESeq2}
 \title{Check the parameters (when using DESeq2)}
 \usage{
-checkParameters.DESeq2(projectName, author, targetFile, rawDir,
-  featuresToRemove, varInt, condRef, batch, fitType, cooksCutoff,
-  independentFiltering, alpha, pAdjustMethod, typeTrans, locfunc, colors)
+checkParameters.DESeq2(
+  projectName,
+  author,
+  targetFile,
+  rawDir,
+  featuresToRemove,
+  varInt,
+  condRef,
+  batch,
+  fitType,
+  cooksCutoff,
+  independentFiltering,
+  alpha,
+  pAdjustMethod,
+  typeTrans,
+  locfunc,
+  colors
+)
 }
 \arguments{
 \item{projectName}{name of the project}

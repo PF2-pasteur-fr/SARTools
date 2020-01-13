@@ -4,9 +4,13 @@
 \alias{diagSizeFactorsPlots}
 \title{Assess the estimations of the size factors}
 \usage{
-diagSizeFactorsPlots(dds, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), outfile = TRUE, plots = c("diag",
-  "sf_libsize"))
+diagSizeFactorsPlots(
+  dds,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE,
+  plots = c("diag", "sf_libsize")
+)
 }
 \arguments{
 \item{dds}{a \code{DESeqDataSet} object}

@@ -4,8 +4,12 @@
 \alias{barplotTotal}
 \title{Total number of reads per sample}
 \usage{
-barplotTotal(counts, group, col = c("lightblue", "orange",
-  "MediumVioletRed", "SpringGreen"), outfile = TRUE)
+barplotTotal(
+  counts,
+  group,
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  outfile = TRUE
+)
 }
 \arguments{
 \item{counts}{\code{matrix} of counts}

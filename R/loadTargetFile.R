@@ -16,7 +16,9 @@ loadTargetFile <- function(targetFile, varInt, condRef, batch){
   if (!is.null(batch) && !I(batch %in% names(target))) stop(paste("The batch effect", batch, "is not in the target file")) 
   target[,varInt] <- as.factor(target[,varInt])
   if (!I(condRef %in% as.character(target[,varInt]))) stop(paste("The reference level", condRef, "is not a level of the factor of interest"))
-  target[,varInt] <- relevel(target[,varInt],ref=condRef)
+  lev <- c(condRef, unique(as.character(target[,varInt])))
+  lev <- lev[!duplicated(lev)]
+  target[,varInt] <- factor(target[,varInt], levels=lev)
   target <- target[order(target[,varInt]),]
   rownames(target) <- as.character(target[,1])
   # check if varInt contains replicates

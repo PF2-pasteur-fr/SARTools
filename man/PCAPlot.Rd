@@ -4,9 +4,13 @@
 \alias{PCAPlot}
 \title{PCA of samples (if use of DESeq2)}
 \usage{
-PCAPlot(counts.trans, group, n = min(500, nrow(counts.trans)),
+PCAPlot(
+  counts.trans,
+  group,
+  n = min(500, nrow(counts.trans)),
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  outfile = TRUE)
+  outfile = TRUE
+)
 }
 \arguments{
 \item{counts.trans}{a matrix a transformed counts (VST- or rlog-counts)}
