@@ -3,12 +3,11 @@
 #' Scatter plots for pairwise comparaisons of log counts
 #'
 #' @param counts \code{matrix} of raw counts
-#' @param group factor vector of the condition from which each sample belongs
 #' @param outfile TRUE to export the figure in a png file
 #' @return A file named pairwiseScatter.png in the figures directory containing a pairwise scatter plot with the SERE statistics in the lower panel
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-pairwiseScatterPlots <- function(counts, group, outfile=TRUE){
+pairwiseScatterPlots <- function(counts, outfile=TRUE){
   ncol <- ncol(counts)
   if (ncol <= 12){
     if (outfile) png(filename="figures/pairwiseScatter.png", width=cairoSizeWrapper(850*ncol), height=cairoSizeWrapper(700*ncol), res=300)

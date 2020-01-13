@@ -27,7 +27,7 @@ descriptionPlots <- function(counts, group, col=c("lightblue","orange","MediumVi
   # SERE and pairwise scatter plots
   cat("Matrix of SERE statistics:\n")
   print(tabSERE(counts))
-  pairwiseScatterPlots(counts=counts, group=group)
+  pairwiseScatterPlots(counts=counts)
 
   return(majSequences)
 }

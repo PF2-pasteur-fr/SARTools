@@ -4,12 +4,10 @@
 \alias{pairwiseScatterPlots}
 \title{Scatter plots for pairwise comparaisons of log counts}
 \usage{
-pairwiseScatterPlots(counts, group, outfile = TRUE)
+pairwiseScatterPlots(counts, outfile = TRUE)
 }
 \arguments{
 \item{counts}{\code{matrix} of raw counts}
-
-\item{group}{factor vector of the condition from which each sample belongs}
 
 \item{outfile}{TRUE to export the figure in a png file}
 }
