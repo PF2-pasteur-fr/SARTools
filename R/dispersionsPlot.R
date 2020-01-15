@@ -4,10 +4,11 @@
 #'
 #' @param dds a \code{DESeqDataSet} object
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named dispersionsPlot.png in the figures directory containing the plot of the mean-dispersion relationship and a diagnostic of log normality of the dispersions
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-dispersionsPlot <- function(dds, outfile=TRUE){
+dispersionsPlot <- function(dds, outfile=TRUE, ggplot_theme=theme_gray()){
   if (outfile) png(filename="figures/dispersionsPlot.png", width=3600, height=1800, res=300)
 	
   # dispersions plot
@@ -33,7 +34,8 @@ dispersionsPlot <- function(dds, outfile=TRUE){
       labels=c("Estimate", "Final", "Fit"),
       name="") +
     guides(colour = guide_legend(override.aes = list(size=2))) +
-    ggtitle("Dispersions")
+    ggtitle("Dispersions") +
+    ggplot_theme
   
   # diagnostic of log normality
   disp <- mcols(dds)$dispGeneEst
@@ -49,7 +51,8 @@ dispersionsPlot <- function(dds, outfile=TRUE){
     xlab("Feature dispersion estimate") +
     ylab("Density") +
     ggtitle("log-normality dispersion diagnostic") +
-    stat_function(fun = dnorm, args = list(mean = mean.disp, sd = sd.disp))
+    stat_function(fun = dnorm, args = list(mean = mean.disp, sd = sd.disp)) +
+    ggplot_theme
   
   grid.arrange(p1, p2, layout_matrix=matrix(c(1, 1, 1, 1, 1, 2, 2, 2, 2), nrow=1))
   

@@ -8,11 +8,12 @@
 #' @param gene.selection \code{"pairwise"} to choose the top features separately for each pairwise comparison between the samples or \code{"common"} to select the same features for all comparisons. Only used when \code{method="logFC"}
 #' @param col colors to use (one per biological condition)
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named MDS.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("pairwise", "common"),
-                    col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("pairwise", "common", ggplot_theme=theme_gray()),
+                    col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
   if (outfile) png(filename="figures/MDS.png", width=1800, height=1800, res=300)
     coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1], plot=FALSE)
     coord <- as.data.frame(coord)
@@ -26,6 +27,7 @@ MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("
       geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
       xlab("Leading logFC dimension 1") +
       ylab("Leading logFC dimension 2") +
-      ggtitle("Multi-Dimensional Scaling plot"))
+      ggtitle("Multi-Dimensional Scaling plot") +
+      ggplot_theme)
   if (outfile) dev.off()      
 }

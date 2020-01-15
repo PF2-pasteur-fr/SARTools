@@ -6,10 +6,11 @@
 #' @param alpha cut-off to apply on each adjusted p-value
 #' @param outfile TRUE to export the figure in a png file
 #' @param log2FClim numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named MAPlot.png in the figures directory containing one MA-plot per comparison
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
+MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL, ggplot_theme=theme_gray()){
   ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/MAPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
@@ -37,7 +38,8 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL){
       scale_y_continuous(expand=expand_scale(mult=c(0.03, 0.03))) +
       xlab("Mean of normalized counts") +
       ylab(expression(log[2]~fold~change)) +
-      ggtitle(paste0("MA-plot - ", gsub("_"," ",name)))
+      ggtitle(paste0("MA-plot - ", gsub("_"," ",name))) +
+      ggplot_theme
   }
   tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
   do.call(tmpfun, p)

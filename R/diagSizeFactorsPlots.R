@@ -7,11 +7,12 @@
 #' @param col colors for the plots
 #' @param outfile TRUE to export the figure in a png file
 #' @param plots vector of plots to generate
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return Two files in the figures directory: diagSizeFactorsHist.png containing one histogram per sample and diagSizeFactorsTC.png for a plot of the size factors vs the total number of reads
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), 
-                                 outfile=TRUE, plots=c("diag","sf_libsize")){
+                                 outfile=TRUE, plots=c("diag","sf_libsize"), ggplot_theme=theme_gray()){
   # histograms
   if ("diag" %in% plots){
     ncol <- 2
@@ -30,7 +31,8 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
         xlab(expression(log[2]~(counts/geometric~mean))) +
         ylab("") +
         ggtitle(paste0("Size factor diagnostic - ", samples[j])) +
-        geom_vline(xintercept=log2(sizeFactors(dds)[j]), linetype="dashed", color="red", size=1)
+        geom_vline(xintercept=log2(sizeFactors(dds)[j]), linetype="dashed", color="red", size=1) +
+        ggplot_theme
     }
     tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
     do.call(tmpfun, p)
@@ -50,7 +52,8 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
             xlab("Size factors") +
             ylab("Total number of reads (millions)") +
             ggtitle("Diagnostic: size factors vs total number of reads") +
-            geom_abline(slope=coefficients(lm(libsize ~ sf + 0, data=d)), intercept=0, show.legend=FALSE, linetype="dashed", color="grey"))
+            geom_abline(slope=coefficients(lm(libsize ~ sf + 0, data=d)), intercept=0, show.legend=FALSE, linetype="dashed", color="grey") +
+            ggplot_theme)
     if (outfile) dev.off()
   }
 }

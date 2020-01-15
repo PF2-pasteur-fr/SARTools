@@ -6,10 +6,11 @@
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the boxplots (one per biological condition)
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named countsBoxplots.png in the figures directory containing boxplots of the raw and normalized counts
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
   if (class(object)=="DESeqDataSet"){
     counts <- counts(object)
     counts <- removeNull(counts)
@@ -38,7 +39,8 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
     xlab("Samples") +
     ylab("Raw counts") +
     ggtitle("Raw counts distribution") +
-    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+    ggplot_theme
   
   d <- stack(as.data.frame(norm.counts))
   d$group <- rep(group, each=nrow(norm.counts))
@@ -52,7 +54,8 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
     xlab("Samples") +
     ylab("Normalized counts") +
     ggtitle("Normalized counts distribution") +
-    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+    theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+    ggplot_theme
   
   grid.arrange(p1, p2, nrow=1, ncol=2)
   if (outfile) dev.off()

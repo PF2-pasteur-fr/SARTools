@@ -4,10 +4,11 @@
 #'
 #' @param dge a \code{DGEList} object
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named BCV.png in the figures directory with a BCV plot produced by the \code{plotBCV()} function of the edgeR package
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-BCVPlot <- function(dge, outfile=TRUE){	
+BCVPlot <- function(dge, outfile=TRUE, ggplot_theme=theme_gray()){	
   if (outfile) png(filename="figures/BCV.png", width=2100, height=1800, res=300)
   A <- dge$AveLogCPM
   if (is.null(A)) A <- aveLogCPM(dge$counts, offset = getOffset(dge))
@@ -26,6 +27,7 @@ BCVPlot <- function(dge, outfile=TRUE){
           geom_hline(data=d, aes(yintercept=.data$sqrtcommon, color="c")) +
           xlab("Average log CPM") +
           ylab("Biological coefficient of variation") +
-          ggtitle("BCV plot"))
+          ggtitle("BCV plot") +
+          ggplot_theme)
   if (outfile) dev.off()	
 }

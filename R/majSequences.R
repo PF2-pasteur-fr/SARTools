@@ -7,10 +7,11 @@
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the bars (one per biological condition)
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A \code{matrix} with the percentage of reads of the three most expressed sequences and a file named majSeq.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
 
   seqnames <- apply(counts, 2, function(x){x <- sort(x, decreasing=TRUE); names(x)[1:n]})
   seqnames <- unique(unlist(as.character(seqnames)))
@@ -33,7 +34,8 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
             scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
             ggtitle("Percentage of reads from most expressed sequence") +
             theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-            geom_text(aes(y=0.8*maj, label=seqname), color="black", size=2.5, angle=90, fontface="bold"))
+            geom_text(aes(y=0.8*maj, label=seqname), color="black", size=2.5, angle=90, fontface="bold") +
+            ggplot_theme)
   if (outfile) dev.off()
   
   return(invisible(p))

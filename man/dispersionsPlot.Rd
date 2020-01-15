@@ -4,12 +4,14 @@
 \alias{dispersionsPlot}
 \title{Plots about DESeq2 dispersions}
 \usage{
-dispersionsPlot(dds, outfile = TRUE)
+dispersionsPlot(dds, outfile = TRUE, ggplot_theme = theme_gray())
 }
 \arguments{
 \item{dds}{a \code{DESeqDataSet} object}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named dispersionsPlot.png in the figures directory containing the plot of the mean-dispersion relationship and a diagnostic of log normality of the dispersions
