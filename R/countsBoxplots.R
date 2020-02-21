@@ -32,30 +32,30 @@ countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVi
   p1 <- ggplot(d) + 
     geom_boxplot(aes(x=.data$ind, y=.data$values+1, fill=.data$group), show.legend=TRUE) +
     labs(fill="") +
-    scale_y_continuous(trans = log10_trans(),
-                       breaks = trans_breaks("log10", function(x) 10^x),
-                       labels = trans_format("log10", math_format(~10^.x))) +
     scale_fill_manual(values=col) +
     xlab("Samples") +
     ylab("Raw counts") +
     ggtitle("Raw counts distribution") +
+    ggplot_theme +
     theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-    ggplot_theme
+    scale_y_continuous(trans = log10_trans(),
+                       breaks = trans_breaks("log10", function(x) 10^x),
+                       labels = trans_format("log10", math_format(~10^.x)))
   
   d <- stack(as.data.frame(norm.counts))
   d$group <- rep(group, each=nrow(norm.counts))
   p2 <- ggplot(d) + 
     geom_boxplot(aes(x=.data$ind, y=.data$values+1, fill=.data$group), show.legend=TRUE) +
     labs(fill="") +
-    scale_y_continuous(trans = log10_trans(),
-                       breaks = trans_breaks("log10", function(x) 10^x),
-                       labels = trans_format("log10", math_format(~10^.x))) +
     scale_fill_manual(values=col) +
     xlab("Samples") +
     ylab("Normalized counts") +
     ggtitle("Normalized counts distribution") +
+    ggplot_theme +
     theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-    ggplot_theme
+    scale_y_continuous(trans = log10_trans(),
+                       breaks = trans_breaks("log10", function(x) 10^x),
+                       labels = trans_format("log10", math_format(~10^.x)))
   
   grid.arrange(p1, p2, nrow=1, ncol=2)
   if (outfile) dev.off()

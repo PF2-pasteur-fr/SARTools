@@ -19,9 +19,9 @@ barplotTotal <- function(counts, group, col=c("lightblue","orange","MediumViolet
           scale_fill_manual(values=col) +
           xlab("Samples") + 
           ylab("Total read count (million)") +
-          scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
           ggtitle("Total read count per sample (million)") +
+          ggplot_theme +
           theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-          ggplot_theme)
+          scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))))
   if (outfile) dev.off()
 }

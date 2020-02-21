@@ -31,11 +31,11 @@ majSequences <- function(counts, n=3, group, col=c("lightblue","orange","MediumV
             scale_fill_manual(values=col) +
             xlab("Samples") + 
             ylab("Percentage of reads") +
-            scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
             ggtitle("Percentage of reads from most expressed sequence") +
+            ggplot_theme +
             theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-            geom_text(aes(y=0.8*maj, label=seqname), color="black", size=2.5, angle=90, fontface="bold") +
-            ggplot_theme)
+            scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+            geom_text(aes(y=0.8*maj, label=seqname), color="black", size=2.5, angle=90, fontface="bold"))
   if (outfile) dev.off()
   
   return(invisible(p))
