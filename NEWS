@@ -1,6 +1,7 @@
 CHANGES IN VERSION 1.7.3
 ------------------------
 	o added some parameters to change the ggplot theme
+	o use breaks instead of binwidth for the raw p-values histogram
 
 CHANGES IN VERSION 1.7.2
 ------------------------
