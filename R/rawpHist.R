@@ -17,7 +17,7 @@ rawpHist <- function(complete, outfile=TRUE, ggplot_theme=theme_gray()){
     complete.name <- complete[[name]]
     complete.name <- complete.name[which(!is.na(complete.name$pvalue)),]
     p[[name]] <- ggplot(data=complete.name, aes(x=.data$pvalue)) +
-      geom_histogram(breaks=seq(0, 1, by=0.025)) +
+      geom_histogram(color="white", breaks=seq(0, 1, by=0.025)) +
       scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
       xlab("Raw p-value") +
       ylab("Frequency") +

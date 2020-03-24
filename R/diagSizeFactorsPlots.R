@@ -57,5 +57,3 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
     if (outfile) dev.off()
   }
 }
-
-
