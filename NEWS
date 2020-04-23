@@ -3,6 +3,7 @@ CHANGES IN VERSION 1.7.3
 	o added some parameters to change the ggplot theme
 	o use breaks instead of binwidth for the raw p-values histogram
 	o updated vignette with ggplot2 figures
+	o now requires ggplot2 >= 3.3.0 (cf issue #76 on GitHub)
 
 CHANGES IN VERSION 1.7.2
 ------------------------

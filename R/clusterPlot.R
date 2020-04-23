@@ -19,6 +19,6 @@ clusterPlot <- function(counts.trans, group, outfile=TRUE, ggplot_theme=theme_gr
           ggplot_theme +
           theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5),
                 axis.text.y=element_text(angle=0)) +
-          scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))))
+          scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))))
   if (outfile) dev.off()
 }

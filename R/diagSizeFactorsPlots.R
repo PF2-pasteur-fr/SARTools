@@ -27,7 +27,7 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
       d <- data.frame(x=counts.trans[,j])
       p[[j]] <- ggplot(data=d, aes(x=.data$x)) +
         geom_histogram(bins=100) +
-        scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+        scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))) +
         xlab(expression(log[2]~(counts/geometric~mean))) +
         ylab("") +
         ggtitle(paste0("Size factor diagnostic - ", samples[j])) +

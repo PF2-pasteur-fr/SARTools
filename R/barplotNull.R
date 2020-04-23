@@ -24,7 +24,7 @@ barplotNull <- function(counts, group, col=c("lightblue","orange","MediumVioletR
             ggtitle("Percentage of null counts per sample") +
             ggplot_theme +
             theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-            scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+            scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))) +
             geom_hline(yintercept=percentage.allNull, linetype="dashed", color="black", size=1))
   if (outfile) dev.off()
 }

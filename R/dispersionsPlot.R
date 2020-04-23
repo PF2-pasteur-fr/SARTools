@@ -47,7 +47,7 @@ dispersionsPlot <- function(dds, outfile=TRUE, ggplot_theme=theme_gray()){
   d <- data.frame(disp)
   p2 <- ggplot(data=d, aes(x=.data$disp)) +
     geom_histogram(bins=80, aes(y=.data$..density..)) +
-    scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))) +
+    scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))) +
     xlab("Feature dispersion estimate") +
     ylab("Density") +
     ggtitle("log-normality dispersion diagnostic") +

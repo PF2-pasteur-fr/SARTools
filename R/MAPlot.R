@@ -35,7 +35,7 @@ MAPlot <- function(complete, alpha=0.05, outfile=TRUE, log2FClim=NULL, ggplot_th
       scale_colour_manual(values=c("no"="black", "yes"="red"), drop=FALSE) +
       scale_shape_manual(values=c("bottom"=25, "in"=21, "top"=24), drop=FALSE) +
       scale_fill_manual(values=c("no"="black", "yes"="red"), drop=FALSE) +
-      scale_y_continuous(expand=expand_scale(mult=c(0.03, 0.03))) +
+      scale_y_continuous(expand=expansion(mult=c(0.03, 0.03))) +
       xlab("Mean of normalized counts") +
       ylab(expression(log[2]~fold~change)) +
       ggtitle(paste0("MA-plot - ", gsub("_"," ",name))) +

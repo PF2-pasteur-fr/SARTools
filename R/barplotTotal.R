@@ -22,6 +22,6 @@ barplotTotal <- function(counts, group, col=c("lightblue","orange","MediumViolet
           ggtitle("Total read count per sample (million)") +
           ggplot_theme +
           theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
-          scale_y_continuous(expand=expand_scale(mult=c(0.01, 0.05))))
+          scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))))
   if (outfile) dev.off()
 }
