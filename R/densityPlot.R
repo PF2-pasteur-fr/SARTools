@@ -6,10 +6,11 @@
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors of the curves (one per biological condition)
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named densplot.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE){
+densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
   if (outfile) png(filename="figures/densplot.png", width=2000, height=1800, res=300)
     counts <- removeNull(counts)
     d <- stack(data.frame(counts))
@@ -23,6 +24,7 @@ densityPlot <- function(counts, group, col=c("lightblue","orange","MediumVioletR
             scale_colour_manual(values=col) +
             xlab("Raw counts") +
             ylab("Density") +
-            ggtitle("Density of counts distribution"))
+            ggtitle("Density of counts distribution") +
+            ggplot_theme)
   if (outfile) dev.off()
 }

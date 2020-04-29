@@ -4,7 +4,13 @@
 \alias{volcanoPlot}
 \title{Volcano plots}
 \usage{
-volcanoPlot(complete, alpha = 0.05, outfile = TRUE, padjlim = NULL)
+volcanoPlot(
+  complete,
+  alpha = 0.05,
+  outfile = TRUE,
+  padjlim = NULL,
+  ggplot_theme = theme_gray()
+)
 }
 \arguments{
 \item{complete}{A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})}
@@ -14,6 +20,8 @@ volcanoPlot(complete, alpha = 0.05, outfile = TRUE, padjlim = NULL)
 \item{outfile}{TRUE to export the figure in a png file}
 
 \item{padjlim}{numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named volcanoPlot.png in the figures directory containing one volcano plot per comparison

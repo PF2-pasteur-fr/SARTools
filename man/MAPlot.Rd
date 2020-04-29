@@ -4,7 +4,13 @@
 \alias{MAPlot}
 \title{MA-plots}
 \usage{
-MAPlot(complete, alpha = 0.05, outfile = TRUE, log2FClim = NULL)
+MAPlot(
+  complete,
+  alpha = 0.05,
+  outfile = TRUE,
+  log2FClim = NULL,
+  ggplot_theme = theme_gray()
+)
 }
 \arguments{
 \item{complete}{A \code{list} of \code{data.frame} containing features results (from \code{exportResults.DESeq2()} or \code{exportResults.edgeR()})}
@@ -14,6 +20,8 @@ MAPlot(complete, alpha = 0.05, outfile = TRUE, log2FClim = NULL)
 \item{outfile}{TRUE to export the figure in a png file}
 
 \item{log2FClim}{numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named MAPlot.png in the figures directory containing one MA-plot per comparison

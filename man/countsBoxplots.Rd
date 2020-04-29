@@ -8,7 +8,8 @@ countsBoxplots(
   object,
   group,
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  outfile = TRUE
+  outfile = TRUE,
+  ggplot_theme = theme_gray()
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ countsBoxplots(
 \item{col}{colors of the boxplots (one per biological condition)}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named countsBoxplots.png in the figures directory containing boxplots of the raw and normalized counts

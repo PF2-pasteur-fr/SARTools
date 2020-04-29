@@ -9,7 +9,8 @@ PCAPlot(
   group,
   n = min(500, nrow(counts.trans)),
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  outfile = TRUE
+  outfile = TRUE,
+  ggplot_theme = theme_gray()
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ PCAPlot(
 \item{col}{colors to use (one per biological condition)}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named PCA.png in the figures directory with a pairwise plot of the three first principal components

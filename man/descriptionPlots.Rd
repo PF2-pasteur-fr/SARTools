@@ -7,7 +7,8 @@
 descriptionPlots(
   counts,
   group,
-  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen")
+  col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
+  ggplot_theme = theme_gray()
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ descriptionPlots(
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{col}{colors for the plots (one per biological condition)}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 PNG files in the "figures" directory and the matrix of the most expressed sequences

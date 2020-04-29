@@ -7,12 +7,13 @@
 #' @param n number of features to keep among the most variant
 #' @param col colors to use (one per biological condition)
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named PCA.png in the figures directory with a pairwise plot of the three first principal components
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 PCAPlot <- function(counts.trans, group, n=min(500, nrow(counts.trans)), 
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
-                    outfile=TRUE){
+                    outfile=TRUE, ggplot_theme=theme_gray()){
   # PCA on the 500 most variables features
   rv = apply(counts.trans, 1, var, na.rm=TRUE)
   pca = prcomp(t(counts.trans[order(rv, decreasing = TRUE), ][1:n,]))
@@ -33,7 +34,8 @@ PCAPlot <- function(counts.trans, group, n=min(500, nrow(counts.trans)),
       scale_colour_manual(values=col) +
       geom_text_repel(show.legend=FALSE, size=5, point.padding=0.2) +
       xlab(paste0("PC", index1, " (",prp[index1],"%)")) +
-      ylab(paste0("PC", index2, " (",prp[index2],"%)"))
+      ylab(paste0("PC", index2, " (",prp[index2],"%)")) +
+      ggplot_theme
   }
   p1 <- tmpFunction(c(1, 2))
   p2 <- tmpFunction(c(1, 3))

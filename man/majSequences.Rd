@@ -9,7 +9,8 @@ majSequences(
   n = 3,
   group,
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  outfile = TRUE
+  outfile = TRUE,
+  ggplot_theme = theme_gray()
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ majSequences(
 \item{col}{colors of the bars (one per biological condition)}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A \code{matrix} with the percentage of reads of the three most expressed sequences and a file named majSeq.png in the figures directory

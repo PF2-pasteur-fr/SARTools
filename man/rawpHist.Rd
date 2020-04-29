@@ -4,12 +4,14 @@
 \alias{rawpHist}
 \title{Histograms of raw p-values}
 \usage{
-rawpHist(complete, outfile = TRUE)
+rawpHist(complete, outfile = TRUE, ggplot_theme = theme_gray())
 }
 \arguments{
 \item{complete}{a list of \code{data.frames} created by \code{summaryResults.DESeq2()} or \code{summaryResults.edgeR()}}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named rawpHist.png in the figures directory with one histogram of raw p-values per comparison

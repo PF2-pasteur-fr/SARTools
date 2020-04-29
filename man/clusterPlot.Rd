@@ -4,7 +4,7 @@
 \alias{clusterPlot}
 \title{Clustering of the samples}
 \usage{
-clusterPlot(counts.trans, group, outfile = TRUE)
+clusterPlot(counts.trans, group, outfile = TRUE, ggplot_theme = theme_gray())
 }
 \arguments{
 \item{counts.trans}{a matrix a transformed counts (VST- or rlog-counts if use of DESeq2 or cpm-counts if use of edgeR)}
@@ -12,6 +12,8 @@ clusterPlot(counts.trans, group, outfile = TRUE)
 \item{group}{factor vector of the condition from which each sample belongs}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named cluster.png in the figures directory with the dendrogram of the clustering

@@ -6,10 +6,11 @@
 #' @param alpha cut-off to apply on each adjusted p-value
 #' @param outfile TRUE to export the figure in a png file
 #' @param padjlim numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named volcanoPlot.png in the figures directory containing one volcano plot per comparison
 #' @author Hugo Varet
 
-volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
+volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL, ggplot_theme=theme_gray()){
   ncol <- min(2, length(complete))
   nrow <- ceiling(length(complete)/ncol)
   if (outfile) png(filename="figures/volcanoPlot.png", width=cairoSizeWrapper(1800*ncol), height=cairoSizeWrapper(1800*nrow), res=300)
@@ -39,7 +40,8 @@ volcanoPlot <- function(complete, alpha=0.05, outfile=TRUE, padjlim=NULL){
       scale_shape_manual(values=c("in"=16, "top"=17), drop=FALSE) +
       xlab(expression(log[2]~fold~change)) +
       ylab("Adjusted P-value") +
-      ggtitle(paste0("Volcano plot - ", gsub("_", " ", name)))
+      ggtitle(paste0("Volcano plot - ", gsub("_", " ", name))) +
+      ggplot_theme
   }
   tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
   do.call(tmpfun, p)

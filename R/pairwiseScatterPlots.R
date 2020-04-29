@@ -4,10 +4,11 @@
 #'
 #' @param counts \code{matrix} of raw counts
 #' @param outfile TRUE to export the figure in a png file
+#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
 #' @return A file named pairwiseScatter.png in the figures directory containing a pairwise scatter plot with the SERE statistics in the lower panel
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-pairwiseScatterPlots <- function(counts, outfile=TRUE){
+pairwiseScatterPlots <- function(counts, outfile=TRUE, ggplot_theme=theme_gray()){
   ncol <- ncol(counts)
   if (ncol <= 12){
     if (outfile) png(filename="figures/pairwiseScatter.png", width=cairoSizeWrapper(850*ncol), height=cairoSizeWrapper(700*ncol), res=300)
@@ -28,7 +29,8 @@ pairwiseScatterPlots <- function(counts, outfile=TRUE){
                                breaks = trans_breaks("log10", function(x) 10^x),
                                labels = trans_format("log10", math_format(~10^.x))) +
             xlab(names(d)[i]) + ylab(names(d)[j]) +
-            geom_abline(slope=1, intercept=0, linetype="dashed", col="lightgrey")
+            geom_abline(slope=1, intercept=0, linetype="dashed", col="lightgrey") +
+            ggplot_theme
         } else{
           text = as.character(round(SERE(counts[,c(i,j)]), digits=2))
           p[[k]] <- ggplot() + annotate("text", x=4, y=25, size=10, label=text) +

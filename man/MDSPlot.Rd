@@ -8,9 +8,10 @@ MDSPlot(
   dge,
   group,
   n = min(500, nrow(dge$counts)),
-  gene.selection = c("pairwise", "common"),
+  gene.selection = c("pairwise", "common", ggplot_theme = theme_gray()),
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  outfile = TRUE
+  outfile = TRUE,
+  ggplot_theme = theme_gray()
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ MDSPlot(
 \item{col}{colors to use (one per biological condition)}
 
 \item{outfile}{TRUE to export the figure in a png file}
+
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
 }
 \value{
 A file named MDS.png in the figures directory

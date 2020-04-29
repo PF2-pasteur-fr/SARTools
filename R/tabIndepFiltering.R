@@ -7,7 +7,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 tabIndepFiltering <- function(results){
-  out <- matrix(NA,ncol=3,nrow=length(names(results)),dimnames=list(names(results),c("Test vs Ref","Threshold","# discarded")))
+  out <- matrix(NA,ncol=3,nrow=length(names(results)),dimnames=list(names(results),c("Test vs Ref","BaseMean Threshold","# discarded")))
   for (name in names(results)){
 	  threshold <- metadata(results[[name]])$filterThreshold
 	  out[name,2] <- round(threshold,2)
