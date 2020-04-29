@@ -20,8 +20,7 @@ To install the SARTools package from GitHub, open a R session and:
 	- Some users may have to install the pandoc and pandoc-citeproc libraries to be able to generate the final HTML reports
 
 - For Windows users only, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) or check that it is already installed (needed to build the package)
-- Load the devtools R package with `library(devtools)`
-- Run `install_github("PF2-pasteur-fr/SARTools", build_opts="--no-resave-data")`
+- Run `devtools::install_github("PF2-pasteur-fr/SARTools", build_opts="--no-resave-data")`
 
 ### Using Conda
 
