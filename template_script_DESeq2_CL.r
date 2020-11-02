@@ -2,7 +2,7 @@
 ### R script to compare several conditions with the SARTools and DESeq2 packages
 ### Hugo Varet
 ### November 28th, 2019
-### designed to be executed with SARTools 1.7.2
+### designed to be executed with SARTools 1.7.4
 ### run "Rscript template_script_DESeq2_CL.r --help" to get some help
 ################################################################################
 
