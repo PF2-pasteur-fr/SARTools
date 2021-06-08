@@ -8,7 +8,7 @@ MDSPlot(
   dge,
   group,
   n = min(500, nrow(dge$counts)),
-  gene.selection = c("pairwise", "common", ggplot_theme = theme_gray()),
+  gene.selection = c("pairwise", "common"),
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
   outfile = TRUE,
   ggplot_theme = theme_gray()

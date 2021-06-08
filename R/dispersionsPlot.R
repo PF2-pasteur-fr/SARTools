@@ -41,17 +41,19 @@ dispersionsPlot <- function(dds, outfile=TRUE, ggplot_theme=theme_gray()){
   disp <- mcols(dds)$dispGeneEst
   disp <- disp[!is.na(disp)]
   disp <- disp[disp>1e-8]
-  disp <- log(disp)
-  mean.disp <- mean(disp,na.rm=TRUE)
-  sd.disp <- sd(disp,na.rm=TRUE)
   d <- data.frame(disp)
   p2 <- ggplot(data=d, aes(x=.data$disp)) +
     geom_histogram(bins=80, aes(y=.data$..density..)) +
+    scale_x_continuous(trans = log10_trans(),
+                       breaks = trans_breaks("log10", function(x) 10^x),
+                       labels = trans_format("log10", math_format())) +
     scale_y_continuous(expand=expansion(mult=c(0.01, 0.05))) +
     xlab("Feature dispersion estimate") +
     ylab("Density") +
     ggtitle("log-normality dispersion diagnostic") +
-    stat_function(fun = dnorm, args = list(mean = mean.disp, sd = sd.disp)) +
+    stat_function(fun = function(x, ...){dnorm(log10(x), ...)}, 
+                  args = list(mean = mean(log10(disp), na.rm=TRUE), 
+                              sd = sd(log10(disp), na.rm=TRUE))) +
     ggplot_theme
   
   grid.arrange(p1, p2, layout_matrix=matrix(c(1, 1, 1, 1, 1, 2, 2, 2, 2), nrow=1))
