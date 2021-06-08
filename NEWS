@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.7.4
+------------------------
+	o fixed a bug in MDSPlot()
+	o SARTools now depends on edgeR 3.34.0
+
 CHANGES IN VERSION 1.7.3
 ------------------------
 	o added some parameters to change the ggplot theme

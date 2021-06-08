@@ -12,12 +12,12 @@
 #' @return A file named MDS.png in the figures directory
 #' @author Marie-Agnes Dillies and Hugo Varet
 
-MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("pairwise", "common", ggplot_theme=theme_gray()),
+MDSPlot <- function(dge, group, n=min(500, nrow(dge$counts)), gene.selection=c("pairwise", "common"),
                     col=c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
   if (outfile) png(filename="figures/MDS.png", width=1800, height=1800, res=300)
     coord <- plotMDS(dge, top=n, method="logFC", gene.selection=gene.selection[1], plot=FALSE)
     d <- data.frame(x=coord$x, y=coord$y, group = group, 
-                    sample = factor(names(coord$x), levels = names(coord$x)))
+                    factor(colnames(coord$distance.matrix.squared), levels = colnames(coord$distance.matrix.squared)))
     print(ggplot(data=d, aes(x=.data$x, y=.data$y, color=group, label=sample)) + 
       geom_point(show.legend=TRUE, size=3) +
       labs(color="") +
