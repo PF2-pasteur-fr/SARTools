@@ -36,6 +36,8 @@ How to use SARTools?
 
 A HTML vignette is available within the vignettes folder on GitHub and provides extensive information on the use of SARTools. The user can also open it with `vignette("SARTools")` if it has been generated during the installation of the package. Note that it is not available when SARTools has been installed using conda.
 
+An online version of SARTools is available in this Google Colaboratory notebook: https://colab.research.google.com/drive/1hoPcImQkct0yPz5nnYcJFOOX9O0EHjtB?usp=sharing
+
 Be careful to use the R script associated with the version of SARTools installed on your system.
 
 Please read the NEWS file to see the latest improvements!
