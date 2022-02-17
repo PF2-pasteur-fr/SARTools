@@ -23,7 +23,7 @@ run.DESeq2 <- function(counts, target, varInt, batch=NULL,
   dds <- DESeqDataSetFromMatrix(countData=counts, colData=target, 
                                 design=formula(paste("~", ifelse(!is.null(batch), paste(batch,"+"), ""), varInt)))
   cat("Design of the statistical model:\n")
-  cat(paste(as.character(design(dds)),collapse=" "),"\n")					  
+  cat(paste(as.character(design(dds)), collapse=" "),"\n")					  
   
   # normalization
   dds <- estimateSizeFactors(dds,locfunc=eval(as.name(locfunc)))
@@ -39,9 +39,12 @@ run.DESeq2 <- function(counts, target, varInt, batch=NULL,
   for (comp in combn(nlevels(colData(dds)[,varInt]), 2, simplify=FALSE)){
     levelRef <- levels(colData(dds)[,varInt])[comp[1]]
     levelTest <- levels(colData(dds)[,varInt])[comp[2]]
-    results[[paste0(levelTest,"_vs_",levelRef)]] <- results(dds, contrast=c(varInt, levelTest, levelRef),
-                                                            pAdjustMethod=pAdjustMethod, cooksCutoff=cooksCutoff,
-                                                            independentFiltering=independentFiltering, alpha=alpha)
+    res <- results(dds, name=paste(c(varInt, levelTest, "vs", levelRef), collapse="_"),
+                   pAdjustMethod=pAdjustMethod, cooksCutoff=cooksCutoff,
+                   independentFiltering=independentFiltering, alpha=alpha)
+    lfcs <- lfcShrink(dds, res=res, coef=paste(c(varInt, levelTest, "vs", levelRef), collapse="_"), type="apeglm")
+    res$log2FoldChange <- lfcs$log2FoldChange
+    results[[paste0(levelTest,"_vs_",levelRef)]] <- res
     cat(paste("Comparison", levelTest, "vs", levelRef, "done\n"))
   }
   

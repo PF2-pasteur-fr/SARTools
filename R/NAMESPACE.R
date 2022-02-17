@@ -1,5 +1,6 @@
 #' @exportPattern ^[a-zA-Z]
 #' @import DESeq2
+#' @import apeglm
 #' @import edgeR
 #' @import ggplot2
 #' @import kableExtra
