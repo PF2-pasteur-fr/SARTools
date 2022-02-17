@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.8.0
+------------------------
+	o log2FoldChanges from DESeq2 are now computed using lfcShrink() with type="apeglm"
+
 CHANGES IN VERSION 1.7.4
 ------------------------
 	o fixed a bug in MDSPlot()

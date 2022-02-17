@@ -216,3 +216,19 @@ doi = {10.1093/nar/gks042},
 URL = {http://dx.doi.org/10.1093/nar/gks042},
 eprint = {/oup/backfile/content_public/journal/nar/40/10/10.1093_nar_gks042/2/gks042.pdf}
 }
+
+@article{zhu2018,
+    author = {Zhu, Anqi and Ibrahim, Joseph G and Love, Michael I},
+    title = "{Heavy-tailed prior distributions for sequence count data: removing the noise and preserving large differences}",
+    journal = {Bioinformatics},
+    volume = {35},
+    number = {12},
+    pages = {2084-2092},
+    year = {2018},
+    month = {11},
+    abstract = "{In RNA-seq differential expression analysis, investigators aim to detect those genes with changes in expression level across conditions, despite technical and biological variability in the observations. A common task is to accurately estimate the effect size, often in terms of a logarithmic fold change (LFC).When the read counts are low or highly variable, the maximum likelihood estimates for the LFCs has high variance, leading to large estimates not representative of true differences, and poor ranking of genes by effect size. One approach is to introduce filtering thresholds and pseudocounts to exclude or moderate estimated LFCs. Filtering may result in a loss of genes from the analysis with true differences in expression, while pseudocounts provide a limited solution that must be adapted per dataset. Here, we propose the use of a heavy-tailed Cauchy prior distribution for effect sizes, which avoids the use of filter thresholds or pseudocounts. The proposed method, Approximate Posterior Estimation for generalized linear model, apeglm, has lower bias than previously proposed shrinkage estimators, while still reducing variance for those genes with little information for statistical inference.The apeglm package is available as an R/Bioconductor package at https://bioconductor.org/packages/apeglm, and the methods can be called from within the DESeq2 software.Supplementary data are available at Bioinformatics online.}",
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/bty895},
+    url = {https://doi.org/10.1093/bioinformatics/bty895},
+    eprint = {https://academic.oup.com/bioinformatics/article-pdf/35/12/2084/28839676/bty895.pdf},
+}
