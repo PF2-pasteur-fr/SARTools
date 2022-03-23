@@ -10,7 +10,7 @@ exploreCounts(
   typeTrans = "VST",
   gene.selection = "pairwise",
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  ggplot_theme = theme_gray()
+  ggplot_theme = theme_light()
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ exploreCounts(
 
 \item{col}{colors used for the PCA/MDS (one per biological condition)}
 
-\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_light()} by default)}
 }
 \value{
 A list containing the dds object and the results object

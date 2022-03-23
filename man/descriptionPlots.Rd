@@ -8,7 +8,7 @@ descriptionPlots(
   counts,
   group,
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
-  ggplot_theme = theme_gray()
+  ggplot_theme = theme_light()
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ descriptionPlots(
 
 \item{col}{colors for the plots (one per biological condition)}
 
-\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_light()} by default)}
 }
 \value{
 PNG files in the "figures" directory and the matrix of the most expressed sequences

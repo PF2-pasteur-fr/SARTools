@@ -7,13 +7,13 @@
 #' @param typeTrans transformation method for PCA/clustering with DESeq2: \code{"VST"} or \code{"rlog"}
 #' @param gene.selection selection of the features in MDSPlot (\code{"pairwise"} by default)
 #' @param col colors used for the PCA/MDS (one per biological condition)
-#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
+#' @param ggplot_theme ggplot2 theme function (\code{theme_light()} by default)
 #' @return A list containing the dds object and the results object
 #' @author Hugo Varet
 
 exploreCounts <- function(object, group, typeTrans="VST", gene.selection="pairwise",
                           col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
-                          ggplot_theme=theme_gray()){
+                          ggplot_theme=theme_light()){
   if (class(object)=="DESeqDataSet"){
     if (typeTrans == "VST") counts.trans <- assay(varianceStabilizingTransformation(object))
     else counts.trans <- assay(rlogTransformation(object))

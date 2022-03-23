@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.8.1
+------------------------
+	o log2FoldChanges from DESeq2 are now computed using lfcShrink() with type="ashr" as "apeglm"
+	was not compatible with the contrast argument
+
 CHANGES IN VERSION 1.8.0
 ------------------------
 	o log2FoldChanges from DESeq2 are now computed using lfcShrink() with type="apeglm"

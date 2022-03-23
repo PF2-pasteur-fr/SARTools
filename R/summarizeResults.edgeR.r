@@ -9,13 +9,13 @@
 #' @param col colors for the plots
 #' @param log2FClim numeric vector containing both upper and lower y-axis limits for all the MA-plots produced (NULL by default to set them automatically)
 #' @param padjlim numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)
-#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
+#' @param ggplot_theme ggplot2 theme function (\code{theme_light()} by default)
 #' @return A list containing: (i) a list of \code{data.frames} from \code{exportResults.edgeR()} and (ii) a table summarizing the number of differentially expressed features
 #' @author Hugo Varet
 
 summarizeResults.edgeR <- function(out.edgeR, group, counts, alpha=0.05,
                                    col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
-                                   log2FClim=NULL, padjlim=NULL, ggplot_theme=theme_gray()){  
+                                   log2FClim=NULL, padjlim=NULL, ggplot_theme=theme_light()){  
   # create the figures/tables directory if does not exist
   if (!I("figures" %in% dir())) dir.create("figures", showWarnings=FALSE)
   if (!I("tables" %in% dir())) dir.create("tables", showWarnings=FALSE)
