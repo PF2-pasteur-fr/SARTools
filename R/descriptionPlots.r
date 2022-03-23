@@ -5,11 +5,12 @@
 #' @param counts \code{matrix} of counts
 #' @param group factor vector of the condition from which each sample belongs
 #' @param col colors for the plots (one per biological condition)
-#' @param ggplot_theme ggplot2 theme function (\code{theme_gray()} by default)
+#' @param ggplot_theme ggplot2 theme function (\code{theme_light()} by default)
 #' @return PNG files in the "figures" directory and the matrix of the most expressed sequences
 #' @author Hugo Varet
 
-descriptionPlots <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), ggplot_theme=theme_gray()){
+descriptionPlots <- function(counts, group, col=c("lightblue","orange","MediumVioletRed","SpringGreen"), 
+                             ggplot_theme=theme_light()){
   # create the figures directory if does not exist
   if (!I("figures" %in% dir())) dir.create("figures", showWarnings=FALSE)
   

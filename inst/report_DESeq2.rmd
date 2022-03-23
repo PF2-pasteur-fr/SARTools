@@ -226,7 +226,7 @@ Figure 14 shows the volcano plots for the comparisons performed and differential
 
 </center>
 
-Note that the log2(Fold-Changes) are shrunk using the "apeglm" method that has been shown to be more robust than the original "normal" method [@zhu2018].
+Note that the log2(Fold-Changes) are shrunk using the "ashr" method that has been shown to be more robust than the original "normal" method [@ashr].
 
 Full results as well as lists of differentially expressed features are provided in the following text files which can be easily read in a spreadsheet. For each comparison:
 

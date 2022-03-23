@@ -13,7 +13,7 @@ summarizeResults.DESeq2(
   col = c("lightblue", "orange", "MediumVioletRed", "SpringGreen"),
   log2FClim = NULL,
   padjlim = NULL,
-  ggplot_theme = theme_gray()
+  ggplot_theme = theme_light()
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ summarizeResults.DESeq2(
 
 \item{padjlim}{numeric value between 0 and 1 for the adjusted p-value upper limits for all the volcano plots produced (NULL by default to set them automatically)}
 
-\item{ggplot_theme}{ggplot2 theme function (\code{theme_gray()} by default)}
+\item{ggplot_theme}{ggplot2 theme function (\code{theme_light()} by default)}
 }
 \value{
 A list containing: (i) a list of \code{data.frames} from \code{exportResults.DESeq2()}, (ii) the table summarizing the independent filtering procedure and (iii) a table summarizing the number of differentially expressed features

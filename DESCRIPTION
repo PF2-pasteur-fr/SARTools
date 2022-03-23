@@ -1,13 +1,13 @@
 Package: SARTools
 Type: Package
 Title: Statistical Analysis of RNA-Seq Tools
-Version: 1.8.0
-Date: 2022-02-17
+Version: 1.8.1
+Date: 2022-03-23
 Author: Marie-Agnes Dillies and Hugo Varet
 Maintainer: Hugo Varet <hugo.varet@pasteur.fr>
 Depends: R (>= 3.3.0),
 	DESeq2 (>= 1.32.0),
-	apeglm (>= 1.14.0),
+	ashr (>= 2.2-54),
 	edgeR (>= 3.34.0),
 	ggplot2 (>= 3.3.0),
 	kableExtra
