@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.8.2
+------------------------
+	o use of after_stat(density) instead of ..density..
+
 CHANGES IN VERSION 1.8.1
 ------------------------
 	o log2FoldChanges from DESeq2 are now computed using lfcShrink() with type="ashr" as "apeglm"

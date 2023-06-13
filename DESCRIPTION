@@ -1,8 +1,8 @@
 Package: SARTools
 Type: Package
 Title: Statistical Analysis of RNA-Seq Tools
-Version: 1.8.1
-Date: 2022-03-23
+Version: 1.8.2
+Date: 2023-06-13
 Author: Marie-Agnes Dillies and Hugo Varet
 Maintainer: Hugo Varet <hugo.varet@pasteur.fr>
 Depends: R (>= 3.3.0),
@@ -34,4 +34,4 @@ VignetteBuilder: knitr, rmarkdown
 Encoding: latin1
 Description: Provide R tools and an environment for the statistical analysis of RNA-Seq projects: load and clean data, produce figures, perform statistical analysis/testing with DESeq2 or edgeR, export results and create final report.
 License: GPL-2
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

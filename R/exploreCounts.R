@@ -14,12 +14,12 @@
 exploreCounts <- function(object, group, typeTrans="VST", gene.selection="pairwise",
                           col=c("lightblue","orange","MediumVioletRed","SpringGreen"),
                           ggplot_theme=theme_light()){
-  if (class(object)=="DESeqDataSet"){
+  if (inherits(object, "DESeqDataSet")){
     if (typeTrans == "VST") counts.trans <- assay(varianceStabilizingTransformation(object))
     else counts.trans <- assay(rlogTransformation(object))
     PCAPlot(counts.trans=counts.trans, group=group, col=col, ggplot_theme=ggplot_theme)
     clusterPlot(counts.trans=counts.trans, group=group, ggplot_theme=ggplot_theme)  
-  } else if (class(object)=="DGEList"){
+  } else if (inherits(object, "DGEList")){
     MDSPlot(dge=object, group=group, col=col, gene.selection=gene.selection, ggplot_theme=ggplot_theme)
     clusterPlot(counts.trans=cpm(object, prior.count=2, log=TRUE), group=group, ggplot_theme=ggplot_theme)  
   } else{
