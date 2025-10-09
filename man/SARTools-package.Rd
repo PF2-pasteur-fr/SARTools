@@ -2,6 +2,7 @@
 % Please edit documentation in R/SARTools-package.r
 \docType{package}
 \name{SARTools-package}
+\alias{SARTools}
 \alias{SARTools-package}
 \title{Statistical Analysis of RNA-Seq Tools}
 \description{

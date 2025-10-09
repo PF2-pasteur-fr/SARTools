@@ -11,7 +11,7 @@
 #' @author Marie-Agnes Dillies and Hugo Varet
 
 countsBoxplots <- function(object, group, col = c("lightblue","orange","MediumVioletRed","SpringGreen"), outfile=TRUE, ggplot_theme=theme_gray()){
-  if (class(object)=="DESeqDataSet"){
+  if (inherits(object, "DESeqDataSet")){
     counts <- counts(object)
     counts <- removeNull(counts)
     norm.counts <- counts(object, normalized=TRUE)

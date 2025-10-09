@@ -34,7 +34,7 @@ run.DESeq2 <- function(counts, target, varInt, batch=NULL,
   dds <- estimateDispersions(dds, fitType=fitType)
   
   # statistical testing: perform all the comparisons between the levels of varInt
-  dds <- nbinomWaldTest(dds, ...)
+  dds <- nbinomWaldTest(dds, betaPrior=TRUE, ...)
   results <- list()
   for (comp in combn(nlevels(colData(dds)[,varInt]), 2, simplify=FALSE)){
     levelRef <- levels(colData(dds)[,varInt])[comp[1]]
@@ -43,10 +43,6 @@ run.DESeq2 <- function(counts, target, varInt, batch=NULL,
                    contrast=c(varInt, levelTest, levelRef),
                    pAdjustMethod=pAdjustMethod, cooksCutoff=cooksCutoff,
                    independentFiltering=independentFiltering, alpha=alpha)
-    lfcs <- lfcShrink(dds, res=res,
-                      contrast=c(varInt, levelTest, levelRef),
-                      type="ashr", quiet=TRUE)
-    res$log2FoldChange <- lfcs$log2FoldChange
     results[[paste0(levelTest,"_vs_",levelRef)]] <- res
     cat(paste("Comparison", levelTest, "vs", levelRef, "done\n"))
   }

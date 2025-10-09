@@ -8,8 +8,8 @@ loadCountData(
   target,
   rawDir = "raw",
   skip = 0,
-  featuresToRemove = c("alignment_not_unique", "ambiguous", "no_feature",
-    "not_aligned", "too_low_aQual")
+  featuresToRemove = c("alignment_not_unique", "ambiguous", "no_feature", "not_aligned",
+    "too_low_aQual")
 )
 }
 \arguments{

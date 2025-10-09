@@ -43,7 +43,7 @@ dispersionsPlot <- function(dds, outfile=TRUE, ggplot_theme=theme_gray()){
   disp <- disp[disp>1e-8]
   d <- data.frame(disp)
   p2 <- ggplot(data=d, aes(x=.data$disp)) +
-    geom_histogram(bins=80, aes(y=.data$..density..)) +
+    geom_histogram(bins=80, aes(y=after_stat(density))) +
     scale_x_continuous(trans = log10_trans(),
                        breaks = trans_breaks("log10", function(x) 10^x),
                        labels = trans_format("log10", math_format())) +

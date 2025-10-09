@@ -20,7 +20,7 @@ pairwiseScatterPlots <- function(counts, outfile=TRUE, ggplot_theme=theme_gray()
       for (j in 1:ncol){
         if (i==j) next
         if (i > j){
-          p[[k]] <- ggplot(data=cbind(d, z=1), aes_string(x=names(d)[i], y=names(d)[j], z="z")) +
+          p[[k]] <- ggplot(data=cbind(d, z=1), aes(x=.data[[names(d)[i]]], y=.data[[names(d)[j]]], z=.data[["z"]])) +
             stat_summary_2d(fun=function(z) log(sum(z)), bins=60, show.legend=FALSE) +
             scale_x_continuous(trans = log10_trans(),
                                breaks = trans_breaks("log10", function(x) 10^x),
