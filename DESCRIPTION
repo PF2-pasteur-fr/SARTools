@@ -2,7 +2,7 @@ Package: SARTools
 Type: Package
 Title: Statistical Analysis of RNA-Seq Tools
 Version: 1.8.2
-Date: 2025-03-24
+Date: 2025-10-09
 Authors@R: c(
     person(given = "Hugo", family = "Varet", role = c("aut", "cre"), email = "hugo.varet@pasteur.fr"),
     person(given = "Marie-Agnès", family = "Dillies", role = c("aut"), email = "marie-agnes.dillies@pasteur.fr")

@@ -31,7 +31,7 @@ diagSizeFactorsPlots <- function(dds, group, col=c("lightblue","orange","MediumV
         xlab(expression(log[2]~(counts/geometric~mean))) +
         ylab("") +
         ggtitle(paste0("Size factor diagnostic - ", samples[j])) +
-        geom_vline(xintercept=log2(sizeFactors(dds)[j]), linetype="dashed", color="red", size=1) +
+        geom_vline(xintercept=log2(sizeFactors(dds)[j]), linetype="dashed", color="red", linewidth=1) +
         ggplot_theme
     }
     tmpfun <- function(...) grid.arrange(..., nrow=nrow, ncol=ncol)
