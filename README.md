@@ -13,14 +13,14 @@ How to install SARTools?
 In addition to the SARTools package itself, the workflow requires the installation of several packages: DESeq2, edgeR, genefilter, xtable and knitr (all available online, see the dedicated webpages). SARTools needs R version 3.3.0 or higher, DESeq2 1.12.0 or higher and edgeR 3.12.0 or higher: old versions of DESeq2 or edgeR may be incompatible with SARTools.
 
 To install the SARTools package from GitHub, open a R session and:
-- Install devtools with `install.packages("devtools")` (if not installed yet)
+- Install remotes with `install.packages("remotes")` (if not installed yet)
 - Notes:
 
-	- Ubuntu users may have to install some libraries (libxml2-dev, libcurl4-openssl-dev and libssl-dev) to be able to install DESeq2 and devtools
+	- Ubuntu users may have to install some libraries to be able to install DESeq2, including gfortran, libblas-dev, liblapack-dev, libharfbuzz-dev, libfribidi-dev, libxml2-dev, libcurl4-openssl-dev and libssl-dev
 	- Some users may have to install the pandoc and pandoc-citeproc libraries to be able to generate the final HTML reports
 
 - For Windows users only, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) or check that it is already installed (needed to build the package)
-- Run `devtools::install_github("PF2-pasteur-fr/SARTools", build_opts="--no-resave-data")`
+- Run `remotes::install_github("PF2-pasteur-fr/SARTools", build_opts="--no-resave-data")`
 
 ### Using Conda
 
